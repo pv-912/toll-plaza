@@ -1,7 +1,7 @@
 <?php
-  require_once 'http://localhost/toll-plaza/config/config.php';
+ /* require_once 'http://localhost/toll-plaza/config/config.php';
  
- /* $username = $pass = $role = $login_name = "";
+ $username = $pass = $role = $login_name = "";
   $username_err = $pass_err = "";
  
   if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -101,9 +101,9 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link href="<?php echo base_url; ?>src/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo base_url; ?>src/css/bootstrap-theme.min.css" rel="stylesheet">
-    <script src="<?php echo base_url; ?>src/js/bootstrap.min.js"></script>
+    <link href="http://localhost/tollPlaza/src/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/tollPlaza/src/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="http://localhost/tollPlaza/src/js/bootstrap.min.js"></script>
 </head>
 
 
@@ -119,7 +119,7 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="<?php echo base_url; ?>"><img src="<?php echo base_url; ?>src/img/sparkLogo.png" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
+         <a class="navbar-brand" href="http://localhost/tollPlaza/"><img src="" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
          <a class="navbar-brand sparkNavbarTag "  href="index.php">Tool Plaza</a><br/>
          <!-- <p class="sparkFullFormTag">Summer Internship Programme at IIT Roorkee</p> -->
        </div>
@@ -162,9 +162,10 @@
 
                 <?php }else{?>
                  
-                 <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
-                  
+                 
           <?php }*/ ?>
+          <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
+                  
          </ul>
        </div>
      </div>
