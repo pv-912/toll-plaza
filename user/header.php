@@ -1,7 +1,7 @@
 <?php
-  require_once '../config/config.php';
+  require_once 'http://localhost/toll-plaza/config/config.php';
  
-  $username = $pass = $role = $login_name = "";
+ /* $username = $pass = $role = $login_name = "";
   $username_err = $pass_err = "";
  
   if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -22,7 +22,7 @@
         $sql = "SELECT name,password,role FROM users WHERE username = ?";
         
         if($stmt = mysqli_prepare($conn, $sql)){
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_username, $param_username);
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
             
             $param_username = $username;
             
@@ -34,7 +34,7 @@
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($pass, $hashed_pass)){
                           
-                            if($role == "faculty"){
+                            if($role == "user"){
                                 session_start();
                                 $_SESSION['username'] = $username; 
                                 $_SESSION['role']=$role;
@@ -44,7 +44,7 @@
                                 setcookie("name", $login_name , time()+24*60*60);
                                 header("location: faculty-portal/");
 
-                              }else if($role == "student"){
+                              }else if($role == "toll"){
                                 session_start();
                                 $_SESSION['username'] = $username; 
                                 $_SESSION['role']=$role;
@@ -54,16 +54,7 @@
                                 setcookie("name", $login_name , time()+24*60*60);
                                 header("location: student-portal/");
 
-                              }else if($role == "admin"){
-                                session_start();
-                                $_SESSION['username'] = $username; 
-                                $_SESSION['role']=$role;
-                                $_SESSION['time'] = time();
-                                setcookie("username", $username , time()+24*60*60);
-                                setcookie("role", $role , time()+24*60*60);
-                                setcookie("name", $login_name , time()+24*60*60);
-                                header("location: admin-portal/");
-                          }
+                              }
                             
                         } else{
                             $pass_err = 'The password you entered was incorrect.
@@ -86,7 +77,7 @@
     }
     
     mysqli_close($conn);
-}
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -129,43 +120,38 @@
            <span class="icon-bar"></span>
          </button>
          <a class="navbar-brand" href="<?php echo base_url; ?>"><img src="<?php echo base_url; ?>src/img/sparkLogo.png" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
-         <a class="navbar-brand sparkNavbarTag "  href="index.php">SPARK | IIT Roorkee</a><br/>
-         <p class="sparkFullFormTag">Summer Internship Programme at IIT Roorkee</p>
+         <a class="navbar-brand sparkNavbarTag "  href="index.php">Tool Plaza</a><br/>
+         <!-- <p class="sparkFullFormTag">Summer Internship Programme at IIT Roorkee</p> -->
        </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
          <ul class="nav navbar-nav navbar-right">
-                 <li><a href="<?php echo base_url; ?>index.php#aboutUs">About Us </a></li>
-                 <!-- <li><a href="<?php //echo base_url; ?>index.php#guidelines">Guidelines</a></li> -->
-                 <li><a href="<?php echo base_url; ?>project.php">Projects</a></li>
-                 <!-- <li><a href="<?php //echo base_url; ?>index.php#timeline">Timeline</a></li> -->
-                 <li><a href="<?php echo base_url; ?>index.php#contact">Contact</a></li>
+                 <li><a href="#">About Us </a></li>
+                 <li><a href="#">Projects</a></li>
+                 <li><a href="#">Contact</a></li>
             <?php 
-              $main_username = $main_role = $main_name = '';
-              // $main_username = $_COOKIE["username"];
-              // $main_role = $_COOKIE['role'];
-              // $main_name = $_COOKIE['name'];
+              /*$main_username = $main_role = $main_name = '';
               
-              if (isset($_COOKIE['username'])) {
-                $main_username = $_COOKIE["username"];
-              }
-              if (isset($_COOKIE['role'])) {
-                $main_role = $_COOKIE["role"];
-              }
-              if (isset($_COOKIE['name'])) {
-                $main_name = $_COOKIE["name"];
-              }
+              // if (isset($_COOKIE['username'])) {
+              //   $main_username = $_COOKIE["username"];
+              // }
+              // if (isset($_COOKIE['role'])) {
+              //   $main_role = $_COOKIE["role"];
+              // }
+              // if (isset($_COOKIE['name'])) {
+              //   $main_name = $_COOKIE["name"];
+              // }
 
               // echo $main_name;
               // echo $main_username;
               // echo $main_role;
              
-                if($main_role== "admin"){?>
+                if($main_role== "toll"){?>
 
                  <li style="font-size: 1.4vw;color: #777;"><a href="<?php echo base_url_admin; ?>"><?php echo $main_name; ?></a></li>
                  <li style="font-size: 1.4vw;color: #777;"><a href="<?php echo base_url; ?>logout.php" data-toggle="tooltip" data-placement="center" title="Logout">Logout</a></li>
 
-                 <?php } else if($main_role== "faculty"){?>
+                 <?php } else if($main_role== "user"){?>
                  
                  <li style="font-size: 1.4vw;color: #777;"><a href="<?php echo base_url_faculty; ?>"><?php echo $main_name; ?></a></li>
 
@@ -178,7 +164,7 @@
                  
                  <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
                   
-          <?php } ?>
+          <?php }*/ ?>
          </ul>
        </div>
      </div>
