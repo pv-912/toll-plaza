@@ -1,30 +1,32 @@
 <?php
-  // require_once 'http://localhost/tollPlaza/config/config.php';
+  require_once '../config/config.php';
  
- $username = $pass = $role = $login_name = "";
-  $username_err = $pass_err = "";
+ $usernameLogin = $pass = $role = $login_name = "";
+  $usernameLogin_err = $pass_err = "";
  
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-      if(empty(trim($_POST["username"]))){
-        $username_err = 'Please enter username.';
-    } else{
-        $username = trim($_POST["username"]);
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+      if(isset($_POST['usernameLogin'])){
+        if(empty(trim($_POST["usernameLogin"]))){
+          $usernameLogin_err = 'Please enter username.';
+      } else{
+          $usernameLogin = trim($_POST["usernameLogin"]);
+      }
+    }
+    if(isset($_POST['pass'])){
+      if(empty(trim($_POST['pass']))){
+          $pass_err = 'Please enter your password.';
+      } else{
+          $pass = trim($_POST['pass']);
+      }
     }
     
-    if(empty(trim($_POST['pass']))){
-        $pass_err = 'Please enter your password.';
-    } else{
-        $pass = trim($_POST['pass']);
-    }
-    
-    if(empty($username_err) && empty($pass_err)){
+    if(!empty($usernameLogin_err) && !empty($pass_err)){
         $sql = "SELECT name,password,role FROM users WHERE username = ?";
         
         if($stmt = mysqli_prepare($conn, $sql)){
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            mysqli_stmt_bind_param($stmt, "s", $param_usernameLogin);
             
-            $param_username = $username;
+            $param_usernameLogin = $usernameLogin;
             
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
@@ -64,7 +66,7 @@
                         }
                     }else{echo 'error';}
                 } else{
-                    $username_err = 'No account found with this username.<script>
+                    $usernameLogin_err = 'No account found with this username.<script>
                                               $("#login").modal("show");
                                             </script>';
                 }
@@ -73,10 +75,10 @@
             }
         }
         
-        mysqli_stmt_close($stmt);
+        // mysqli_stmt_close($stmt);
     }
     
-    mysqli_close($conn);
+    // mysqli_close($conn);
 }
 ?>
 

@@ -1,36 +1,25 @@
  <?php include('header.php'); ?>
  <?php
-// define('base_url', 'http://localhost/tollPlaza/');
-$servername = "localhost";
-$username = "root";
-$password = "99569";
-$dbname = "tollplaza";
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}   ?>
- <?php
-
-
- echo 'hjdskl';
-// include('../config/config.php');
+ // echo 'hjdskl';
+include('../config/config.php');
  
-$name = $username = $contact = $gender = $dob = $college = $password = $confirm_password = $car_variant = $license_no = $car_color = $vehicle_number = $sparkId = "";
-$name_err = $username_err = $contact_err = $gender_err = $dob_err = $college_err = $password_err = $confirm_password_err = $car_variant_err = $license_no_err = $car_color_err = $vehicle_number_err = "";
+$name = $username = $contact = $gender = $dob = $college = $password = $confirm_password = $carVariant = $licenseNo = $carColor = $vehicleNo = "";
+$name_err = $username_err = $contact_err = $gender_err = $dob_err = $college_err = $password_err = $confirm_password_err = $carVariant_err = $licenseNo_err = $carColor_err = $vehicleNo_err = "";
  
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  if(isset($_POST["username"])){
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
     } else{
+        $username = trim($_POST['username']);
         $sql = "SELECT username FROM users where username=? ";
         
         if($stmt = mysqli_prepare($conn, $sql)){
-            mysqli_stmt_bind_param($stmt, "sss", $param_username);
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
             
-            $param_username = trim($_POST["username"]);
+            $param_username = $username;
             
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
@@ -50,123 +39,135 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
     /* validators */
-    if(empty(trim($_POST['name']))){
-        $name_err = "Please enter a name.";     
-    }  else{
-        $name = trim($_POST['name']);
-        // echo $name;
+    if(isset($_POST['name'])){
+        if(empty(trim($_POST['name']))){
+            $name_err = "Please enter a name.";     
+        }  else{
+            $name = trim($_POST['name']);
+            // echo $name;
+        }
     }
-    
-    if(empty(trim($_POST['gender']))){
-        $gender_err = "Please select gender";     
-    } else{
-        $gender = trim($_POST['gender']);
-        // echo $gender;
+    if(isset($_POST['gender'])){
+        if(empty(trim($_POST['gender']))){
+            $gender_err = "Please select gender";     
+        } else{
+            $gender = trim($_POST['gender']);
+            // echo $gender;
+        }
+    }    
+    if(isset($_POST['contact'])){
+        if(empty(trim($_POST['contact']))){
+            $contact_err = "Please enter a contact no.";     
+        } elseif(strlen(trim($_POST['contact'])) < 10){
+            $contact_err = "Please enter contact no.";
+        } else{
+            $contact = trim($_POST['contact']);
+            // echo $contact;
+        }
+    }    
+    if(isset($_POST['dob'])){
+        if(empty(trim($_POST['dob']))){
+            $dob_err = "Please enter a date of birth";     
+        } else{
+            $dob = trim($_POST['dob']);
+            // echo $dob;
+        }
+    }   
+    if(isset($_POST['college'])){
+        if(empty(trim($_POST['college']))){
+            $college_err = "Please enter a college name.";     
+        } else{
+            $college = trim($_POST['college']);
+            // echo $college;
+        }
     }
-    
-    if(empty(trim($_POST['contact']))){
-        $contact_err = "Please enter a contact no.";     
-    } elseif(strlen(trim($_POST['contact'])) < 10){
-        $contact_err = "Password must have atleast 10 digits.";
-    } else{
-        $contact = trim($_POST['contact']);
-        // echo $contact;
+    if(isset($_POST['carVariant'])){
+        if(empty(trim($_POST['carVariant']))){
+            $carVariant_err = "Please enter a carVariant.";     
+        } else{
+            $carVariant = trim($_POST['carVariant']);
+            // echo $college;
+        }
     }
-    
-    if(empty(trim($_POST['dob']))){
-        $dob_err = "Please enter a date of birth";     
-    } else{
-        $dob = trim($_POST['dob']);
-        // echo $dob;
+    if(isset($_POST['licenseNo'])){
+        if(empty(trim($_POST['licenseNo']))){
+            $licenseNo_err = "Please enter a licenseNo.";     
+        } else{
+            $licenseNo = trim($_POST['licenseNo']);
+            // echo $licenseNo;
+        }
     }
-    
-    if(empty(trim($_POST['college']))){
-        $college_err = "Please enter a college name.";     
-    } else{
-        $college = trim($_POST['college']);
-        // echo $college;
+    if(isset($_POST['carColor'])){
+        if(empty(trim($_POST['carColor']))){
+            $carColor_err = "Please enter a C.G.P.A.";     
+        } else{
+            $carColor = trim($_POST['carColor']);
+            // echo $college;
+        }
+    }
+    if(isset($_POST['vehicleNo'])){
+        if(empty(trim($_POST['vehicleNo']))){
+            $vehicleNo_err = "Please enter a vehicleNo (B.Tech)";     
+        } else{
+            $vehicleNo = trim($_POST['vehicleNo']);
+            // echo $college;
+        }
     }
 
-    if(empty(trim($_POST['car_variant']))){
-        $car_variant_err = "Please enter a car_variant.";     
-    } else{
-        $car_variant = trim($_POST['car_variant']);
-        // echo $college;
-    }
-
-    if(empty(trim($_POST['license_no']))){
-        $license_no_err = "Please enter a license_no.";     
-    } else{
-        $license_no = trim($_POST['license_no']);
-        // echo $college;
-    }
-
-    if(empty(trim($_POST['car_color']))){
-        $car_color_err = "Please enter a C.G.P.A.";     
-    } else{
-        $car_color = trim($_POST['car_color']);
-        // echo $college;
-    }
-
-    if(empty(trim($_POST['vehicle_number']))){
-        $vehicle_number_err = "Please enter a vehicle_number (B.Tech)";     
-    } else{
-        $vehicle_number = trim($_POST['vehicle_number']);
-        // echo $college;
-    }
-
-
     
 
-    
-    if(empty(trim($_POST['password']))){
-        $password_err = "Please enter a password.";     
-    } elseif(strlen(trim($_POST['password'])) < 0){
-        $password_err = "Password must have atleast 6 characters.";
-    } else{
-        $password = trim($_POST['password']);
-        // echo $password;
+    if(isset($_POST['password'])){
+        if(empty(trim($_POST['password']))){
+            $password_err = "Please enter a password.";     
+        } elseif(strlen(trim($_POST['password'])) < 0){
+            $password_err = "Password must have atleast 6 characters.";
+        } else{
+            $password = trim($_POST['password']);
+            // echo $password;
+        }
     }
-    
-    if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = 'Please confirm password.';     
-    } else{
-        $confirm_password = trim($_POST['confirm_password']);
-        if($password != $confirm_password){
-            $confirm_password_err = 'Password did not match.';
+    if(isset($_POST['confirm_password'])){
+        if(empty(trim($_POST["confirm_password"]))){
+            $confirm_password_err = 'Please confirm password.';     
+        } else{
+            $confirm_password = trim($_POST['confirm_password']);
+            if($password != $confirm_password){
+                $confirm_password_err = 'Password did not match.';
+            }
         }
     }
     // echo $username_err; echo $password_err; echo $confirm_password_err;
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)&& empty($vehicle_number_err)&& empty($car_color_err) && empty($license_no_err) && empty($car_variant_err)&& empty($college_err)&& empty($dob_err)&& empty($contact_err)&& empty($gender_err)&& empty($name_err)){
-         $sql = "INSERT INTO users (username, password, name, contact, dob, gender, role, car_variant, car_color,license_no, vehicle_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)&& empty($vehicleNo_err)&& empty($carColor_err) && empty($licenseNo_err) && empty($carVariant_err)&& empty($college_err)&& empty($dob_err)&& empty($contact_err)&& empty($gender_err)&& empty($name_err)){
+         $sql1 = "INSERT INTO users (username) VALUES (?)";
          
-        if($stmt = mysqli_prepare($conn, $sql)){
-            mysqli_stmt_bind_param($stmt, "sssssssssss", $param_username, $param_password, $param_name, $param_contact, $param_dob, $param_gender, $param_role, $param_car_variant, $param_car_color, $param_license_no, $param_vehicle_number);
+        if($stmt1 = mysqli_prepare($conn, $sql1)){
+            mysqli_stmt_bind_param($stmt1, "s", $param_username);
             // echo 'hello';
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); 
             $param_name = $name;
             $param_contact = $contact;
             $param_dob = $dob;
-            $param_college = $college;
             $param_gender = $gender;
             $param_role = "user";
-            $param_car_variant = $car_variant;
-            $param_car_color = $car_color;
-            $param_license_no = $license_no;
-            $param_vehicle_number = $vehicle_number;
-            // $param_sparkId = $sparkId;
-            // echo $param_gender;
+            $param_carVariant = $carVariant;
+            $param_carColor = $carColor;
+            $param_licenseNo = $licenseNo;
+            $param_vehicleNo = $vehicleNo;
+            // echo $param_licenseNo;
+            // echo $param_name;
             // echo $param_username;
-            if(mysqli_stmt_execute($stmt)){
-                header('Location: http://toolPlaza/user/index.php');
-            
+            if(mysqli_stmt_execute($stmt1)){
+                // header('Location: http://localhost:4001/user/index.php');
+                
             } else{
-                ?> <script> alert(' Something went wrong. ') </script> <?php
+                echo " <script> alert(' Something went wrong."; echo $param_role ; echo "') </script>" ;
             }
-         }
+         }else{
+                ?> <script> alert(' Something went wrong2.') </script> <?php
+            }
          
-        mysqli_stmt_close($stmt);
+        mysqli_stmt_close($stmt1);
     }
     
     mysqli_close($conn);
@@ -220,39 +221,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			           </div>
 			           
                        <div class="form-group  ">
-                        <label for="" class="sr-only">license_no</label>
+                        <label for="" class="sr-only">licenseNo</label>
                          <div class="col-sm-6">
-                           <input type="text" name="license_no"  class="form-control"  placeholder="license_no (1st)" value="<?php echo $license_no; ?>">
-                            <span class="help-block"><?php echo $license_no_err; ?></span>
+                           <input type="text" name="licenseNo"  class="form-control"  placeholder="licenseNo " value="<?php echo $licenseNo; ?>">
+                            <span class="help-block"><?php echo $licenseNo_err; ?></span>
                          </div>
                         
-                        <label for="" class="sr-only">vehicle_number</label>
+                        <label for="" class="sr-only">vehicleNo</label>
                          <div class="col-sm-6">
-                           <input type="text"  name="vehicle_number" class="form-control"  placeholder="vehicle_number ( B.Tech )" value="<?php echo $vehicle_number; ?>">
-                            <span class="help-block"><?php echo $vehicle_number_err; ?></span>
+                           <input type="text"  name="vehicleNo" class="form-control"  placeholder="vehicleNo ( B.Tech )" value="<?php echo $vehicleNo; ?>">
+                            <span class="help-block"><?php echo $vehicleNo_err; ?></span>
                          </div>
                        </div>
 
                        <div class="form-group  ">
-                        <label for="" class="sr-only">car_variant</label>
+                        <label for="" class="sr-only">carVariant</label>
                          <div class="col-sm-6">
-                           <input type="text" name="car_variant"  class="form-control"  placeholder="car_variant" value="<?php echo $car_variant; ?>">
-                            <span class="help-block"><?php echo $car_variant_err; ?></span>
+                           <input type="text" name="carVariant"  class="form-control"  placeholder="carVariant" value="<?php echo $carVariant; ?>">
+                            <span class="help-block"><?php echo $carVariant_err; ?></span>
                          </div>
                         
-                        <label for="" class="sr-only">car_color</label>
+                        <!-- <label for="" class="sr-only">carColor</label>
                          <div class="col-sm-6">
-                           <input type="text"  name="car_color" class="form-control"  placeholder="C.G.P.A ( If % then convert it to C.G.P.A. ) " value="<?php echo $car_color; ?>">
-                            <span class="help-block"><?php echo $car_color_err; ?></span>
+                           <input type="text"  name="carColor" class="form-control"  placeholder="C.G.P.A ( If % then convert it to C.G.P.A. ) " value="<?php //echo $carColor; ?>">
+                            <span class="help-block"></span>
                          </div>
-                       </div>
+                       </div> -->
 
                        
 
-			           <div class="form-group   <?php echo (!empty($college_err)) ? 'has-error' : ''; ?>">
-			            <label for="" class="sr-only">College</label>
+			           <div class="form-group  ">
+			            <label for="" class="sr-only">Car Color</label>
 			             <div class="col-sm-6">
-			               <input type="text" name="college"  class="form-control"  placeholder="College" value="<?php echo $college; ?>">
+			               <input type="text" name="carColor"  class="form-control"  placeholder="Car Color" value="<?php echo $carColor; ?>">
 			                <span class="help-block"><?php echo $college_err; ?></span>
 			             </div>
 			            

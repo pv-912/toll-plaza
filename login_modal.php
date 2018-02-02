@@ -12,12 +12,11 @@
          </div>
          <div class="modal-body">
            <form class="form-horizontal" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="loginForm">
-           <div class="form-group  <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-             <label for="inputusername3" class="col-sm-2 control-label">username<sup>*</sup></label>
+           <div class="form-group  <?php echo (!empty($usernameLogin_err)) ? 'has-error' : ''; ?>">
+             <label for="inputusernameLogin3" class="col-sm-2 control-label">usernameLogin<sup>*</sup></label>
              <div class="col-sm-10">
-               <input type="username" name="username" class="form-control" placeholder="username" id="loginusername" value="<?php echo $username; ?>">
-
-                <span class="help-block"><?php echo $username_err; ?></span>
+               <input type="email" name="usernameLogin" class="form-control" placeholder="usernameLogin" id="loginusername" value="<?php echo $usernameLogin; ?>">
+                <span class="help-block"><?php echo $usernameLogin_err; ?></span>
              </div>
            </div>
            <div class="form-group  <?php echo (!empty($pass_err)) ? 'has-error' : ''; ?>"">
@@ -34,7 +33,7 @@
            </div>
            <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <a href="signup.php">Don't Have Account (Only For Student.)</a>
+              <a href="user/signup.php">Don't Have Account (Only For Student.)</a>
             </div>
            </div> 
          </form>
