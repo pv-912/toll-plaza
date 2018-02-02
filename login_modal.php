@@ -12,12 +12,12 @@
          </div>
          <div class="modal-body">
            <form class="form-horizontal" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="loginForm">
-           <div class="form-group  <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-             <label for="inputEmail3" class="col-sm-2 control-label">Email<sup>*</sup></label>
+           <div class="form-group  <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+             <label for="inputusername3" class="col-sm-2 control-label">username<sup>*</sup></label>
              <div class="col-sm-10">
-               <input type="email" name="email" class="form-control" placeholder="Email" id="loginEmail" value="<?php echo $email; ?>">
+               <input type="username" name="username" class="form-control" placeholder="username" id="loginusername" value="<?php echo $username; ?>">
 
-                <span class="help-block"><?php echo $email_err; ?></span>
+                <span class="help-block"><?php echo $username_err; ?></span>
              </div>
            </div>
            <div class="form-group  <?php echo (!empty($pass_err)) ? 'has-error' : ''; ?>"">

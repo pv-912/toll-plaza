@@ -5,7 +5,7 @@ define('base_url', 'http://localhost/toll-plaza/');
 $servername = "localhost";
 $username = "";
 $password = "";
-$dbname = "spark";
+$dbname = "tollplaza";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 
