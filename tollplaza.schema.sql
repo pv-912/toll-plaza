@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 02, 2018 at 09:59 AM
+-- Generation Time: Feb 02, 2018 at 04:31 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.20
 
@@ -37,15 +37,11 @@ CREATE TABLE `tolls` (
   `medium_rate` varchar(255) NOT NULL,
   `medium_return_rate` varchar(255) NOT NULL,
   `light_rate` varchar(255) NOT NULL,
-  `light_return_rate` varchar(255) NOT NULL
+  `light_return_rate` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tolls`
---
-
-INSERT INTO `tolls` (`id`, `name`, `address`, `lat`, `lng`, `heavy_rate`, `heavy_return_rate`, `medium_rate`, `medium_return_rate`, `light_rate`, `light_return_rate`) VALUES
-(1, 'Testing Toll One', 'Roorkee, Haridwar', '12.312331', '213.231312', '100', '81', '150', '125', '201', '175');
 
 -- --------------------------------------------------------
 
@@ -67,22 +63,20 @@ CREATE TABLE `toll_access` (
 --
 
 CREATE TABLE `users` (
-  `id` int(16) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `dob` varchar(255) NOT NULL,
   `car_variant` varchar(255) NOT NULL,
   `car_color` varchar(255) NOT NULL,
-  `licence_no` varchar(255) NOT NULL,
-  `balance` int(16) NOT NULL,
-  `gender` varchar(255) NOT NULL
+  `license_no` varchar(255) NOT NULL,
+  `balance` int(11) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `role` varchar(10) NOT NULL,
+  `password` varchar(260) NOT NULL,
+  `dob` varchar(15) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `vehicle_number` varchar(15) NOT NULL,
+  `username` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `dob`, `car_variant`, `car_color`, `licence_no`, `balance`, `gender`) VALUES
-(1, 'Nikhil One', '23-10-1998', 'light', '#ff0000', 'AB-1234', 1000, 'Male');
 
 -- --------------------------------------------------------
 
@@ -98,13 +92,6 @@ CREATE TABLE `user_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_logs`
---
-
-INSERT INTO `user_logs` (`id`, `user_id`, `toll_id`, `payment`) VALUES
-(1, 8, 10, 175);
-
---
 -- Indexes for dumped tables
 --
 
@@ -112,7 +99,9 @@ INSERT INTO `user_logs` (`id`, `user_id`, `toll_id`, `payment`) VALUES
 -- Indexes for table `tolls`
 --
 ALTER TABLE `tolls`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `toll_access`
@@ -140,7 +129,7 @@ ALTER TABLE `user_logs`
 -- AUTO_INCREMENT for table `tolls`
 --
 ALTER TABLE `tolls`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `toll_access`
 --
@@ -150,12 +139,12 @@ ALTER TABLE `toll_access`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user_logs`
 --
 ALTER TABLE `user_logs`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

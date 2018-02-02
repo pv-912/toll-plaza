@@ -6,10 +6,15 @@
                 $dob = '23-10-1998';
                 $car_variant = 'light';
                 $car_color = '#ff0000';
-                $licence_no = 'AB-1234';
+                $license_no = 'AB-1234';
                 $balance = 1000;
                 $gender = 'Male';
-                $add_user = `INSERT INTO users (name,  dob, car_variant, car_color, licence_no, balance, gender) VALUES ($name,  $dob, $car_variant, $car_color, $licence_no, $balance, $gender);`;
+                $contact = '';
+                $vehicle_number = '';
+                $username = '';
+                $password = '';
+                $role = '';
+                $add_user = `INSERT INTO users (name,  dob, car_variant, car_color, license_no, balance, gender, contact, vehicle_number, username, password, role) VALUES ($name,  $dob, $car_variant, $car_color, $license_no, $balance, $gender, $contact, $vehicle_number, $username, $password, $role);`;
 
 
         // Get Tolls
@@ -19,15 +24,15 @@
 
 
             // Method - 1: Square Box
-            // Should obtain data using Get Request for this
-            $geo_lat = 'From Geolocation';
-            $geo_lng = 'From Geolocation';
-            $side_by_two = 0.0001;
-            $low_lat = $geo_lat - $side_by_two;
-            $high_lat = $geo_lat + $side_by_two;
-            $low_lng = $geo_lng - $side_by_two;
-            $high_lng = $geo_lng + $side_by_two;
-            $get_tolls = `SELECT * FROM tolls WHERE lat BETWEEN ($low_lat, $high_lat) AND lng BETWEEN ($low_lng, $high_lng)`;
+            // Should obtain data using GET Request, for this
+                $geo_lat = 'From Geolocation';
+                $geo_lng = 'From Geolocation';
+                $side_by_two = 0.0001;
+                $low_lat = $geo_lat - $side_by_two;
+                $high_lat = $geo_lat + $side_by_two;
+                $low_lng = $geo_lng - $side_by_two;
+                $high_lng = $geo_lng + $side_by_two;
+                $get_tolls = `SELECT * FROM tolls WHERE lat BETWEEN ($low_lat, $high_lat) AND lng BETWEEN ($low_lng, $high_lng)`;
 
             // Use javascript to sort the result array
                 // --> Maybe create a function which takes (array of objects) as input and appends a method to each object.
@@ -35,7 +40,9 @@
                 // Sort the array in ascending order based on obtained distance
 
 
-
+            // Search
+                $que = 'seach query';
+                $get_tolls = `SELECT * FROM tolls WHERE name like '%$que%' or address like '%$que%'`;
 
 
 
@@ -100,7 +107,10 @@
                 $medium_return_rate = 125;
                 $light_rate = 100;
                 $light_return_rate = 75;
-                $add_toll = `INSERT INTO tolls (name, address, lat, lng, heavy_rate, heavy_return_rate, medium_rate, medium_return_rate, light_rate, light_return_rate) VALUES ($name, $address, $lat, $lng, $heavy_rate, $heavy_return_rate, $medium_rate, $medium_return_rate, $light_rate, $light_return_rate);`;
+                $username = '';
+                $password = '';
+                $role = '';
+                $add_toll = `INSERT INTO tolls (name, address, lat, lng, heavy_rate, heavy_return_rate, medium_rate, medium_return_rate, light_rate, light_return_rate, username, password, role) VALUES ($name, $address, $lat, $lng, $heavy_rate, $heavy_return_rate, $medium_rate, $medium_return_rate, $light_rate, $light_return_rate, $username, $password, $role);`;
 
 
         // Toll Live Data
