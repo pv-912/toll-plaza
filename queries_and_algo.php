@@ -1,7 +1,7 @@
 <?php
     // User Area
         // User Signup
-            // Insert User
+            // Insert User -- Data from submitted form
                 $name = 'Nikhil One';
                 $dob = '23-10-1998';
                 $car_variant = 'light';
@@ -14,12 +14,25 @@
 
         // Get Tolls
             // Think of an efficient algorithm to fetch data depending of minimum distance
+            
 
 
 
+            // Method - 1: Square Box
+            // Should obtain data using Get Request for this
+            $geo_lat = 'From Geolocation';
+            $geo_lng = 'From Geolocation';
+            $side_by_two = 0.0001;
+            $low_lat = $geo_lat - $side_by_two;
+            $high_lat = $geo_lat + $side_by_two;
+            $low_lng = $geo_lng - $side_by_two;
+            $high_lng = $geo_lng + $side_by_two;
+            $get_tolls = `SELECT * FROM tolls WHERE lat BETWEEN ($low_lat, $high_lat) AND lng BETWEEN ($low_lng, $high_lng)`;
 
-
-
+            // Use javascript to sort the result array
+                // --> Maybe create a function which takes (array of objects) as input and appends a method to each object.
+                //  That method calculates and returns the distance from geo_lat and geo_lng for that object.
+                // Sort the array in ascending order based on obtained distance
 
 
 
@@ -36,24 +49,29 @@
                         return 'not_found'; // give error-> toll not found
                     // Else payment -> $get_payment;
                         $payment= 175;
-
-
-            // Insert Log
-                $add_log = `INSERT INTO user_logs (user_id, toll_id, payment) VALUES ($user_id, $toll_id, $payment);`;
-
             
             // Check if already exists
                 $get_data = `SELECT round FROM toll_access WHERE toll_id=$toll_id AND user_id=$user_id`;
                     // if get_data -> num_rows == 0, then normally #GiveAccess
                         // if !(does exists round): Give access - Normal
-                            $add_log = `INSERT INTO toll_access (user_id, toll_id) VALUES ($user_id, $toll_id);`;
-                            $make_payment = `UPDATE users SET balance=balance-$payment WHERE id=$user_id;`;
+                            // Set data in access table    
+                                $add_access = `INSERT INTO toll_access (user_id, toll_id) VALUES ($user_id, $toll_id);`;
+                            // Make Payment
+                                $make_payment = `UPDATE users SET balance=balance-$payment WHERE id=$user_id;`;
+                            // Insert Log
+                                $add_log = `INSERT INTO user_logs (user_id, toll_id, payment) VALUES ($user_id, $toll_id, $payment);`;
                             return 'registered';
+
                         // else: Give access - Round
                             $round = 1;
-                            $add_log = `INSERT INTO toll_access (user_id, toll_id, round) VALUES ($user_id, $toll_id, $round);`;
-                            $make_payment = `UPDATE users SET balance=balance-$payment WHERE id=$user_id;`;
+                            // Set data in access table
+                                $add_access = `INSERT INTO toll_access (user_id, toll_id, round) VALUES ($user_id, $toll_id, $round);`;
+                            // Make Payment
+                                $make_payment = `UPDATE users SET balance=balance-$payment WHERE id=$user_id;`;
+                            // Insert Log
+                                $add_log = `INSERT INTO user_logs (user_id, toll_id, payment) VALUES ($user_id, $toll_id, $payment);`;
                             return 'registered';
+
                     // else
                         return 'already_registered'; // give error-> alerady registered
 
@@ -71,7 +89,7 @@
 
     // Admin Area
         // Toll Signup
-            // Insert Toll
+            // Insert Toll  -- Data from submitted form
                 $name = 'Testing Toll One';
                 $address = 'Roorkee, Haridwar';
                 $lat = 12.312331;
@@ -83,11 +101,12 @@
                 $light_rate = 100;
                 $light_return_rate = 75;
                 $add_toll = `INSERT INTO tolls (name, address, lat, lng, heavy_rate, heavy_return_rate, medium_rate, medium_return_rate, light_rate, light_return_rate) VALUES ($name, $address, $lat, $lng, $heavy_rate, $heavy_return_rate, $medium_rate, $medium_return_rate, $light_rate, $light_return_rate);`;
-        
-        
+
+
         // Toll Live Data
             $toll_id = 10; // From session
             $get_live_data = `SELECT * FROM toll_access AS toll INNER JOIN users ON toll.user_id = users.id where toll_id=$toll_id;`;
+
 
         // Toll Logs
             $toll_id = 10; // From session
