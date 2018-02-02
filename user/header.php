@@ -1,5 +1,5 @@
 <?php
- /* require_once 'http://localhost/toll-plaza/config/config.php';
+  // require_once 'http://localhost/tollPlaza/config/config.php';
  
  $username = $pass = $role = $login_name = "";
   $username_err = $pass_err = "";
@@ -77,7 +77,7 @@
     }
     
     mysqli_close($conn);
-}*/
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,20 @@
  <?php include('header.php'); ?>
  <?php
+// define('base_url', 'http://localhost/tollPlaza/');
+$servername = "localhost";
+$username = "root";
+$password = "99569";
+$dbname = "tollplaza";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}   ?>
+ <?php
+
+
+ echo 'hjdskl';
 // include('../config/config.php');
  
 $name = $username = $contact = $gender = $dob = $college = $password = $confirm_password = $car_variant = $license_no = $car_color = $vehicle_number = $sparkId = "";
@@ -144,10 +159,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // echo $param_gender;
             // echo $param_username;
             if(mysqli_stmt_execute($stmt)){
-                echo '
-                      <script>
-                         alert("hello");
-                      </script>';
+                header('Location: http://toolPlaza/user/index.php');
             
             } else{
                 ?> <script> alert(' Something went wrong. ') </script> <?php
