@@ -11,31 +11,62 @@
                 $gender = 'Male';
                 $add_user = `INSERT INTO users (name,  dob, car_variant, car_color, licence_no, balance, gender) VALUES ($name,  $dob, $car_variant, $car_color, $licence_no, $balance, $gender);`;
 
-        // Request Access
 
+        // Get Tolls
+            // Think of an efficient algorithm to fetch data depending of minimum distance
+
+
+
+
+
+
+
+
+
+
+
+
+        // Request Toll Access
             // Data
-                $user_id = 10;
-                $toll_id = 8;
-                // For security puropses, dont get toll fee from  POST data. Use (user_id and user table) -> car_variant -> (toll_id and toll table) -> $payment
-                $payment= 175;
+                $user_id = 10; // from session
+                $toll_id = 8; // from post
+                // Store car_varient in SESSION
+                $get_payment = `SELECT $varient from tolls where id=$toll_id`;
+                    // Handle errors: If get_payment -> num_rows == 0
+                        return 'not_found'; // give error-> toll not found
+                    // Else payment -> $get_payment;
+                        $payment= 175;
+
+
             // Insert Log
                 $add_log = `INSERT INTO user_logs (user_id, toll_id, payment) VALUES ($user_id, $toll_id, $payment);`;
 
             
             // Check if already exists
-                $get_data = `select round from toll_access where toll_id=$toll_id AND user_id=$user_id`;
+                $get_data = `SELECT round FROM toll_access WHERE toll_id=$toll_id AND user_id=$user_id`;
                     // if get_data -> num_rows == 0, then normally #GiveAccess
-                        // Give access    
+                        // if !(does exists round): Give access - Normal
                             $add_log = `INSERT INTO toll_access (user_id, toll_id) VALUES ($user_id, $toll_id);`;
-                            // Update money in user table
-                            return 1;
-                        // Give access - Round
+                            $make_payment = `UPDATE users SET balance=balance-$payment WHERE id=$user_id;`;
+                            return 'registered';
+                        // else: Give access - Round
                             $round = 1;
                             $add_log = `INSERT INTO toll_access (user_id, toll_id, round) VALUES ($user_id, $toll_id, $round);`;
-                            // Update money in user table
-                            return 1;
+                            $make_payment = `UPDATE users SET balance=balance-$payment WHERE id=$user_id;`;
+                            return 'registered';
                     // else
-                        return 0; // give error-> alerady registered
+                        return 'already_registered'; // give error-> alerady registered
+
+
+        // Add Money
+            $user_id = 10; // from session
+            $payment = 500; // from POST
+            $make_payment = `UPDATE users SET balance=balance+$payment WHERE id=$user_id;`;
+
+
+        // Show user logs
+            $user_id = 10; // from session
+            $get_logs = `SELECT name, address, payment FROM user_logs AS logs INNER JOIN tolls ON logs.toll_id = tolls.id WHERE user_id=$user_id ;`;
 
 
     // Admin Area
@@ -52,12 +83,22 @@
                 $light_rate = 100;
                 $light_return_rate = 75;
                 $add_toll = `INSERT INTO tolls (name, address, lat, lng, heavy_rate, heavy_return_rate, medium_rate, medium_return_rate, light_rate, light_return_rate) VALUES ($name, $address, $lat, $lng, $heavy_rate, $heavy_return_rate, $medium_rate, $medium_return_rate, $light_rate, $light_return_rate);`;
+        
+        
+        // Toll Live Data
+            $toll_id = 10; // From session
+            $get_live_data = `SELECT * FROM toll_access AS toll INNER JOIN users ON toll.user_id = users.id where toll_id=$toll_id;`;
+
+        // Toll Logs
+            $toll_id = 10; // From session
+            $get_toll_logs = `SELECT * FROM user_logs AS logs INNER JOIN users ON logs.user_id = users.id where toll_id = $toll_id;`;
+
 
 
     // Scanner Area
         // Scanner - API
             // Verify access token -- if possible
-            $toll_id = 8;
+            $toll_id = 8; // Obtained after toll login ?? Manually feed
             $user_id = 10;
             $get_data = `select * from toll_access where toll_id=$toll_id AND user_id=$user_id`;
                 // If get_data -> num_rows == 0, then DOES NOT EXISTS
