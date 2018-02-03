@@ -1,6 +1,6 @@
 <?php
 	
-	$con = mysqli_connect("localhost","root","","registration");
+	$con = mysqli_connect("localhost","root","","tollplaza");
 	
 	if(mysqli_connect_errno())
 	{
