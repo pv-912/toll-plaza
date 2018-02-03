@@ -160,11 +160,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(mysqli_stmt_execute($stmt)){
                 echo '
                       <script>
-                         $("#signupSubmitButton").click(function () {
-                            $("#signupForm").trigger("reset");
-                        });
-                      
-                         window.location.href="'.base_url.'index.php"; 
+                         window.location.href="'.base_url_user.'index.php"; 
                       </script>';
                 
             } else{
