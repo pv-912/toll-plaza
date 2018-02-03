@@ -27,7 +27,7 @@
     
     
     if(empty($usernameLogin_err) && empty($pass_err)){
-        $sql = "SELECT name,password,role FROM tolls WHERE username = ?";
+        $sql = "SELECT name,password,role,id FROM tolls WHERE username = ?";
         
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_usernameLogin);
@@ -40,13 +40,13 @@
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    mysqli_stmt_bind_result($stmt, $login_name, $hashed_pass, $role);
+                    mysqli_stmt_bind_result($stmt, $login_name, $hashed_pass, $role, $id);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($pass, $hashed_pass)){
                           
                             if($role == "toll"){
                                 session_start();
-                                $_SESSION['username'] = $username; 
+                                $_SESSION['id'] = $id; 
                                 $_SESSION['role']=$role;
                                 $_SESSION['time'] = time();
                                 // setcookie("username", $username , time()+24*60*60);
