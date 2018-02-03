@@ -1,4 +1,8 @@
 <?php
+
+    // Users table me rows ki identify krne le liye 
+
+
     // User Area
         // User Signup
             // Insert User -- Data from submitted form
@@ -19,7 +23,7 @@
 
         // Get Tolls
             // Think of an efficient algorithm to fetch data depending of minimum distance
-            
+
 
 
 
@@ -42,7 +46,7 @@
 
             // Search
                 $que = 'seach query';
-                $get_tolls = `SELECT * FROM tolls WHERE name like '%$que%' or address like '%$que%'`;
+                $get_tolls = `SELECT * FROM tolls WHERE name like '%$que%' or address like '%$que%' ORDER BY name`;
 
 
 
@@ -50,8 +54,9 @@
             // Data
                 $user_id = 10; // from session
                 $toll_id = 8; // from post
-                // Store car_varient in SESSION
-                $get_payment = `SELECT $varient from tolls where id=$toll_id`;
+                $round = '0 or 1'; // from POST
+                // Store car_varient-round in SESSION
+                $get_payment = `SELECT $varient_and_round from tolls where id=$toll_id`;
                     // Handle errors: If get_payment -> num_rows == 0
                         return 'not_found'; // give error-> toll not found
                     // Else payment -> $get_payment;
@@ -120,7 +125,7 @@
 
         // Toll Logs
             $toll_id = 10; // From session
-            $get_toll_logs = `SELECT * FROM user_logs AS logs INNER JOIN users ON logs.user_id = users.id where toll_id = $toll_id;`;
+            $get_toll_logs = `SELECT * FROM user_logs AS logs INNER JOIN users ON logs.user_id = users.id where toll_id = $toll_id order by id desc;`;
 
 
 
