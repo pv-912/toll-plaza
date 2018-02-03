@@ -164,7 +164,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_lat = $lat;
             $param_lng = $lng;
             $param_address = $address;
+<<<<<<< HEAD
             $param_role = "toll";
+=======
+            $param_role = "user";
+>>>>>>> toll login
             $param_heavy_rate = $heavy_rate;
             $param_medium_rate = $medium_rate;
             $param_heavy_return_rate = $heavy_return_rate;

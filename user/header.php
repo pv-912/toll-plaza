@@ -1,5 +1,5 @@
 <?php
-  require_once 'config/config.php';
+  require_once '../config/config.php';
  
  $usernameLogin = $pass = $role ="";
   $usernameLogin_err = $pass_err = "";
@@ -52,7 +52,6 @@
                                 <script>
                                    window.location.href="'.base_url_user.'payToll"; 
                                 </script>';
-
                               }
                             
                         } else{

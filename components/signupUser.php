@@ -138,11 +138,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     // echo $username_err; echo $password_err; echo $confirm_password_err;
     if(empty($username_err) && empty($password_err)){
-<<<<<<< HEAD:components/signupUser.php
          $sql = "INSERT INTO users (username, name, password, contact, dob, gender, role, carVariant, carColor, licenseNo, vehicleNo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-=======
-         $sql1 = "INSERT INTO users (username) VALUES (?)";
->>>>>>> admin api:user/signup.php
          
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "sssssssssss", $param_username, $param_name, $param_password, $param_contact, $param_dob, $param_gender, $param_role, $param_carVariant, $param_carColor, $param_licenseNo, $param_vehicleNo);
@@ -161,18 +157,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // echo $param_licenseNo;
             // echo $param_name;
             // echo $param_username;
-<<<<<<< HEAD:components/signupUser.php
             if(mysqli_stmt_execute($stmt)){
                 echo '
                       <script>
                          window.location.href="'.base_url_user.'index.php"; 
                       </script>';
                 
-=======
-            if(mysqli_stmt_execute($stmt1)){
-                // header('Location: http://localhost:4001/user/index.php');
-                echo 'hello hey got it';
->>>>>>> admin api:user/signup.php
+
             } else{
                 echo " <script> alert(' Something went wrong."; echo $param_role ; echo "') </script>" ;
             }
@@ -305,8 +296,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            
 <?php //require_once('footer.php'); ?>
 
-<<<<<<< HEAD:components/signupUser.php
-    <?php require_once('login_modal_user.php'); ?>
-=======
+
     <?php require_once('../components/login_modal.php'); ?>
->>>>>>> admin api:user/signup.php
