@@ -20,23 +20,29 @@ $vehicle_number = $car_variant = $car_color = "";
 
 if($_SESSION['role']=='toll'){
     $currentTollId = $_SESSION['id'];
-    // include '../header.php';
+
+
+    include '../header.php';
 
 ?>
 
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12">
+          	<a href="<?php echo base_url_toll; ?>comingVehicles/record.php">Records</a>
             <table class="table table-hover">
               <tr>
+              	<th>Name</th>
+              	<th>Contact</th>
                 <th>Vehicle Type</th>
                 <th>Vehicle No.</th>
                 <th>Vehicle Color</th>
                 <th>Vehicle Load</th>
+                <th>Round</th>
               </tr>
               <?php 
 
-                  $query    = "SELECT distinct c.id,c.user_id, (select name from users as a where a.id=c.user_id) as name, (select carVariant from users as a where a.id=c.user_id) as carVariant,(select carColor from users as a where a.id=c.user_id) as carColor,(select vehicleNo from users as a where a.id=c.user_id) as vehicleNo,(select licenseNo from users as a where a.id=c.user_id) as licenseNo,(select contact from users as a where a.id=c.user_id) as contact from toll_access as c where toll_id=1;";
+                  $query    = "SELECT distinct c.id,c.user_id,c.round, (select name from users as a where a.id=c.user_id) as name, (select carVariant from users as a where a.id=c.user_id) as carVariant,(select carColor from users as a where a.id=c.user_id) as carColor,(select vehicleNo from users as a where a.id=c.user_id) as vehicleNo,(select licenseNo from users as a where a.id=c.user_id) as licenseNo,(select vehicleSize from users as a where a.id=c.user_id) as vehicleSize,(select contact from users as a where a.id=c.user_id) as contact from toll_access as c where toll_id=1;";
                   $result = $conn->query($query);
                   if($result) {
                       if(!$result->num_rows == 0) {
@@ -47,6 +53,9 @@ if($_SESSION['role']=='toll'){
                               <td><?php echo $row['carVariant']; ?></td>
                               <td><?php echo $row['carColor']; ?></td>
                               <td><?php echo $row['vehicleNo']; ?></td>
+                              <td><?php echo $row['vehicleSize']; ?></td>
+                              <td><?php echo $row['round']; ?></td>
+
                             </tr>
                           <?php 
                         }  
@@ -61,3 +70,5 @@ if($_SESSION['role']=='toll'){
       </div>
 
       <?php }?>
+
+  </body>
