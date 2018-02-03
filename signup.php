@@ -3,7 +3,7 @@
 
 
  // echo 'hjdskl';
-include('../config/config.php');
+include('config/config.php');
  
 $name = $username = $contact = $gender = $dob = $college = $password = $confirm_password = $carVariant = $licenseNo = $carColor = $vehicleNo = "";
 $name_err = $username_err = $contact_err = $gender_err = $dob_err = $college_err = $password_err = $confirm_password_err = $carVariant_err = $licenseNo_err = $carColor_err = $vehicleNo_err = "";
@@ -138,10 +138,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     // echo $username_err; echo $password_err; echo $confirm_password_err;
     if(empty($username_err) && empty($password_err)){
-         $sql1 = "INSERT INTO users (username) VALUES (?)";
+         $sql = "INSERT INTO users (username, name, password, contact, dob, gender, role, carVariant, carColor, licenseNo, vehicleNo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
          
-        if($stmt1 = mysqli_prepare($conn, $sql1)){
-            mysqli_stmt_bind_param($stmt1, "s", $param_username);
+        if($stmt = mysqli_prepare($conn, $sql)){
+            mysqli_stmt_bind_param($stmt, "sssssssssss", $param_username, $param_name, $param_password, $param_contact, $param_dob, $param_gender, $param_role, $param_carVariant, $param_carColor, $param_licenseNo, $param_vehicleNo);
             // echo 'hello';
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); 
@@ -157,9 +157,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // echo $param_licenseNo;
             // echo $param_name;
             // echo $param_username;
-            if(mysqli_stmt_execute($stmt1)){
-                // header('Location: http://localhost:4001/user/index.php');
-                echo 'hello hey got it';
+            if(mysqli_stmt_execute($stmt)){
+                echo '
+                      <script>
+                         $("#signupSubmitButton").click(function () {
+                            $("#signupForm").trigger("reset");
+                        });
+                      
+                         window.location.href="'.base_url.'index.php"; 
+                      </script>';
+                
             } else{
                 echo " <script> alert(' Something went wrong."; echo $param_role ; echo "') </script>" ;
             }
@@ -167,7 +174,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 ?> <script> alert(' Something went wrong2.') </script> <?php
             }
          
-        mysqli_stmt_close($stmt1);
+        mysqli_stmt_close($stmt);
     }
     
     mysqli_close($conn);
@@ -195,10 +202,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			             </div>
 			           </div>
 			            
-			           <div class="form-group  <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-			             <label for="" class="sr-only">username<sup>*</sup></label>
+			           <div class="form-group">
+			             <label for="username" class="sr-only">username<sup>*</sup></label>
 			             <div class="col-sm-12">
-			               <input type="email" name="username"  class="form-control"  placeholder="username"  value="<?php echo $username; ?>">
+			               <input type="text" name="username"  class="form-control" id="username"  placeholder="username"  value="<?php echo $username; ?>">
 			                <span class="help-block"><?php echo $username_err; ?></span>
 			             </div>
 			           </div>
@@ -292,4 +299,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            
 <?php //require_once('footer.php'); ?>
 
-    <?php require_once('../components/login_modal.php'); ?>
+    <?php require_once('components/login_modal.php'); ?>

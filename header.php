@@ -1,34 +1,41 @@
 <?php
-  require_once '../config/config.php';
+  require_once 'config/config.php';
  
- $usernameLogin = $pass = "";
+ $usernameLogin = $pass = $role ="";
   $usernameLogin_err = $pass_err = "";
  
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+
       if(isset($_POST['usernameLogin'])){
         if(empty(trim($_POST["usernameLogin"]))){
           $usernameLogin_err = 'Please enter username.';
-      } else{
+        }
+      
+       else{
           $usernameLogin = trim($_POST["usernameLogin"]);
       }
     }
+    // echo $usernameLogin_err;
     if(isset($_POST['pass'])){
       if(empty(trim($_POST['pass']))){
           $pass_err = 'Please enter your password.';
-      } else{
+      }
+     else{
           $pass = trim($_POST['pass']);
       }
     }
     
-    if(!empty($usernameLogin_err) && !empty($pass_err)){
+    
+    if(empty($usernameLogin_err) && empty($pass_err)){
         $sql = "SELECT name,password,role FROM users WHERE username = ?";
         
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_usernameLogin);
             
-            $param_usernameLogin = $usernameLogin;
+            $param_usernameLogin =$usernameLogin;
             echo $param_usernameLogin;
-            echo 'hello';
+            // echo 'hello';
+            echo $param_usernameLogin;
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
                 
@@ -42,20 +49,20 @@
                                 $_SESSION['username'] = $username; 
                                 $_SESSION['role']=$role;
                                 $_SESSION['time'] = time();
-                                setcookie("username", $username , time()+24*60*60);
-                                setcookie("role", $role , time()+24*60*60);
-                                setcookie("name", $login_name , time()+24*60*60);
-                                header("location: faculty-portal/");
+                                // setcookie("username", $username , time()+24*60*60);
+                                // setcookie("role", $role , time()+24*60*60);
+                                // setcookie("name", $login_name , time()+24*60*60);
+                                header("location: user/");
 
                               }else if($role == "toll"){
                                 session_start();
                                 $_SESSION['username'] = $username; 
                                 $_SESSION['role']=$role;
                                 $_SESSION['time'] = time();
-                                setcookie("username", $username , time()+24*60*60);
-                                setcookie("role", $role , time()+24*60*60);
-                                setcookie("name", $login_name , time()+24*60*60);
-                                header("location: student-portal/");
+                                // setcookie("username", $username , time()+24*60*60);
+                                // setcookie("role", $role , time()+24*60*60);
+                                // setcookie("name", $login_name , time()+24*60*60);
+                                header("location: toll/");
 
                               }
                             
@@ -66,20 +73,16 @@
                                             </script>';
                         }
                     }else{echo 'error';}
-                } else{
-                    $usernameLogin_err = 'No account found with this username.<script>
-                                              $("#login").modal("show");
-                                            </script>';
-                }
+                } 
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
         }
         
-        // mysqli_stmt_close($stmt);
+        mysqli_stmt_close($stmt);
     }
     
-    // mysqli_close($conn);
+    mysqli_close($conn);
 }
 ?>
 
