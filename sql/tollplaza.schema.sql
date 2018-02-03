@@ -30,21 +30,21 @@ CREATE TABLE `tolls` (
   `id` int(16) NOT NULL,
   `name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `lat` varchar(255) NOT NULL,
-  `lng` varchar(255) NOT NULL,
-  `heavy_rate` varchar(255) NOT NULL,
-  `heavy_return_rate` varchar(255) NOT NULL,
-  `medium_rate` varchar(255) NOT NULL,
-  `medium_return_rate` varchar(255) NOT NULL,
-  `light_rate` varchar(255) NOT NULL,
-  `light_return_rate` varchar(255) NOT NULL,
+  `lat` int(5) NOT NULL,
+  `lng` int(5) NOT NULL,
+  `heavy_rate` int(5) NOT NULL,
+  `heavy_return_rate` int(5) NOT NULL,
+  `medium_rate` int(5) NOT NULL,
+  `medium_return_rate` int(5) NOT NULL,
+  `light_rate` int(5) NOT NULL,
+  `light_return_rate` int(5) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
-
+insert into tolls(name,address,lat,lng,heavy_rate,heavy_return_rate,medium_rate,medium_return_rate,light_rate,light_return_rate,username,password,role) values ('delhi-noida highway','')
 --
 -- Table structure for table `toll_access`
 --

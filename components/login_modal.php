@@ -12,14 +12,14 @@
          </div>
          <div class="modal-body">
            <form class="form-horizontal" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="loginForm">
-           <div class="form-group  <?php echo (!empty($usernameLogin_err)) ? 'has-error' : ''; ?>">
-             <label for="inputusernameLogin3" class="col-sm-2 control-label">usernameLogin<sup>*</sup></label>
+           <div class="form-group">
+             <label for="inputusernameLogin3" class="col-sm-2 control-label">Username Login<sup>*</sup></label>
              <div class="col-sm-10">
                <input type="email" name="usernameLogin" class="form-control" placeholder="usernameLogin" id="loginusername" value="<?php echo $usernameLogin; ?>">
                 <span class="help-block"><?php echo $usernameLogin_err; ?></span>
              </div>
            </div>
-           <div class="form-group  <?php echo (!empty($pass_err)) ? 'has-error' : ''; ?>"">
+           <div class="form-group">
              <label for="inputpass3" class="col-sm-2 control-label">Password<sup>*</sup></label>
              <div class="col-sm-10">
                <input type="password" name="pass" class="form-control" id="loginPassword" placeholder="Password" autocomplete="off">

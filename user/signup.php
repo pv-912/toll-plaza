@@ -137,7 +137,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
     // echo $username_err; echo $password_err; echo $confirm_password_err;
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)&& empty($vehicleNo_err)&& empty($carColor_err) && empty($licenseNo_err) && empty($carVariant_err)&& empty($college_err)&& empty($dob_err)&& empty($contact_err)&& empty($gender_err)&& empty($name_err)){
+    if(empty($username_err) && empty($password_err)){
          $sql1 = "INSERT INTO users (username) VALUES (?)";
          
         if($stmt1 = mysqli_prepare($conn, $sql1)){
@@ -159,7 +159,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // echo $param_username;
             if(mysqli_stmt_execute($stmt1)){
                 // header('Location: http://localhost:4001/user/index.php');
-                
+                echo 'hello hey got it';
             } else{
                 echo " <script> alert(' Something went wrong."; echo $param_role ; echo "') </script>" ;
             }
@@ -292,4 +292,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            
 <?php //require_once('footer.php'); ?>
 
-    <?php require_once('../login_modal.php'); ?>
+    <?php require_once('../components/login_modal.php'); ?>

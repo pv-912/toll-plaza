@@ -15,6 +15,6 @@
 
     <?php //require_once('footer.php'); ?>
 
-    <?php require_once('../login_modal.php'); ?>
+    <?php require_once('../components/login_modal.php'); ?>
    
 </body>

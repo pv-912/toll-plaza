@@ -1,7 +1,7 @@
 <?php
   require_once '../config/config.php';
  
- $usernameLogin = $pass = $role = $login_name = "";
+ $usernameLogin = $pass = "";
   $usernameLogin_err = $pass_err = "";
  
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -27,7 +27,8 @@
             mysqli_stmt_bind_param($stmt, "s", $param_usernameLogin);
             
             $param_usernameLogin = $usernameLogin;
-            
+            echo $param_usernameLogin;
+            echo 'hello';
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
                 
