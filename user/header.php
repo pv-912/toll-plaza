@@ -1,5 +1,5 @@
 <?php
-  require_once 'config/config.php';
+  require_once '../config/config.php';
  
  $usernameLogin = $pass = $role ="";
   $usernameLogin_err = $pass_err = "";
@@ -52,7 +52,7 @@
                                 // setcookie("username", $username , time()+24*60*60);
                                 // setcookie("role", $role , time()+24*60*60);
                                 // setcookie("name", $login_name , time()+24*60*60);
-                                header("location: user/");
+                                header("location: user/payToll");
 
                               }else if($role == "toll"){
                                 session_start();
@@ -107,9 +107,9 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link href="http://localhost/tollPlaza/src/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://localhost/tollPlaza/src/css/bootstrap-theme.min.css" rel="stylesheet">
-    <script src="http://localhost/tollPlaza/src/js/bootstrap.min.js"></script>
+    <link href="<?php echo base_url; ?>src/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>src/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="<?php echo base_url; ?>src/js/bootstrap.min.js"></script>
 </head>
 
 

@@ -1,9 +1,9 @@
- <?php include('header.php'); ?>
+ <?php include('../user/header.php'); ?>
  <?php
 
 
  // echo 'hjdskl';
-include('config/config.php');
+include('../config/config.php');
  
 $name = $username = $contact = $gender = $dob = $college = $password = $confirm_password = $carVariant = $licenseNo = $carColor = $vehicleNo = "";
 $name_err = $username_err = $contact_err = $gender_err = $dob_err = $college_err = $password_err = $confirm_password_err = $carVariant_err = $licenseNo_err = $carColor_err = $vehicleNo_err = "";
@@ -299,4 +299,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            
 <?php //require_once('footer.php'); ?>
 
-    <?php require_once('components/login_modal.php'); ?>
+    <?php require_once('login_modal_user.php'); ?>
