@@ -12,30 +12,30 @@
          </div>
          <div class="modal-body">
            <form class="form-horizontal" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="loginForm">
-           <div class="form-group">
-             <label for="inputusernameLogin3" class="col-sm-2 control-label">Username Login<sup>*</sup></label>
-             <div class="col-sm-10">
-               <input type="email" name="usernameLogin" class="form-control" placeholder="usernameLogin" id="loginusername" value="<?php echo $usernameLogin; ?>">
-                <span class="help-block"><?php echo $usernameLogin_err; ?></span>
-             </div>
-           </div>
-           <div class="form-group">
-             <label for="inputpass3" class="col-sm-2 control-label">Password<sup>*</sup></label>
-             <div class="col-sm-10">
-               <input type="password" name="pass" class="form-control" id="loginPassword" placeholder="Password" autocomplete="off">
-               <span class="help-block"><?php echo $pass_err; ?></span>
-             </div>
-           </div>
-           <div class="form-group">
-             <div class="col-sm-offset-2 col-sm-10">
-               <button type="submit" class="btn btn-primary loginModalSignupButton">Sign in</button>
-             </div>
-           </div>
-           <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <a href="user/signup.php">Don't Have Account (Only For Student.)</a>
-            </div>
-           </div> 
+               <div class="form-group">
+                 <label for="inputusernameLogin3" class="col-sm-2 control-label">Username Login<sup>*</sup></label>
+                 <div class="col-sm-10">
+                   <input type="text" name="usernameLogin" class="form-control" placeholder="usernameLogin" id="inputusernameLogin3" value="<?php echo $usernameLogin; ?>">
+                    <span class="help-block"><?php echo $usernameLogin_err; ?></span>
+                 </div>
+               </div>
+               <div class="form-group">
+                 <label for="loginPassword" class="col-sm-2 control-label">Password<sup>*</sup></label>
+                 <div class="col-sm-10">
+                   <input type="password" name="pass" class="form-control" id="loginPassword" placeholder="Password" autocomplete="off">
+                   <span class="help-block"><?php echo $pass_err; ?></span>
+                 </div>
+               </div>
+               <div class="form-group">
+                 <div class="col-sm-offset-2 col-sm-10">
+                   <button type="submit" class="btn btn-primary loginModalSignupButton">Sign in</button>
+                 </div>
+               </div>
+               <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <a href="<?php echo base_url; ?>signup.php">Don't Have Account (Only For Student.)</a>
+                </div>
+               </div> 
          </form>
          </div>
       </div>
