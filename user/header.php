@@ -31,11 +31,7 @@
         
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_usernameLogin);
-            
             $param_usernameLogin =$usernameLogin;
-            echo $param_usernameLogin;
-            // echo 'hello';
-            echo $param_usernameLogin;
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
                 
