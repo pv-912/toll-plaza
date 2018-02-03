@@ -109,21 +109,25 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `car_variant` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL,
+  `firstName` varchar(100) NOT NULL,
+  `lastName` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(10) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `date` date NOT NULL,
+  `car_varient` varchar(255) NOT NULL,
   `car_color` varchar(255) NOT NULL,
-  `license_no` varchar(255) NOT NULL,
+  `license_no` int(100) NOT NULL,
   `balance` int(11) NOT NULL,
   `gender` varchar(255) NOT NULL,
-  `role` varchar(10) NOT NULL,
-  `password` varchar(260) NOT NULL,
-  `dob` varchar(15) NOT NULL,
-  `contact` varchar(15) NOT NULL,
-  `vehicle_number` varchar(15) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `role` varchar(255) NOT NULL,
+  `dob` date NOT NULL,
+  `contact` int(11) NOT NULL,
+  `vehicle_number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

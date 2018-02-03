@@ -89,12 +89,18 @@
                 {
                     $image = rand(0, 100000).rand(0, 100000).rand(0, 100000).time().".".$imageExtension;
                 
-                    $insertQuery = "INSERT INTO `users`(`firstName`, `lastName`, `email`, `password`, `image`, `date`, `car_varient`, `car_color`, `license_no`, `balance`, `gender`, `role`, `dob`, `contact`, `vehicle_number`) VALUES ('$firstName','$lastName','$email','$password','$image','$date','$car_varient','$car_color','$license_no','$balance','$gender','$role','$dob','$contact','$vehicle_number')";
+        $insertQuery = "INSERT INTO `users`(`firstName`, `lastName`, `email`, `password`, `image`, `car_variant`, `car_color`, `license_no`, `balance`, `gender`, `role`, `dob`, `contact`, `vehicle_number`) VALUES ('$firstName','$lastName','$email','$password','$image','$car_varient','$car_color','$license_no','$balance','$gender','$role','$dob','$contact','$vehicle_number')";
 
+
+
+
+
+                         
+                        
 
                     if(mysqli_query($con, $insertQuery))
                     {
-                        if(move_uploaded_file($tmp_image,"images/$image"))
+                        if(move_uploaded_file($tmp_image,"../images/$image"))
                         {
                             $error = "You are successfully registered";
                         }
