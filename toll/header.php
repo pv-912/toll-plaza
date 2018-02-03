@@ -27,7 +27,7 @@
     
     
     if(empty($usernameLogin_err) && empty($pass_err)){
-        $sql = "SELECT name,password,role FROM users WHERE username = ?";
+        $sql = "SELECT name,password,role FROM tolls WHERE username = ?";
         
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_usernameLogin);
@@ -44,7 +44,7 @@
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($pass, $hashed_pass)){
                           
-                            if($role == "user"){
+                            if($role == "toll"){
                                 session_start();
                                 $_SESSION['username'] = $username; 
                                 $_SESSION['role']=$role;
@@ -52,9 +52,9 @@
                                 // setcookie("username", $username , time()+24*60*60);
                                 // setcookie("role", $role , time()+24*60*60);
                                 // setcookie("name", $login_name , time()+24*60*60);
-                                echo '
+                               echo '
                                 <script>
-                                   window.location.href="'.base_url_user.'payToll"; 
+                                   window.location.href="'.base_url_toll.'comingVehicles"; 
                                 </script>';
 
                               }
