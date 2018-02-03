@@ -163,7 +163,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                          window.location.href="'.base_url_user.'index.php"; 
                       </script>';
                 
-
             } else{
                 echo " <script> alert(' Something went wrong."; echo $param_role ; echo "') </script>" ;
             }
@@ -296,5 +295,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            
 <?php //require_once('footer.php'); ?>
 
-
-    <?php require_once('../components/login_modal.php'); ?>
+    <?php require_once('login_modal_user.php'); ?>
