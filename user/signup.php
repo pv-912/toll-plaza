@@ -1,295 +1,170 @@
- <?php include('header.php'); ?>
- <?php
+<?php
 
+    include("connect.php");
+    include("functions.php");
+    
+    if(logged_in())
+    {
+        header("location:profile.php");
+        exit();
+    }
+    
+    $error = "";
 
- // echo 'hjdskl';
-include('../config/config.php');
- 
-$name = $username = $contact = $gender = $dob = $college = $password = $confirm_password = $carVariant = $licenseNo = $carColor = $vehicleNo = "";
-$name_err = $username_err = $contact_err = $gender_err = $dob_err = $college_err = $password_err = $confirm_password_err = $carVariant_err = $licenseNo_err = $carColor_err = $vehicleNo_err = "";
- 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- if(isset($_POST["username"])){
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter a username.";
-    } else{
-        $username = trim($_POST['username']);
-        $sql = "SELECT username FROM users where username=? ";
+    if(isset($_POST['submit']))
+    {
+        $firstName = mysqli_real_escape_string($con, $_POST['fname']);
+        $lastName = mysqli_real_escape_string($con, $_POST['lname']);
+        $email = mysqli_real_escape_string($con, $_POST['email']);
+        $password = $_POST['password'];
+        $passwordConfirm = $_POST['passwordConfirm'];
+      
+        $image = $_FILES['image']['name'];
+        $tmp_image = $_FILES['image']['tmp_name'];
+        $imageSize = $_FILES['image']['size'];
+                
+        $conditions = isset($_POST['conditions']);
         
-        if($stmt = mysqli_prepare($conn, $sql)){
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
-            $param_username = $username;
-            
-            if(mysqli_stmt_execute($stmt)){
-                mysqli_stmt_store_result($stmt);
+        $date = date("F, d Y");
+        
+        
+        if(strlen($firstName) < 3)
+        {
+            $error = "First name is too short";
+        }
+        
+        else if(strlen($lastName) < 3)
+        {
+            $error = "Last name is too short";
+        }
+        else if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            $error = "Please enter valid email address";
+        }
+        else if(email_exists($email, $con))
+        {
+            $error = "Someone is already registered with this email";
+        }
+        else if(strlen($password) < 8)
+        {
+            $error = "Password must be greater than 8 characters";
+        }
+        else if($password !== $passwordConfirm)
+        {
+            $error = "Password does not match";
+        }
+        else if($image == "")
+        {
+            $error = "Please upload your image";
+        }
+        else if($imageSize > 1048576)
+        {
+            $error = "Image size must be less than 1 mb";
+        }           
+        else if(!$conditions)
+        {
+            $error = "You must be agree with the terms and conditions";
+        }
+        else
+        {   
+                //$password = password_hash($password, PASSWORD_DEFAULT);
                 
-                if(mysqli_stmt_num_rows($stmt) == 1){
-                    $username_err = "This username is already registered.";
-                } 
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }else{
-                echo "Oops! Something went wrong. Please try again later.2";
-            }
-         
-        mysqli_stmt_close($stmt);
-    }
-}
-
-    /* validators */
-    if(isset($_POST['name'])){
-        if(empty(trim($_POST['name']))){
-            $name_err = "Please enter a name.";     
-        }  else{
-            $name = trim($_POST['name']);
-            // echo $name;
-        }
-    }
-    if(isset($_POST['gender'])){
-        if(empty(trim($_POST['gender']))){
-            $gender_err = "Please select gender";     
-        } else{
-            $gender = trim($_POST['gender']);
-            // echo $gender;
-        }
-    }    
-    if(isset($_POST['contact'])){
-        if(empty(trim($_POST['contact']))){
-            $contact_err = "Please enter a contact no.";     
-        } elseif(strlen(trim($_POST['contact'])) < 10){
-            $contact_err = "Please enter contact no.";
-        } else{
-            $contact = trim($_POST['contact']);
-            // echo $contact;
-        }
-    }    
-    if(isset($_POST['dob'])){
-        if(empty(trim($_POST['dob']))){
-            $dob_err = "Please enter a date of birth";     
-        } else{
-            $dob = trim($_POST['dob']);
-            // echo $dob;
-        }
-    }   
-    if(isset($_POST['college'])){
-        if(empty(trim($_POST['college']))){
-            $college_err = "Please enter a college name.";     
-        } else{
-            $college = trim($_POST['college']);
-            // echo $college;
-        }
-    }
-    if(isset($_POST['carVariant'])){
-        if(empty(trim($_POST['carVariant']))){
-            $carVariant_err = "Please enter a carVariant.";     
-        } else{
-            $carVariant = trim($_POST['carVariant']);
-            // echo $college;
-        }
-    }
-    if(isset($_POST['licenseNo'])){
-        if(empty(trim($_POST['licenseNo']))){
-            $licenseNo_err = "Please enter a licenseNo.";     
-        } else{
-            $licenseNo = trim($_POST['licenseNo']);
-            // echo $licenseNo;
-        }
-    }
-    if(isset($_POST['carColor'])){
-        if(empty(trim($_POST['carColor']))){
-            $carColor_err = "Please enter a C.G.P.A.";     
-        } else{
-            $carColor = trim($_POST['carColor']);
-            // echo $college;
-        }
-    }
-    if(isset($_POST['vehicleNo'])){
-        if(empty(trim($_POST['vehicleNo']))){
-            $vehicleNo_err = "Please enter a vehicleNo (B.Tech)";     
-        } else{
-            $vehicleNo = trim($_POST['vehicleNo']);
-            // echo $college;
-        }
-    }
-
-    
-
-    if(isset($_POST['password'])){
-        if(empty(trim($_POST['password']))){
-            $password_err = "Please enter a password.";     
-        } elseif(strlen(trim($_POST['password'])) < 0){
-            $password_err = "Password must have atleast 6 characters.";
-        } else{
-            $password = trim($_POST['password']);
-            // echo $password;
-        }
-    }
-    if(isset($_POST['confirm_password'])){
-        if(empty(trim($_POST["confirm_password"]))){
-            $confirm_password_err = 'Please confirm password.';     
-        } else{
-            $confirm_password = trim($_POST['confirm_password']);
-            if($password != $confirm_password){
-                $confirm_password_err = 'Password did not match.';
-            }
-        }
-    }
-    // echo $username_err; echo $password_err; echo $confirm_password_err;
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)&& empty($vehicleNo_err)&& empty($carColor_err) && empty($licenseNo_err) && empty($carVariant_err)&& empty($college_err)&& empty($dob_err)&& empty($contact_err)&& empty($gender_err)&& empty($name_err)){
-         $sql1 = "INSERT INTO users (username) VALUES (?)";
-         
-        if($stmt1 = mysqli_prepare($conn, $sql1)){
-            mysqli_stmt_bind_param($stmt1, "s", $param_username);
-            // echo 'hello';
-            $param_username = $username;
-            $param_password = password_hash($password, PASSWORD_DEFAULT); 
-            $param_name = $name;
-            $param_contact = $contact;
-            $param_dob = $dob;
-            $param_gender = $gender;
-            $param_role = "user";
-            $param_carVariant = $carVariant;
-            $param_carColor = $carColor;
-            $param_licenseNo = $licenseNo;
-            $param_vehicleNo = $vehicleNo;
-            // echo $param_licenseNo;
-            // echo $param_name;
-            // echo $param_username;
-            if(mysqli_stmt_execute($stmt1)){
-                // header('Location: http://localhost:4001/user/index.php');
+                $imageExt = explode(".", $image);
+                $imageExtension = $imageExt[1];
                 
-            } else{
-                echo " <script> alert(' Something went wrong."; echo $param_role ; echo "') </script>" ;
-            }
-         }else{
-                ?> <script> alert(' Something went wrong2.') </script> <?php
-            }
-         
-        mysqli_stmt_close($stmt1);
+                if($imageExtension == "PNG" || $imageExtension == "png" || $imageExtension == "JPG" || $imageExtension == "jpg")
+                {
+                    $image = rand(0, 100000).rand(0, 100000).rand(0, 100000).time().".".$imageExtension;
+                
+                    $insertQuery = "INSERT INTO users(firstName, lastName, email, password, image, date) VALUES ('$firstName','$lastName','$email','$password','$image','$date')";
+
+
+                    if(mysqli_query($con, $insertQuery))
+                    {
+                        if(move_uploaded_file($tmp_image,"images/$image"))
+                        {
+                            $error = "You are successfully registered";
+                        }
+                        else
+                        {
+                            $error = "Image is not uploaded";
+                        }
+                    }
+                }
+                else
+                {
+                    $error = "File must be an image";
+                }
+        }
+                            
     }
-    
-    mysqli_close($conn);
-}
+
 ?>
 
 
 
+<!doctype html>
 
-
-		<div class="container">
-            <div id="Error">
-                
+<html>
+    
+    <head>
+        
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="css/styles.css"  />
+    
+    </head>
+    
+    
+    <body>
+        
+        <div id="error" style=" <?php  if($error !=""){ ?>  display:block; <?php } ?> "><?php echo $error; ?></div>
+        
+        <div id="wrapper">
+            
+            <div id="menu">
+                <a href="signup.php">Sign Up</a>
+                <a href="login.php">Login</a>
             </div>
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2">
-					<p class="signupHereTag">Sign Up Here ..</p>
-					<form class="form-horizontal" id="signupForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-           
-			           <div class="form-group   <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-			             <label for="" class="sr-only">Name<sup>*</sup></label>
-			             <div class="col-sm-12">
-			               <input type="text"  name="name"  class="form-control"  placeholder="Name" value="<?php echo $name; ?>" >
-			                <span class="help-block"><?php echo $name_err; ?></span>
-			             </div>
-			           </div>
-			            
-			           <div class="form-group  <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-			             <label for="" class="sr-only">username<sup>*</sup></label>
-			             <div class="col-sm-12">
-			               <input type="email" name="username"  class="form-control"  placeholder="username"  value="<?php echo $username; ?>">
-			                <span class="help-block"><?php echo $username_err; ?></span>
-			             </div>
-			           </div>
-			          
-			           <div class="form-group   ">
-			             <label for="" class="sr-only">Gender</label>
-			             <div class="col-sm-6">
-			               <select class="form-control"  name="gender"  placeholder="gender">
-			                  <option value="male">Male</option>
-			                  <option value="female">Female</option>
-			               </select>
-			                <span class="help-block"><?php echo $gender_err; ?></span>
-			             </div>
-			            
-			             <label for="" class="sr-only">Date Of Birth</label>
-			             <div class="col-sm-6">
-			               <input type="text" name="dob"  class="form-control"  placeholder="Date Of Birth"  onfocus="(this.type='date')" onblur="(this.type='text')" value="<?php echo $dob; ?>" >
-			                <span class="help-block"> <?php echo $dob_err; ?></span>
-			             </div>
-			           </div>
-			           
-                       <div class="form-group  ">
-                        <label for="" class="sr-only">licenseNo</label>
-                         <div class="col-sm-6">
-                           <input type="text" name="licenseNo"  class="form-control"  placeholder="licenseNo " value="<?php echo $licenseNo; ?>">
-                            <span class="help-block"><?php echo $licenseNo_err; ?></span>
-                         </div>
-                        
-                        <label for="" class="sr-only">vehicleNo</label>
-                         <div class="col-sm-6">
-                           <input type="text"  name="vehicleNo" class="form-control"  placeholder="vehicleNo ( B.Tech )" value="<?php echo $vehicleNo; ?>">
-                            <span class="help-block"><?php echo $vehicleNo_err; ?></span>
-                         </div>
-                       </div>
+            
+            <div id="formDiv">
+                
+                <form method="POST" action="signup.php" enctype="multipart/form-data">
+                
+                <label>First Name:</label><br/>
+                <input type="text" name="fname" class="inputFields" required/><br/><br/>
+                
+                <label>Last Name:</label><br/>
+                <input type="text" name="lname"  class="inputFields" required/><br/><br/>
+                
+                <label>Email:</label><br/>
+                <input type="text" name="email"  class="inputFields" required/><br/><br/>
+                
+                <label>Password:</label><br/>
+                <input type="password" name="password" class="inputFields"  required/><br/><br/>
+                
+                <label>Re-enter Password:</label><br/>
+                <input type="password" name="passwordConfirm"  class="inputFields" required/><br/><br/>
+                
+                <label>Image:</label><br/>
+                <input type="file" name="image" id="imageupload"/><br/><br/>
+                
+            
+                <input type="checkbox" name="conditions" />
+                <label>I am agree with terms and conditions</label><br/><br/>
+                
+                <input type="submit"  class="theButtons"  name="submit" />
 
-                       <div class="form-group  ">
-                        <label for="" class="sr-only">carVariant</label>
-                         <div class="col-sm-6">
-                           <input type="text" name="carVariant"  class="form-control"  placeholder="carVariant" value="<?php echo $carVariant; ?>">
-                            <span class="help-block"><?php echo $carVariant_err; ?></span>
-                         </div>
-                        
-                        <!-- <label for="" class="sr-only">carColor</label>
-                         <div class="col-sm-6">
-                           <input type="text"  name="carColor" class="form-control"  placeholder="C.G.P.A ( If % then convert it to C.G.P.A. ) " value="<?php //echo $carColor; ?>">
-                            <span class="help-block"></span>
-                         </div>
-                       </div> -->
+                
+                
+                </form>
+            
+            </div>
+        
+        </div>
+        
+    </body>
 
-                       
+</html>
 
-			           <div class="form-group  ">
-			            <label for="" class="sr-only">Car Color</label>
-			             <div class="col-sm-6">
-			               <input type="text" name="carColor"  class="form-control"  placeholder="Car Color" value="<?php echo $carColor; ?>">
-			                <span class="help-block"><?php echo $college_err; ?></span>
-			             </div>
-			            
-			            <label for="" class="sr-only">Contact</label>
-			             <div class="col-sm-6">
-			               <input type="number"  name="contact" class="form-control"  placeholder="Contact" value="<?php echo $contact; ?>">
-			                <span class="help-block"><?php echo $contact_err; ?></span>
-			             </div>
-			           </div>
-			          
-			           <div class="form-group  <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-			             <label for=""  class="sr-only">Password<sup>*</sup></label>
-			             <div class="col-sm-6">
-			               <input type="password" name="password" id="signupPassword" class="form-control"  placeholder="Password"  value="<?php echo $password; ?>" autocomplete="off">
-			                <span class="help-block"><?php echo $password_err; ?></span>
-			             </div>
-			            
-			             <label for="" class="sr-only">Confirm Password<sup>*</sup></label>
-			             <div class="col-sm-6">
-			               <input type="password" name="confirm_password" class="form-control" id="signupConfirmPassword" placeholder="Confirm Password"  value="<?php echo $confirm_password; ?>" autocomplete="off">
-			                <span class="help-block"><?php echo $confirm_password_err; ?></span>
-			             </div>
-			          
-			           </div>
-			           <div class="form-group">
-			             <div class="col-sm-offset-3 col-sm-6">
-			               <input type="submit" value="SIGN UP" id="signupSubmitButton" class="btn btn-primary signupModalSignupButton" style="width: 100%;margin-bottom: 5vh" autocomplete="off">
-			             </div>
-			           </div>
-			         </form>
-
-				</div>
-			</div>
-		</div>
-
-           
-<?php //require_once('footer.php'); ?>
-
-    <?php require_once('../login_modal.php'); ?>
+<!--<form method="POST" action="index.php" enctype="multipart/form-data">The enctype is needed to upload files or images-->
+<!--<label>First Name:</label>  Label tag is new in html5-->
