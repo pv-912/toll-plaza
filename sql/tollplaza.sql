@@ -109,22 +109,20 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `firstName` varchar(100) NOT NULL,
-  `lastName` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(10) NOT NULL,
-  `image` varchar(100) NOT NULL,
-  `date` date NOT NULL,
-  `car_varient` varchar(255) NOT NULL,
-  `car_color` varchar(255) NOT NULL,
-  `license_no` int(100) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `carVariant` varchar(255) NOT NULL,
+  `carColor` varchar(255) NOT NULL,
+  `licenseNo` varchar(255) NOT NULL,
   `balance` int(11) NOT NULL,
   `gender` varchar(255) NOT NULL,
-  `role` varchar(255) NOT NULL,
-  `dob` date NOT NULL,
-  `contact` int(11) NOT NULL,
-  `vehicle_number` int(11) NOT NULL
+  `role` varchar(10) NOT NULL,
+  `password` varchar(527) DEFAULT NULL,
+  `dob` varchar(15) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `vehicleNo` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -148,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-02  3:52:07
+-- Dump completed on 2018-02-02 21:52:37
