@@ -64,7 +64,7 @@
 	<head>
 		
 	<title>Login Page</title>
-	<link rel="stylesheet" href="css/styles.css"  />
+	<link rel="stylesheet" href="../src/css/styles.css"  />
 	
 	</head>
 	
@@ -76,7 +76,7 @@
 		<div id="wrapper">
 			
 			<div id="menu">
-				<a href="index.php">Sign Up</a>
+				<a href="signup.php">Sign Up</a>
 				<a href="login.php">Login</a>
 			</div>
 			
@@ -107,3 +107,9 @@
 	</body>
 
 </html>
+
+
+
+
+
+

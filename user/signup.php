@@ -18,7 +18,20 @@
         $email = mysqli_real_escape_string($con, $_POST['email']);
         $password = $_POST['password'];
         $passwordConfirm = $_POST['passwordConfirm'];
-      
+        
+
+        $car_varient = $_POST['car_varient'];
+        $car_color = $_POST['car_color'];
+        $license_no = $_POST['license_no'];
+        $balance = $_POST['balance'];
+        $gender = $_POST['gender'];
+        $role = $_POST['role'];
+        $dob = $_POST['dob'];
+        $contact = $_POST['contact'];
+        $vehicle_number = $_POST['vehicle_number'];
+
+
+
         $image = $_FILES['image']['name'];
         $tmp_image = $_FILES['image']['tmp_name'];
         $imageSize = $_FILES['image']['size'];
@@ -76,7 +89,7 @@
                 {
                     $image = rand(0, 100000).rand(0, 100000).rand(0, 100000).time().".".$imageExtension;
                 
-                    $insertQuery = "INSERT INTO users(firstName, lastName, email, password, image, date) VALUES ('$firstName','$lastName','$email','$password','$image','$date')";
+                    $insertQuery = "INSERT INTO `users`(`firstName`, `lastName`, `email`, `password`, `image`, `date`, `car_varient`, `car_color`, `license_no`, `balance`, `gender`, `role`, `dob`, `contact`, `vehicle_number`) VALUES ('$firstName','$lastName','$email','$password','$image','$date','$car_varient','$car_color','$license_no','$balance','$gender','$role','$dob','$contact','$vehicle_number')";
 
 
                     if(mysqli_query($con, $insertQuery))
@@ -138,6 +151,33 @@
                 
                 <label>Email:</label><br/>
                 <input type="text" name="email"  class="inputFields" required/><br/><br/>
+
+                <label>car_varient</label><br/>
+                <input type="text" name="car_varient"  class="inputFields" required/><br/><br/>
+
+                <label>car_color</label><br/>
+                <input type="text" name="car_color"  class="inputFields" required/><br/><br/>
+
+                <label>license_no</label><br/>
+                <input type="text" name="license_no"  class="inputFields" required/><br/><br/>
+
+                <label>balance</label><br/>
+                <input type="text" name="balance"  class="inputFields" required/><br/><br/>
+
+                <label>gender</label><br/>
+                <input type="gender" name="gender"  class="inputFields" required/><br/><br/>
+
+                <label>role</label><br/>
+                <input type="text" name="role"  class="inputFields" required/><br/><br/>
+
+                <label>dob</label><br/>
+                <input type="date" name="dob"  class="inputFields" required/><br/><br/>
+
+                <label>contact</label><br/>
+                <input type="text" name="contact"  class="inputFields" required/><br/><br/>
+
+                <label>vehicle_number</label><br/>
+                <input type="text" name="vehicle_number"  class="inputFields" required/><br/><br/>
                 
                 <label>Password:</label><br/>
                 <input type="password" name="password" class="inputFields"  required/><br/><br/>
