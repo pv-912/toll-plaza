@@ -48,7 +48,7 @@ if($_SESSION['role']=='toll'){
                   if($result) {
                       if(!$result->num_rows == 0) {
                           while($row = $result->fetch_assoc()) {   ?>
-                          	<tr onclick="pass(<?php echo $row['id']; ?>);">
+                          	<tr onclick="pass(<?php echo $row['user_id']; ?>);">
                               <td><?php echo $row['name']; ?></td>
                               <td><?php echo $row['contact']; ?></td>
                               <td><?php echo $row['carVariant']; ?></td>
