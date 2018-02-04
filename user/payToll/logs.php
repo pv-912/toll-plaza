@@ -37,7 +37,7 @@ if($_SESSION['role']=='user'){
                   $query    = "SELECT distinct c.payment,(select name from tolls as a where a.id=c.toll_id) as name, (select address from tolls as a where a.id=c.toll_id) as tollAddress,(select payTime from toll_access as b where b.toll_id=c.toll_id and b.user_id=c.user_id) as payTime from user_logs as c where user_id=$currentUserId";
                   $result = $conn->query($query);
                   if($result) {
-                      if(!$result->num_rows == 0) {
+                      if(!$result->num_rows  == 0) {
                           while($row = $result->fetch_assoc()) {   ?>
                             <tr>
                               <td><?php echo $row['name']; ?></td>
