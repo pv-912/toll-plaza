@@ -27,7 +27,7 @@
     
     
     if(empty($usernameLogin_err) && empty($pass_err)){
-        $sql = "SELECT name,password,role FROM users WHERE username = ?";
+        $sql = "SELECT password,role,id FROM users WHERE username = ?";
         
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_usernameLogin);
@@ -40,13 +40,12 @@
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    mysqli_stmt_bind_result($stmt, $login_name, $hashed_pass, $role);
+                    mysqli_stmt_bind_result($stmt, $hashed_pass, $role,$id);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($pass, $hashed_pass)){
                           
-                            if($role == "user"){
                                 session_start();
-                                $_SESSION['username'] = $username; 
+                                $_SESSION['id'] = $id; 
                                 $_SESSION['role']=$role;
                                 $_SESSION['time'] = time();
                                 // setcookie("username", $username , time()+24*60*60);
@@ -57,7 +56,6 @@
                                    window.location.href="'.base_url_user.'payToll"; 
                                 </script>';
 
-                              }
                             
                         } else{
                             $pass_err = 'The password you entered was incorrect.
@@ -120,7 +118,6 @@
          </button>
          <a class="navbar-brand" href="http://localhost/tollPlaza/"><img src="" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
          <a class="navbar-brand sparkNavbarTag "  href="index.php">Tool Plaza</a><br/>
-         <!-- <p class="sparkFullFormTag">Summer Internship Programme at IIT Roorkee</p> -->
        </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
