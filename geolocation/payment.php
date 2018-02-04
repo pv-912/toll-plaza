@@ -4,7 +4,7 @@
    $result = $conn->query($query);
    while($row = $result->fetch_assoc()) {   ?>
                             <tr>
-                              <td><?php echo $row['id'];?></td>
+                              <td id="toll_id"><?php echo $row['id'];?></td>
                               <td><?php echo "      ";?></td>
                               <td><?php echo $row['lat'];?></td>
                               <td><?php echo "      ";?></td>
@@ -23,28 +23,34 @@
                               <td><?php echo $row['light_return_rate'];?></td>
                               <td><?php echo "      ";?></td>
                               <td><?php echo $row['address'];?></td>
-                              <td><?php echo "      ";?></td>
+                              <td><?php echo "      ";?></td>                              
+                              <td><button type="button"  id="select_toll" value="<?php echo $row['id'];?>">select</button></td>
+                              <td><?php echo "      ";?></td>                              
+                              <td><button type="button"  id="select_toll_with_round" value="<?php echo $row['id'];?>">select</button></td>
                               <td><?php echo "</br>";?></td>
-                              <td><button type="button"  id="select_toll">select</button></td>
                             </tr>
                           <?php 
 
 }
 
 ?>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
     $("#select_toll").on("click",function(){
-              
-
+ 
+      var toll_id = $("#select_toll").val();
+      var round=0;
+                console.log(toll_id);  
        
 
             $.ajax({
             type: "POST",
-            url: "<?=base_url?>chat_signup_functions.php/",
+            url: "",
             data:{
-                mobile:phone_no,
+                toll_id:toll_id,
+                round:round,
             },
             success: function(data){
                 console.log(data);
@@ -55,28 +61,33 @@ $(document).ready(function(){
 
     });
 
+ });
+
+$(document).ready(function(){
+    $("#select_toll_with_round").on("click",function(){
  
-});
-function otpgeneration(){
-        
+      var toll_id = $("#select_toll_with_round").val();
+      var round=1;
 
-        // $("#submit_otp").prop("disabled",true);
-        console.log("hello");
+                console.log(toll_id);  
+       
 
-        var otp=$("#chatotp").val();
             $.ajax({
             type: "POST",
-            url: "<?=base_url?>chat_signup_otp_functions.php/",
+            url: "",
             data:{
-                otp:otp,
+                toll_id:toll_id,
+                round:round,
             },
             success: function(data){
-                window.location.href=data;
+                console.log(data);
             }
         });
+            
+         console.log("disabled");  
 
-      
+    });
 
-    }
+ });
 
 </script>
