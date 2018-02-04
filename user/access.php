@@ -1,12 +1,14 @@
 <?php
-    require_once './../config/config.php';
+    require_once '../config/config.php';
 
-    $_SESSION['username'] = 'nikhil';
+    $_SESSION['username'] = 'kshitij';
     $_SESSION['user_id'] = 1; 
     $_SESSION['role'] = 'user';
     $_SESSION['varient'] = 'light';
-    $_POST['toll_id'] = 1;
+    $_POST['toll_id'] = 2;
     $varient_and_round = 'lol';
+    $_POST['round']=1;
+    $round=$_POST['round'];
 
     $user_id = $_SESSION['user_id'];
     $toll_id = $_POST['toll_id'];
@@ -36,14 +38,16 @@
         }
         echo $payment;
 
-        $get_data = "SELECT round FROM toll_access WHERE toll_id=$toll_id AND user_id=$user_id";
+        $get_data = "SELECT allow FROM toll_access WHERE toll_id=$toll_id AND user_id=$user_id";
         $result = $conn->query($get_data);
-        if ($result->num_rows == 0) {
+        $row=$result->num_rows;
+        print_r($row);
+        if ($row[allow]) {
             if (!isset($_POST['round'])) {
                 $add_access = "INSERT INTO toll_access (user_id, toll_id) VALUES ($user_id, $toll_id);";
                 
             } else {
-                $add_access = "INSERT INTO toll_access (user_id, toll_id, round) VALUES ($user_id, $toll_id, $round);";
+                $add_access = "INSERT INTO toll_access (user_id, toll_id, allow) VALUES ($user_id, $toll_id, $round);";
             }
             $make_payment = "UPDATE users SET balance=balance-$payment WHERE id=$user_id;";
             $add_log = "INSERT INTO user_logs (user_id, toll_id, payment) VALUES ($user_id, $toll_id, $payment);";    

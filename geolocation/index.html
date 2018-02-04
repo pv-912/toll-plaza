@@ -20,10 +20,11 @@ function showLocation(position) {
 	var longitude = position.coords.longitude;
     latitude=latitude;
     longitude=longitude;
+    console.log(longitude);
 
 	$.ajax({
 		type:'POST',
-		url:'getLocation.php',
+		url:'geoLocation.php',
 		data:'latitude='+latitude+'&longitude='+longitude,
 		success:function(msg){
             if(msg){

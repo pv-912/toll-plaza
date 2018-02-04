@@ -160,7 +160,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(mysqli_stmt_execute($stmt)){
                 echo '
                       <script>
-                         window.location.href="'.base_url_user.'index.php"; 
+                         window.location.href="'.base_url.'user/index.php"; 
                       </script>';
                 
             } else{
