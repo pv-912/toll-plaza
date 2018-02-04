@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-<title>SPACE-O :: Get Visitor Location using HTML5</title>
+<?php include '../config/config.php';?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!DOCTYPE html>
+<html>
 
+<body>
+<span id="location"></span>
+</body>
+</html>
 <script>
 
 $(document).ready(function(){
@@ -21,7 +24,6 @@ function showLocation(position) {
     latitude=latitude;
     longitude=longitude;
     console.log(longitude);
-
 	$.ajax({
 		type:'POST',
 		url:'geoLocation.php',
@@ -32,17 +34,11 @@ function showLocation(position) {
             }else{
                 $("#location").html('Not Available');
             }
+
+        
 		}
 	});
-
+//     var location=$("#location").val();
+// console.log(location);
 }
 </script>
-<style type="text/css">
-	p{ border: 2px dashed #009755; width: auto; padding: 10px; font-size: 18px; border-radius: 5px; color: #FF7361;}
-    span.label{ font-weight: bold; color: #000;}
-</style>
-</head>
-<body>
-    <p><span class="label">Your Geo-location:</span> <span id="location"></span></p>
-</body>
-</html>
