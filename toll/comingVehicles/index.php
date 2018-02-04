@@ -30,6 +30,7 @@ if($_SESSION['role']=='toll'){
         <div class="row">
           <div class="col-sm-12">
           	<a href="<?php echo base_url_toll; ?>comingVehicles/record.php">Records</a>
+
             <table class="table table-hover">
               <tr>
               	<th>Name</th>
@@ -47,7 +48,7 @@ if($_SESSION['role']=='toll'){
                   if($result) {
                       if(!$result->num_rows == 0) {
                           while($row = $result->fetch_assoc()) {   ?>
-                          	<tr>
+                          	<tr onclick="pass(<?php echo $row['id']; ?>);">
                               <td><?php echo $row['name']; ?></td>
                               <td><?php echo $row['contact']; ?></td>
                               <td><?php echo $row['carVariant']; ?></td>
@@ -55,7 +56,7 @@ if($_SESSION['role']=='toll'){
                               <td><?php echo $row['vehicleNo']; ?></td>
                               <td><?php echo $row['vehicleSize']; ?></td>
                               <td><?php echo $row['round']; ?></td>
-
+				          		<input type='hidden' id="passedUserRound<?php echo $row['id']; ?>" value="<?php echo $row['round']; ?>">
                             </tr>
                           <?php 
                         }  
@@ -65,10 +66,35 @@ if($_SESSION['role']=='toll'){
 
               
             </table>
+            <div id="passedDiv"></div>
+
           </div>
         </div>
       </div>
 
       <?php }?>
+
+
+  <script>
+  	function pass(data){
+
+            var userId = data;
+            var tollId = <?php echo $currentTollId; ?> ;
+                $.ajax({
+                    url: '../../api/toll/vehiclePassed.php',
+                    data: {'userId':userId,'tollId':tollId},
+                    async: true,
+                    type: 'POST',          
+
+                    success: function(data){
+                            $('#passedDiv').html(data);
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                            alert(errorThrown+ 'Priority Set.');
+                    }
+                });
+        	}
+  </script>
+
 
   </body>
