@@ -77,22 +77,21 @@ if($_SESSION['role']=='toll'){
 
   <script>
   	function pass(data){
+        var userId = data;
+        var tollId = <?php echo $currentTollId; ?> ;
+            $.ajax({
+                url: '../../api/toll/vehiclePassed.php',
+                data: {'userId':userId,'tollId':tollId},
+                async: true,
+                type: 'POST',          
 
-            var userId = data;
-            var tollId = <?php echo $currentTollId; ?> ;
-                $.ajax({
-                    url: '../../api/toll/vehiclePassed.php',
-                    data: {'userId':userId,'tollId':tollId},
-                    async: true,
-                    type: 'POST',          
-
-                    success: function(data){
-                            $('#passedDiv').html(data);
-                    },
-                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                            alert(errorThrown+ 'Priority Set.');
-                    }
-                });
+                success: function(data){
+                        $('#passedDiv').html(data);
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown+ 'Priority Set.');
+                }
+            });
         	}
   </script>
 

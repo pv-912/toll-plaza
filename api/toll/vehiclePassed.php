@@ -46,6 +46,18 @@ include '../../config/config.php';
 							        }else {echo '<script>alert("Something Went Wrong.")</script>';}
 							         
 							        mysqli_stmt_close($stmt);
+							        $sql = "DELETE from toll_access where user_id=? and toll_id = ?";
+         
+							        if($stmt = mysqli_prepare($conn, $sql)){
+							            mysqli_stmt_bind_param($stmt, "ii", $param_user_id, $param_toll_id);
+							            if(mysqli_stmt_execute($stmt)){
+							                echo '<script>alert("Deleted from logs")</script>';
+							            } else{
+							                echo '<script>alert("Something Went Wrong.")</script>';
+							            }
+							        }else {echo '<script>alert("Something Went Wrong.")</script>';}
+							         
+							        mysqli_stmt_close($stmt);
 							    }
 							    else{
 						    	echo '<script>alert("Something Went Wrong.")</script>';

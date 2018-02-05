@@ -4,37 +4,37 @@
     $_SESSION['username'] = 'kshitij';
     $_SESSION['user_id'] = 1; 
     $_SESSION['role'] = 'user';
-    $_SESSION['varient'] = 'light';
+    $_SESSION['variant'] = 'light';
     $_POST['toll_id'] = 2;
-    $varient_and_round = 'lol';
+    $variant_and_round = 'lol';
     $_POST['round']=1;
     $round=$_POST['round'];
 
     $user_id = $_SESSION['user_id'];
     $toll_id = $_POST['toll_id'];
     if ($_SESSION['role'] === 'user' && isset($_POST['toll_id'])) {
-        if ($_SESSION['varient'] == 'light' && isset($_POST['round'])) {
-            $varient_and_round = 'light_return_rate';
-        } else if ($_SESSION['varient'] == 'light') {
-            $varient_and_round = 'light_rate';
-        } else if ($_SESSION['varient'] == 'medium' && isset($_POST['round'])) {
-            $varient_and_round = 'medium_return_rate';
-        } else if ($_SESSION['varient'] == 'medium') {
-            $varient_and_round = 'medium_rate';
-        } else if ($_SESSION['varient'] == 'heavy' && isset($_POST['round'])) {
-            $varient_and_round = 'heavy_return_rate';
-        } else if ($_SESSION['varient'] == 'heavy') {
-            $varient_and_round = 'heavy_rate';
+        if ($_SESSION['variant'] == 'light' && isset($_POST['round'])) {
+            $variant_and_round = 'light_return_rate';
+        } else if ($_SESSION['variant'] == 'light') {
+            $variant_and_round = 'light_rate';
+        } else if ($_SESSION['variant'] == 'medium' && isset($_POST['round'])) {
+            $variant_and_round = 'medium_return_rate';
+        } else if ($_SESSION['variant'] == 'medium') {
+            $variant_and_round = 'medium_rate';
+        } else if ($_SESSION['variant'] == 'heavy' && isset($_POST['round'])) {
+            $variant_and_round = 'heavy_return_rate';
+        } else if ($_SESSION['variant'] == 'heavy') {
+            $variant_and_round = 'heavy_rate';
         } else {
-            print "Varient and Round Exception";
+            print "variant and Round Exception";
         };
-        echo $varient_and_round;
+        echo $variant_and_round;
         echo $toll_id;
-        $get_payment = "SELECT $varient_and_round FROM tolls WHERE id=$toll_id";
+        $get_payment = "SELECT $variant_and_round FROM tolls WHERE id=$toll_id";
 
         $result = $conn->query($get_payment);
         while($row = $result->fetch_assoc()) {
-            $payment= $row[$varient_and_round];
+            $payment= $row[$variant_and_round];
         }
         echo $payment;
 

@@ -1,5 +1,7 @@
 <?php
 define('base_url', 'http://localhost/toll-plaza/');
+define('base_url_toll', 'http://localhost:4001/toll/');
+define('base_url_user', 'http://localhost:4001/user/');
 
 
 $servername = "localhost";

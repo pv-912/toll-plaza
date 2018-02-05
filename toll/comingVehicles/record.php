@@ -29,7 +29,7 @@ if($_SESSION['role']=='toll'){
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12">
-            <a href="<?php echo base_url_toll; ?>comingVehicles/toll.php">Current</a>
+            <a href="<?php echo base_url_toll; ?>comingVehicles/index.php">Current</a>
             <table class="table table-hover">
               <tr>
               	<th>Name</th>
