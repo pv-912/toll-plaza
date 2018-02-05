@@ -1,8 +1,6 @@
  <?php include('../user/header.php'); ?>
  <?php
 
-
- // echo 'hjdskl';
 include('../config/config.php');
  
 $name = $username = $contact = $gender = $dob = $college = $password = $confirm_password = $carVariant = $licenseNo = $carColor = $vehicleNo = "";

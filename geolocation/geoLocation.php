@@ -1,16 +1,14 @@
 <?php
 include '../config/config.php';
 
+$user_id = $_SESSION['id'];
+
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
-
-    //Send request and receive json data by latitude and longitude
     $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($_POST['latitude']).','.trim($_POST['longitude']).'&sensor=false';
-
     $json = @file_get_contents($url);
     $data = json_decode($json);
     $status = $data->status;
     if($status=="OK"){
-        //Get address from json data
         $location = $data->results[0]->formatted_address;
     }else{
         $location =  '';
@@ -28,37 +26,49 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     $low_lng = $geo_lng - $side_by_two;
     $high_lng = $geo_lng + $side_by_two;
 
-    $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
+    $query = "SELECT * FROM `toll_access` WHERE id=$user_id";
+    $result = $conn->query($query);
+    $allocated_tolls = $array();
+    while($row = $result->fetch_assoc()) {
+        array_push($allocated_tolls, $row['toll_id']);
+    };
+    print_r($allocated_tolls);
 
-    // print $query;
+    $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
     $result = $conn->query($query);
     if(!$result->num_rows == 0) {
-        while($row = $result->fetch_assoc()) {   ?>
-                                <tr>
-                                <td id="toll_id"><?php echo $row['id'];?></td>
-                                <td><?php echo "      ";?></td>
-                                <td><?php echo $row['lat'];?></td>
-                                <td><?php echo "      ";?></td>
-                                <td><?php echo $row['lng'];?></td>
-                                <td><?php echo "      ";?></td>
-                                <td><?php echo $row['heavy_rate'];?></td>
-                                <td><?php echo "      ";?></td>
-                                <td><?php echo $row['heavy_return_rate'];?></td>
-                                <td><?php echo "      ";?></td>
-                                <td><?php echo $row['medium_rate'];?></td>
-                                <td><?php echo "      ";?></td>
-                                <td><?php echo $row['medium_return_rate'];?></td>
-                                <td><?php echo "      ";?></td>
-                                <td><?php echo $row['light_rate'];?></td>
-                                <td><?php echo "      ";?></td>
-                                <td><?php echo $row['light_return_rate'];?></td>
-                                <td><?php echo "      ";?></td>
-                                <td><?php echo $row['address'];?></td>
-                                <td><?php echo "      ";?></td>                              
-                                <td><button type="button"  id="select_toll" value="<?php echo $row['id'];?>">select</button></td>
-                                <td><?php echo "      ";?></td>                              
-                                <td><button type="button"  id="select_toll_with_round" value="<?php echo $row['id'];?>">select</button></td>
-                                <td><?php echo "</br>";?></td>
+        while($row = $result->fetch_assoc()) {
+            if ($_SESSION['variant'] == 'light') {
+                $variant = 'light_rate';
+                $variant_round = 'light_return_rate';
+            } else if ($_SESSION['variant'] == 'medium') {
+                $variant = 'medium_rate';
+                $variant_round = 'medium_return_rate';
+            } else if ($_SESSION['variant'] == 'heavy') {
+                $variant = 'heavy_rate';
+                $variant_round = 'heavy_return_rate';
+            } else {
+                print "Variant Exception";
+            };
+            if (in_array($row['id'],$allocated_tolls, TRUE)) {
+                $allocated = true;
+            } else {
+                $allocated = false;
+            };
+            ?>
+                                <tr <?php if ($allocated) { echo `class="lassan"`; } ?>>
+                                    <td id="toll_id"><?php echo $row['id'];?></td>
+                                    <td><?php echo "      ";?></td>
+                                    <td><?php echo $row['address'];?></td>
+                                    <td><?php echo "      ";?></td>
+                                    <td><?php echo $row[$variant];?></td>
+                                    <td><?php echo "      ";?></td>
+                                    <td><button type="button" id="select_toll" value="<?php echo $row['id'];?>" <?php if ($allocated) { echo `disabled`; } ?>>select</button></td>
+                                    <td><?php echo "      ";?></td>
+                                    <td><?php echo $row[$variant_round];?></td>
+                                    <td><?php echo "      ";?></td>
+                                    <td><button type="button" id="select_toll_with_round" value="<?php echo $row['id'];?>" <?php if ($allocated) { echo `disabled`; } ?>>select</button></td>
+                                    <td><?php echo "</br>";?></td>
                                 </tr>
                             <?php 
         }
@@ -91,13 +101,8 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("#select_toll_with_round").on("click",function(){
- 
       var toll_id = $("#select_toll_with_round").val();
       var round=1;
-
-                console.log(toll_id);  
-       
-
             $.ajax({
             type: "POST",
             url: "payment_function.php",
@@ -109,11 +114,7 @@ $(document).ready(function(){
                 console.log(data);
             }
         });
-            
-              
-
     });
-
  });
 
 </script>

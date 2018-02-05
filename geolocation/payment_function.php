@@ -1,64 +1,30 @@
 <?php
     require_once '../config/config.php';
-    echo "string";
-		$_SESSION['user_id'] = 1; 
-		$user_id=$_SESSION['user_id'];
-		$query = "SELECT * FROM `users` WHERE `id`= $user_id";
-		$result = $conn->query($query);
-		$row = $result->fetch_assoc();
-		print_r($row);
-
+    $user_id=$_SESSION['user_id'];
+    $query = "SELECT * FROM `users` WHERE `id`= $user_id";
+    $result = $conn->query($query);
+    $row = $result->fetch_assoc();
+    print_r($row);
+    // Test it
     if ($row['role'] == 'user' && isset($_POST['toll_id'])) {
-
-    	
-
         if ($row['carVariant'] == 'light' && isset($_POST['round'])) {
-
-        	
-
             $varient_and_round = 'light_return_rate';
-
-
         } else if ($row['carVariant'] == 'light') {
-
-        	
-
             $varient_and_round = 'light_rate';
-
-
         } else if ($row['carVariant'] == 'medium' && isset($_POST['round'])) {
-
-
             $varient_and_round = 'medium_return_rate';
-
-
         } else if ($row['carVariant'] == 'medium') {
-
-
             $varient_and_round = 'medium_rate';
-
-
         } else if ($row['carVariant'] == 'heavy' && isset($_POST['round'])) {
-
-
             $varient_and_round = 'heavy_return_rate';
-
-
         } else if ($row['carVariant'] == 'heavy') {
-
-
             $varient_and_round = 'heavy_rate';
-
-
         } else {
-
-
             print "Varient and Round Exception";
-
-
         };
-         $varient_and_round;
-         $toll_id=$_POST['toll_id'];
+
+        $varient_and_round;
+        $toll_id=$_POST['toll_id'];
         $get_payment = "SELECT $varient_and_round FROM tolls WHERE id=$toll_id";
 
         $result = $conn->query($get_payment);
