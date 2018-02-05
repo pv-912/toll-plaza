@@ -1,11 +1,11 @@
- <?php include('header.php'); ?>
+ <?php include('../toll/header.php'); ?>
  <?php
 
 
  // echo 'hjdskl';
-include('config/config.php');
+include('../config/config.php');
  
-$name = $username = $lat = $address = $lng = $heavy_rate = $password = $confirm_password = $carVariant = $heavy_return_rate = $medium_rate = $vehicleNo = "";
+$name = $username = $lat = $address = $lng = $heavy_rate = $password = $confirm_password = $carVariant = $heavy_return_rate =$light_rate_err =$light_return_rate_err =$medium_return_rate_err = $medium_rate = $vehicleNo = "";
 $name_err = $username_err = $lat_err = $address_err = $lng_err = $heavy_rate_err = $password_err = $confirm_password_err = $carVariant_err = $heavy_return_rate_err = $medium_rate_err = $vehicleNo_err = "";
  
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -181,7 +181,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $("#signupForm").trigger("reset");
                         });
                       
-                         window.location.href="'.base_url.'index.php"; 
+                         window.location.href="'.base_url_toll.'index.php"; 
                       </script>';
                 
             } else{
@@ -309,4 +309,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            
 <?php //require_once('footer.php'); ?>
 
-    <?php require_once('components/login_modal.php'); ?>
+    <?php require_once('login_modal_tolls.php'); ?>

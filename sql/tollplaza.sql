@@ -38,7 +38,7 @@ CREATE TABLE `toll_access` (
 
 LOCK TABLES `toll_access` WRITE;
 /*!40000 ALTER TABLE `toll_access` DISABLE KEYS */;
-INSERT INTO `toll_access` VALUES (2,1,3,1,'2018-02-04 01:05:44'),(5,2,1,2,'2018-02-04 01:05:44'),(6,3,3,2,'2018-02-04 01:05:44');
+INSERT INTO `toll_access` VALUES (5,2,1,2,'2018-02-04 01:05:44'),(6,3,3,2,'2018-02-04 01:05:44');
 /*!40000 ALTER TABLE `toll_access` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +55,7 @@ CREATE TABLE `toll_access_logs` (
   `user_id` int(16) NOT NULL,
   `timeOfPass` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `toll_access_logs` (
 
 LOCK TABLES `toll_access_logs` WRITE;
 /*!40000 ALTER TABLE `toll_access_logs` DISABLE KEYS */;
-INSERT INTO `toll_access_logs` VALUES (1,1,2,'2018-02-04 00:07:29'),(2,1,5,'2018-02-04 00:07:29'),(3,1,3,'2018-02-04 00:07:29'),(4,1,4,'2018-02-04 00:07:29'),(5,1,3,'2018-02-04 00:07:29'),(6,1,1,'2018-02-04 00:07:29'),(7,1,2,'2018-02-04 00:07:29'),(8,1,1,'2018-02-04 00:07:37'),(9,1,4,'2018-02-04 00:08:39'),(10,1,1,'2018-02-04 00:27:29'),(11,1,1,'2018-02-05 16:41:50'),(12,1,4,'2018-02-05 16:42:03'),(13,1,4,'2018-02-05 16:42:09'),(14,1,3,'2018-02-05 16:42:11'),(15,1,4,'2018-02-05 16:42:17'),(16,1,2,'2018-02-05 16:42:30'),(17,1,2,'2018-02-05 16:42:31'),(18,1,2,'2018-02-05 17:00:17'),(19,1,4,'2018-02-05 17:00:36'),(20,1,1,'2018-02-05 17:00:42');
+INSERT INTO `toll_access_logs` VALUES (1,1,2,'2018-02-04 00:07:29'),(2,1,5,'2018-02-04 00:07:29'),(3,1,3,'2018-02-04 00:07:29'),(4,1,4,'2018-02-04 00:07:29'),(5,1,3,'2018-02-04 00:07:29'),(6,1,1,'2018-02-04 00:07:29'),(7,1,2,'2018-02-04 00:07:29'),(8,1,1,'2018-02-04 00:07:37'),(9,1,4,'2018-02-04 00:08:39'),(10,1,1,'2018-02-04 00:27:29'),(11,1,1,'2018-02-05 16:41:50'),(12,1,4,'2018-02-05 16:42:03'),(13,1,4,'2018-02-05 16:42:09'),(14,1,3,'2018-02-05 16:42:11'),(15,1,4,'2018-02-05 16:42:17'),(16,1,2,'2018-02-05 16:42:30'),(17,1,2,'2018-02-05 16:42:31'),(18,1,2,'2018-02-05 17:00:17'),(19,1,4,'2018-02-05 17:00:36'),(20,1,1,'2018-02-05 17:00:42'),(21,1,3,'2018-02-05 17:51:27');
 /*!40000 ALTER TABLE `toll_access_logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `tolls`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tolls` (
   `id` int(16) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `lat` int(5) DEFAULT NULL,
   `lng` int(5) DEFAULT NULL,
@@ -91,9 +91,9 @@ CREATE TABLE `tolls` (
   `password` varchar(255) NOT NULL,
   `role` varchar(10) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `tolls` (
 
 LOCK TABLES `tolls` WRITE;
 /*!40000 ALTER TABLE `tolls` DISABLE KEYS */;
-INSERT INTO `tolls` VALUES (1,'a','',0,1,1,1,1,1,1,1,'a','$2y$10$VxudbJJUXtlRxfRaw8AMrO8pFOvVjoPJ4EICIRk4CChNdxKFZm4Jy','toll');
+INSERT INTO `tolls` VALUES (1,'a','',0,1,1,1,1,1,1,1,'a','$2y$10$VxudbJJUXtlRxfRaw8AMrO8pFOvVjoPJ4EICIRk4CChNdxKFZm4Jy','toll'),(2,'kshitij','',0,77,150,250,95,170,53,90,'z','$2y$10$Tk1.chY9d1vSpGfmqH5/Guwla6O5ChebaAI/fTPNh4x9yZG89tdeO','toll'),(17,'kshitija','',0,77,150,250,95,170,53,90,'ca','$2y$10$ENM/J7knKW5keo2WhFRkluM1vwOFaBUA//q.1aHkHsUPI8nRkiZ/2','toll'),(18,'kshitijab','',0,77,150,250,95,170,53,90,'vca','$2y$10$tAZXTn/jMk0ircXbejaPUuCwX2mWo7FptjW/Ire6T8cG460Gd.51q','toll');
 /*!40000 ALTER TABLE `tolls` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,4 +177,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-05 23:05:34
+-- Dump completed on 2018-02-06  0:05:47

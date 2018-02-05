@@ -1,5 +1,5 @@
 <?php
-  include '../config/config.php';
+  require_once '../config/config.php';
  
  $usernameLogin = $pass = $role ="";
   $usernameLogin_err = $pass_err = "";
@@ -120,7 +120,6 @@
          </button>
          <a class="navbar-brand" href="http://localhost/tollPlaza/"><img src="" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
          <a class="navbar-brand sparkNavbarTag "  href="index.php">Tool Plaza</a><br/>
-         <!-- <p class="sparkFullFormTag">Summer Internship Programme at IIT Roorkee</p> -->
        </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
