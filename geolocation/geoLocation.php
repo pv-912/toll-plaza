@@ -15,7 +15,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     }else{
         $location =  '';
     }
-    // dipslay address
+    // display address
 
     $location = $location;
       
@@ -30,39 +30,42 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
 
     $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
 
-     print $query;
- $result = $conn->query($query);
-   while($row = $result->fetch_assoc()) {   ?>
-                            <tr>
-                              <td id="toll_id"><?php echo $row['id'];?></td>
-                              <td><?php echo "      ";?></td>
-                              <td><?php echo $row['lat'];?></td>
-                              <td><?php echo "      ";?></td>
-                              <td><?php echo $row['lng'];?></td>
-                              <td><?php echo "      ";?></td>
-                              <td><?php echo $row['heavy_rate'];?></td>
-                              <td><?php echo "      ";?></td>
-                              <td><?php echo $row['heavy_return_rate'];?></td>
-                              <td><?php echo "      ";?></td>
-                              <td><?php echo $row['medium_rate'];?></td>
-                              <td><?php echo "      ";?></td>
-                              <td><?php echo $row['medium_return_rate'];?></td>
-                              <td><?php echo "      ";?></td>
-                              <td><?php echo $row['light_rate'];?></td>
-                              <td><?php echo "      ";?></td>
-                              <td><?php echo $row['light_return_rate'];?></td>
-                              <td><?php echo "      ";?></td>
-                              <td><?php echo $row['address'];?></td>
-                              <td><?php echo "      ";?></td>                              
-                              <td><button type="button"  id="select_toll" value="<?php echo $row['id'];?>">select</button></td>
-                              <td><?php echo "      ";?></td>                              
-                              <td><button type="button"  id="select_toll_with_round" value="<?php echo $row['id'];?>">select</button></td>
-                              <td><?php echo "</br>";?></td>
-                            </tr>
-                          <?php 
-
-}
-}
+    // print $query;
+    $result = $conn->query($query);
+    if(!$result->num_rows == 0) {
+        while($row = $result->fetch_assoc()) {   ?>
+                                <tr>
+                                <td id="toll_id"><?php echo $row['id'];?></td>
+                                <td><?php echo "      ";?></td>
+                                <td><?php echo $row['lat'];?></td>
+                                <td><?php echo "      ";?></td>
+                                <td><?php echo $row['lng'];?></td>
+                                <td><?php echo "      ";?></td>
+                                <td><?php echo $row['heavy_rate'];?></td>
+                                <td><?php echo "      ";?></td>
+                                <td><?php echo $row['heavy_return_rate'];?></td>
+                                <td><?php echo "      ";?></td>
+                                <td><?php echo $row['medium_rate'];?></td>
+                                <td><?php echo "      ";?></td>
+                                <td><?php echo $row['medium_return_rate'];?></td>
+                                <td><?php echo "      ";?></td>
+                                <td><?php echo $row['light_rate'];?></td>
+                                <td><?php echo "      ";?></td>
+                                <td><?php echo $row['light_return_rate'];?></td>
+                                <td><?php echo "      ";?></td>
+                                <td><?php echo $row['address'];?></td>
+                                <td><?php echo "      ";?></td>                              
+                                <td><button type="button"  id="select_toll" value="<?php echo $row['id'];?>">select</button></td>
+                                <td><?php echo "      ";?></td>                              
+                                <td><button type="button"  id="select_toll_with_round" value="<?php echo $row['id'];?>">select</button></td>
+                                <td><?php echo "</br>";?></td>
+                                </tr>
+                            <?php 
+        }
+    } else {
+        echo "No results found";
+    }
+};
 
 ?>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -72,9 +75,7 @@ $(document).ready(function(){
     $("#select_toll").on("click",function(){
  
       var toll_id = $("#select_toll").val();
-                console.log(toll_id);  
-       
-
+            console.log(toll_id);  
             $.ajax({
             type: "POST",
             url: "payment_function.php",
@@ -85,11 +86,7 @@ $(document).ready(function(){
                 console.log(data);
             }
         });
-            
-              
-
     });
-
  });
 
 $(document).ready(function(){

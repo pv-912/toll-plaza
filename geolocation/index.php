@@ -27,27 +27,5 @@ function showLocation(position) {
 	document.getElementById("latitude").value=position.coords.latitude;
     document.getElementById("longitude").value=position.coords.longitude;
     document.getElementById("formGeo").submit();
-
-
- //    var latitude = position.coords.latitude;
-	// var longitude = position.coords.longitude;
- //    latitude=latitude;
- //    longitude=longitude;
- //    console.log(longitude);
-	// $.ajax({
-	// 	type:'POST',
-	// 	url:'geoLocation.php',
-	// 	data:'latitude='+latitude+'&longitude='+longitude,
-	// 	success:function(msg){
- //            if(msg){
- //               $("#location").html(msg);
- //            }else{
- //                $("#location").html('Not Available');
- //            }
-
-        
-	// 	}
-	// });
-   
 }
 </script>
