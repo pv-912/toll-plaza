@@ -33,7 +33,7 @@
                </div>
                <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <a href="<?php echo base_url; ?>components/signupUser.php">Don't Have Account</a>
+                  <a href="<?php echo base_url; ?>components/signupUser.php">Don't Have Account.</a>
 
                 </div>
                </div> 
