@@ -2,7 +2,6 @@
 <?php
 ob_start();
 session_start();
-
    /* logout after 10min. */
     
     if(time()-$_SESSION['time']>60*60*10){
@@ -78,11 +77,12 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     // echo $query;
     $result = $conn->query($query);
     $allocated_tolls = array();
+    // echo $result;
     while($row = $result->fetch_assoc()) {
         array_push($allocated_tolls, $row['toll_id']);
     };
-    print_r($allocated_tolls);
-    // print_r($_SESSION);
+    // print_r($allocated_tolls);
+    print_r($_SESSION);
     $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
     $result = $conn->query($query);
     if(!$result->num_rows == 0) {
