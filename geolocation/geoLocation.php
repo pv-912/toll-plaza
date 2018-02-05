@@ -78,11 +78,10 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     // echo $query;
     $result = $conn->query($query);
     $allocated_tolls = array();
-    // echo $result;
     while($row = $result->fetch_assoc()) {
         array_push($allocated_tolls, $row['toll_id']);
     };
-    // print_r($allocated_tolls);
+    print_r($allocated_tolls);
     // print_r($_SESSION);
     $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
     $result = $conn->query($query);
@@ -110,19 +109,23 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
             } else {
                 print "Variant Exception";
             };
+            print_r($row);
+            echo $user_id;
             if (in_array($row['id'],$allocated_tolls, TRUE)) {
-                $allocated = true;
+                $allocated = 1;
             } else {
-                $allocated = false;
+                $allocated = 0;
             };
+            if($allocated == 0) { echo "There"; };
+            echo $allocated."Status";
             ?>
                                 <tr <?php if ($allocated) { echo `class="lassan"`; } ?>>
                                     <td id="toll_id"><?php echo $row['name'];?></td>
                                     <td><?php echo $row['address'];?></td>
                                     <td><?php echo $row[$variant];?></td>
-                                    <td><button type="button" id="select_toll" class="btn btn-primary" value="<?php echo $row['id'];?>" <?php if ($allocated) { echo `disabled`; } ?>>Pay Now</button></td>
+                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay Now</button></td>
                                     <td><?php echo $row[$variant_round];?></td>
-                                    <td><button type="button" class="btn btn-primary" id="select_toll_with_round" value="<?php echo $row['id'];?>" <?php if ($allocated) { echo `disabled`; } ?>>Paynow</button></td>
+                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="<?php echo $row['id']; ?>, 2)">Paynow</button></td>
                                     <td><?php echo "</br>";?></td>
                                 </tr>
                             <?php 
@@ -138,43 +141,19 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
-$(document).ready(function(){
-    $("#select_toll").on("click",function(){
- 
-      var toll_id = $("#select_toll").val();
-      // alert(toll_id);
+function payReturn(data,round){
+            // console.log(data, round);
             $.ajax({
             type: "POST",
             url: "payment_function.php",
             data:{
-                toll_id:toll_id,
-            },
-            success: function(data){
-                alert(toll_id);
-                alert(data);
-
-                 console.log(data);                 
-            }
-        });
-    });
- });
-
-$(document).ready(function(){
-    $("#select_toll_with_round").on("click",function(){
-      var toll_id = $("#select_toll_with_round").val();
-      var round=1;
-            $.ajax({
-            type: "POST",
-            url: "payment_function.php",
-            data:{
-                toll_id:toll_id,
+                toll_id:data,
                 round:round,
             },
             success: function(data){
-                console.log(data);
+                window.location.href="<?php echo base_url?>geolocation/index.php";
             }
-        });
-    });
- });
+        })
+}
 
 </script>
