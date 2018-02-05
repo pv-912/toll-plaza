@@ -54,7 +54,7 @@
                                 // setcookie("name", $login_name , time()+24*60*60);
                                 echo '
                                 <script>
-                                   window.location.href="'.base_url.'geolocation/payment.php"; 
+                                   window.location.href="'.base_url.'geolocation/index.php"; 
                                 </script>';
 
                             
