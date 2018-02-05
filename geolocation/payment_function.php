@@ -1,29 +1,64 @@
 <?php
     require_once '../config/config.php';
-
+    echo "string";
 		$_SESSION['user_id'] = 1; 
-		$query = "SELECT * FROM `users` WHERE `id`=$_SESSION['user_id']";
+		$user_id=$_SESSION['user_id'];
+		$query = "SELECT * FROM `users` WHERE `id`= $user_id";
 		$result = $conn->query($query);
 		$row = $result->fetch_assoc();
+		print_r($row);
 
-    if ($_SESSION['role'] === 'user' && isset($_POST['toll_id'])) {
-        if ($_SESSION['varient'] == 'light' && isset($_POST['round'])) {
+    if ($row['role'] == 'user' && isset($_POST['toll_id'])) {
+
+    	
+
+        if ($row['carVariant'] == 'light' && isset($_POST['round'])) {
+
+        	
+
             $varient_and_round = 'light_return_rate';
-        } else if ($_SESSION['varient'] == 'light') {
+
+
+        } else if ($row['carVariant'] == 'light') {
+
+        	
+
             $varient_and_round = 'light_rate';
-        } else if ($_SESSION['varient'] == 'medium' && isset($_POST['round'])) {
+
+
+        } else if ($row['carVariant'] == 'medium' && isset($_POST['round'])) {
+
+
             $varient_and_round = 'medium_return_rate';
-        } else if ($_SESSION['varient'] == 'medium') {
+
+
+        } else if ($row['carVariant'] == 'medium') {
+
+
             $varient_and_round = 'medium_rate';
-        } else if ($_SESSION['varient'] == 'heavy' && isset($_POST['round'])) {
+
+
+        } else if ($row['carVariant'] == 'heavy' && isset($_POST['round'])) {
+
+
             $varient_and_round = 'heavy_return_rate';
-        } else if ($_SESSION['varient'] == 'heavy') {
+
+
+        } else if ($row['carVariant'] == 'heavy') {
+
+
             $varient_and_round = 'heavy_rate';
+
+
         } else {
+
+
             print "Varient and Round Exception";
+
+
         };
-        echo $varient_and_round;
-        echo $toll_id;
+         $varient_and_round;
+         $toll_id=$_POST['toll_id'];
         $get_payment = "SELECT $varient_and_round FROM tolls WHERE id=$toll_id";
 
         $result = $conn->query($get_payment);
@@ -35,13 +70,12 @@
         $get_data = "SELECT allow FROM toll_access WHERE toll_id=$toll_id AND user_id=$user_id";
         $result = $conn->query($get_data);
         $row=$result->num_rows;
-        print_r($row);
-        if ($row[allow]) {
+        if ($row) {
             if (!isset($_POST['round'])) {
                 $add_access = "INSERT INTO toll_access (user_id, toll_id) VALUES ($user_id, $toll_id);";
                 
             } else {
-                $add_access = "INSERT INTO toll_access (user_id, toll_id, allow) VALUES ($user_id, $toll_id, $round);";
+                $add_access = "INSERT INTO toll_access (user_id, toll_id, allow) VALUES ($user_id, $toll_id, 1);";
             }
             $make_payment = "UPDATE users SET balance=balance-$payment WHERE id=$user_id;";
             $add_log = "INSERT INTO user_logs (user_id, toll_id, payment) VALUES ($user_id, $toll_id, $payment);";    

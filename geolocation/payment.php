@@ -41,23 +41,21 @@ $(document).ready(function(){
     $("#select_toll").on("click",function(){
  
       var toll_id = $("#select_toll").val();
-      var round=0;
                 console.log(toll_id);  
        
 
             $.ajax({
             type: "POST",
-            url: "",
+            url: "payment_function.php",
             data:{
                 toll_id:toll_id,
-                round:round,
             },
             success: function(data){
                 console.log(data);
             }
         });
             
-         console.log("disabled");  
+         	  
 
     });
 
@@ -74,7 +72,7 @@ $(document).ready(function(){
 
             $.ajax({
             type: "POST",
-            url: "",
+            url: "payment_function.php",
             data:{
                 toll_id:toll_id,
                 round:round,
@@ -84,7 +82,7 @@ $(document).ready(function(){
             }
         });
             
-         console.log("disabled");  
+         	  
 
     });
 
