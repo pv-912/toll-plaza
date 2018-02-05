@@ -1,5 +1,5 @@
 <?php
-  require_once '../config/config.php';
+  include '../config/config.php';
  
  $usernameLogin = $pass = $role ="";
   $usernameLogin_err = $pass_err = "";

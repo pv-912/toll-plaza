@@ -1,9 +1,25 @@
 <?php
-include '../config/config.php';
+ob_start();
+session_start();
 
+   /* logout after 10min. */
+    
+    if(time()-$_SESSION['time']>60*60*10){
+        unset($_SESSION['time']);
+        // setcookie("username", "", time()-3600);
+        // setcookie("role", "", time()-3600);
+        // setcookie("name", "", time()-3600); 
+        session_destroy();
+        header("location: ../index.php");}
+    else{
+        $_SESSION['time']=time();
+    }
+include '../config/config.php';
+// print_r($_POST);
 $user_id = $_SESSION['id'];
 
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
+    // echo 'hello';
     $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($_POST['latitude']).','.trim($_POST['longitude']).'&sensor=false';
     $json = @file_get_contents($url);
     $data = json_decode($json);
@@ -20,20 +36,22 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     $geo_lat =$_POST['latitude'];
     $geo_lng =$_POST['longitude'];
     
-    $side_by_two = 0.001;
+    $side_by_two = 1;
     $low_lat = $geo_lat - $side_by_two;
     $high_lat = $geo_lat + $side_by_two;
     $low_lng = $geo_lng - $side_by_two;
     $high_lng = $geo_lng + $side_by_two;
 
-    $query = "SELECT * FROM `toll_access` WHERE id=$user_id";
+    $query = "SELECT * FROM `toll_access` WHERE user_id=$user_id";
+    // echo $query;
     $result = $conn->query($query);
-    $allocated_tolls = $array();
+    $allocated_tolls = array();
+    // echo $result;
     while($row = $result->fetch_assoc()) {
         array_push($allocated_tolls, $row['toll_id']);
     };
-    print_r($allocated_tolls);
-
+    // print_r($allocated_tolls);
+    print_r($_SESSION);
     $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
     $result = $conn->query($query);
     if(!$result->num_rows == 0) {
