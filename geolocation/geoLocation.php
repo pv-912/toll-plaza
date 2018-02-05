@@ -1,3 +1,4 @@
+
 <?php
 ob_start();
 session_start();
@@ -15,7 +16,38 @@ session_start();
         $_SESSION['time']=time();
     }
 include '../config/config.php';
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title> Toll Plaza</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+
+    <meta name="keywords" content="toll-plaza, toll, highway">
+
+    <meta name="author" content="Toll Plaza">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="<?php echo base_url; ?>src/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>src/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="<?php echo base_url; ?>src/js/bootstrap.min.js"></script>
+</head>
+
+<body><?php 
+
 // print_r($_POST);
+
 $user_id = $_SESSION['id'];
 
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
@@ -51,10 +83,20 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
         array_push($allocated_tolls, $row['toll_id']);
     };
     // print_r($allocated_tolls);
-    print_r($_SESSION);
+    // print_r($_SESSION);
     $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
     $result = $conn->query($query);
     if(!$result->num_rows == 0) {
+        ?>
+        <table class="table table-hover">
+            <tr>
+                <thead>Toll Name</thead>
+                <thead>Address</thead>
+                <thead></thead>
+                <thead></thead>
+
+            </tr>
+        <?php
         while($row = $result->fetch_assoc()) {
             if ($_SESSION['variant'] == 'light') {
                 $variant = 'light_rate';
@@ -75,21 +117,18 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
             };
             ?>
                                 <tr <?php if ($allocated) { echo `class="lassan"`; } ?>>
-                                    <td id="toll_id"><?php echo $row['id'];?></td>
-                                    <td><?php echo "      ";?></td>
+                                    <td id="toll_id"><?php echo $row['name'];?></td>
                                     <td><?php echo $row['address'];?></td>
-                                    <td><?php echo "      ";?></td>
                                     <td><?php echo $row[$variant];?></td>
-                                    <td><?php echo "      ";?></td>
-                                    <td><button type="button" id="select_toll" value="<?php echo $row['id'];?>" <?php if ($allocated) { echo `disabled`; } ?>>select</button></td>
-                                    <td><?php echo "      ";?></td>
+                                    <td><button type="button" id="select_toll" class="btn btn-primary" value="<?php echo $row['id'];?>" <?php if ($allocated) { echo `disabled`; } ?>>Pay Now</button></td>
                                     <td><?php echo $row[$variant_round];?></td>
-                                    <td><?php echo "      ";?></td>
-                                    <td><button type="button" id="select_toll_with_round" value="<?php echo $row['id'];?>" <?php if ($allocated) { echo `disabled`; } ?>>select</button></td>
+                                    <td><button type="button" class="btn btn-primary" id="select_toll_with_round" value="<?php echo $row['id'];?>" <?php if ($allocated) { echo `disabled`; } ?>>Paynow</button></td>
                                     <td><?php echo "</br>";?></td>
                                 </tr>
                             <?php 
-        }
+        }?>
+    </table>
+        <?php
     } else {
         echo "No results found";
     }
@@ -103,7 +142,7 @@ $(document).ready(function(){
     $("#select_toll").on("click",function(){
  
       var toll_id = $("#select_toll").val();
-            console.log(toll_id);  
+      // alert(toll_id);
             $.ajax({
             type: "POST",
             url: "payment_function.php",
@@ -111,7 +150,10 @@ $(document).ready(function(){
                 toll_id:toll_id,
             },
             success: function(data){
-                console.log(data);
+                alert(toll_id);
+                alert(data);
+
+                 console.log(data);                 
             }
         });
     });

@@ -1,10 +1,24 @@
 <?php
+
+    ob_start();
+session_start();
+   /* logout after 10min. */
+    
+    if(time()-$_SESSION['time']>60*60*10){
+        unset($_SESSION['time']);
+        // setcookie("username", "", time()-3600);
+        // setcookie("role", "", time()-3600);
+        // setcookie("name", "", time()-3600); 
+        session_destroy();
+        header("location: ../index.php");}
+    else{
+        $_SESSION['time']=time();
+    }
     require_once '../config/config.php';
-    $user_id=$_SESSION['user_id'];
+    $user_id=$_SESSION['id'];
     $query = "SELECT * FROM `users` WHERE `id`= $user_id";
     $result = $conn->query($query);
     $row = $result->fetch_assoc();
-    print_r($row);
     // Test it
     if ($row['role'] == 'user' && isset($_POST['toll_id'])) {
         if ($row['carVariant'] == 'light' && isset($_POST['round'])) {
@@ -20,7 +34,7 @@
         } else if ($row['carVariant'] == 'heavy') {
             $varient_and_round = 'heavy_rate';
         } else {
-            print "Varient and Round Exception";
+            echo "Varient and Round Exception";
         };
 
         $varient_and_round;
@@ -31,7 +45,6 @@
         while($row = $result->fetch_assoc()) {
             $payment= $row[$varient_and_round];
         }
-        echo $payment;
 
         $get_data = "SELECT allow FROM toll_access WHERE toll_id=$toll_id AND user_id=$user_id";
         $result = $conn->query($get_data);
@@ -48,9 +61,11 @@
             $conn->query($add_access);
             $conn->query($make_payment);
             $conn->query($add_log);
-            print "registered";
+            echo "registered";
         } else {
-            print "already_registered";
+            echo "already_registered";
         }
+    } else {
+        echo "exception 00";
     }
 ?>
