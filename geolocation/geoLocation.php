@@ -82,7 +82,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
         array_push($allocated_tolls, $row['toll_id']);
     };
     // print_r($allocated_tolls);
-    print_r($_SESSION);
+    // print_r($_SESSION);
     $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
     $result = $conn->query($query);
     if(!$result->num_rows == 0) {
@@ -141,19 +141,19 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
-function payReturn(data,round){
-            // console.log(data, round);
-            $.ajax({
-            type: "POST",
-            url: "payment_function.php",
-            data:{
-                toll_id:data,
-                round:round,
-            },
-            success: function(data){
-                window.location.href="<?php echo base_url?>geolocation/index.php";
-            }
-        })
+    function payReturn(data,round){
+        // console.log(data, round);
+        $.ajax({
+        type: "POST",
+        url: "payment_function.php",
+        data:{
+            toll_id:data,
+            round:round,
+        },
+        success: function(data){
+            window.location.href="<?php echo base_url?>geolocation/index.php";
+        }
+    })
 }
 
 </script>
