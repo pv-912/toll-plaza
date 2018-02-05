@@ -1,6 +1,6 @@
-<?php include './geoLocation.php';
+<?php include './index.php';
       include '../header.php';
-
+    
    $result = $conn->query($query);
    while($row = $result->fetch_assoc()) {   ?>
                             <tr>
