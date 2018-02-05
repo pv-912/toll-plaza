@@ -169,29 +169,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_light_rate = $light_rate;
             $param_medium_return_rate = $medium_return_rate;
             $param_light_return_rate = $light_return_rate;
-            echo $param_light_return_rate."   ";
-            echo $param_medium_return_rate."   ";
-            echo $param_light_rate."   ";
-            echo $param_medium_rate."   ";
-            echo $param_heavy_rate."   ";
-            echo $param_heavy_return_rate."   ";
-            echo $param_lat."   ";
-            echo $param_lng."   ";
-            echo $param_name."   ";
-            echo $param_username."   ";
-            echo $param_address."   ";
-            echo $param_role."   ";
-            echo $param_password."   ";
+            // echo $param_light_return_rate."   ";
+            // echo $param_medium_return_rate."   ";
+            // echo $param_light_rate."   ";
+            // echo $param_medium_rate."   ";
+            // echo $param_heavy_rate."   ";
+            // echo $param_heavy_return_rate."   ";
+            // echo $param_lat."   ";
+            // echo $param_lng."   ";
+            // echo $param_name."   ";
+            // echo $param_username."   ";
+            // echo $param_address."   ";
+            // echo $param_role."   ";
+            // echo $param_password."   ";
 
 
             if(mysqli_stmt_execute($stmt)){
                 echo '
                       <script>
-                         window.location.href="'.base_url.'user/index.php"; 
+                         window.location.href="'.base_url.'toll/index.php"; 
                       </script>';
                 
             } else{
-                echo " <script> alert(' Something went wrong."; echo $param_lat.$param_lng ; echo "') </script>" ;
+                echo " <script> alert(' Something went wrong.') </script>" ;
             }
          }else{
                 ?> <script> alert(' Something went wrong2.') </script> <?php
