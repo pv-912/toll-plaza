@@ -58,8 +58,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(isset($_POST['lat'])){
         if(empty(trim($_POST['lat']))){
             $lat_err = "Please enter a lat no.";     
-        } elseif(strlen(trim($_POST['lat'])) < 10){
-            $lat_err = "Please enter lat no.";
         } else{
             $lat = trim($_POST['lat']);
             // echo $lat;
@@ -153,10 +151,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     // echo $username_err; echo $password_err; echo $confirm_password_err;
     if(empty($username_err) && empty($password_err)){
-         $sql = "INSERT INTO tolls (username, name, password, lat, lng, address, role, heavy_rate, medium_rate, light_rate, heavy_return_rate, medium_return_rate, light_return_rate) VALUES (?,?,?,?,?,?,?,?,?,?,?, ?, ?)";
+         $sql = "INSERT INTO tolls (username, name, password, lat, lng, role, heavy_rate, medium_rate, light_rate, heavy_return_rate, medium_return_rate, light_return_rate) VALUES (?,?,?,?,?,?,?,?,?,?, ?, ?)";
          
         if($stmt = mysqli_prepare($conn, $sql)){
-            mysqli_stmt_bind_param($stmt, "sssiissiiiiii", $param_username, $param_name, $param_password, $param_lat, $param_lng, $param_address, $param_role, $param_heavy_rate, $param_medium_rate,  $param_light_rate, $param_heavy_return_rate, $param_medium_return_rate, $light_return_rate);
+            mysqli_stmt_bind_param($stmt, "ssssssiiiiii", $param_username, $param_name, $param_password, $param_lat, $param_lng, $param_role, $param_heavy_rate, $param_medium_rate,  $param_light_rate, $param_heavy_return_rate, $param_medium_return_rate, $light_return_rate);
             // echo 'hello';
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); 
@@ -171,21 +169,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_light_rate = $light_rate;
             $param_medium_return_rate = $medium_return_rate;
             $param_light_return_rate = $light_return_rate;
-            // echo $param_heavy_return_rate;
-            // echo $param_name;
-            // echo $param_username;
+            echo $param_light_return_rate."   ";
+            echo $param_medium_return_rate."   ";
+            echo $param_light_rate."   ";
+            echo $param_medium_rate."   ";
+            echo $param_heavy_rate."   ";
+            echo $param_heavy_return_rate."   ";
+            echo $param_lat."   ";
+            echo $param_lng."   ";
+            echo $param_name."   ";
+            echo $param_username."   ";
+            echo $param_address."   ";
+            echo $param_role."   ";
+            echo $param_password."   ";
+
+
             if(mysqli_stmt_execute($stmt)){
                 echo '
                       <script>
-                         $("#signupSubmitButton").click(function () {
-                            $("#signupForm").trigger("reset");
-                        });
-                      
-                         window.location.href="'.base_url_toll.'index.php"; 
+                         window.location.href="'.base_url.'user/index.php"; 
                       </script>';
                 
             } else{
-                echo " <script> alert(' Something went wrong."; echo $param_role ; echo "') </script>" ;
+                echo " <script> alert(' Something went wrong."; echo $param_lat.$param_lng ; echo "') </script>" ;
             }
          }else{
                 ?> <script> alert(' Something went wrong2.') </script> <?php
@@ -230,13 +236,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			           <div class="form-group   ">
 			              <label for="" class="sr-only">Latitude</label>
                          <div class="col-sm-6">
-                           <input type="number" name="lat"  class="form-control"  placeholder="Latitude"  onfocus="(this.type='number')" onblur="(this.type='text')" value="<?php echo $lat; ?>" >
+                           <input type="text" name="lat"  class="form-control"  placeholder="Latitude"  value="<?php echo $lat; ?>" >
                             <span class="help-block"> <?php echo $lat_err; ?></span>
                          </div>
 			            
 			             <label for="" class="sr-only">Longitude</label>
 			             <div class="col-sm-6">
-			               <input type="number" name="lng"  class="form-control"  placeholder="Longitude"  onfocus="(this.type='number')" onblur="(this.type='text')" value="<?php echo $lng; ?>" >
+			               <input type="text" name="lng"  class="form-control"  placeholder="Longitude" value="<?php echo $lng; ?>" >
 			                <span class="help-block"> <?php echo $lng_err; ?></span>
 			             </div>
 			           </div>
