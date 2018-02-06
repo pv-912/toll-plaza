@@ -162,7 +162,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                       </script>';
                 
             } else{
-                echo " <script> alert(' Something went wrong."; echo $param_role ; echo "') </script>" ;
+                echo " <script> alert(' Something went wrong."; echo $param_role; echo "') </script>" ;
             }
          }else{
                 ?> <script> alert(' Something went wrong2.') </script> <?php

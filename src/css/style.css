@@ -1,7 +1,11 @@
+body{
+	background-color: #c9edcb
+}
+
 .indexNavbarTollLogo{
 	    height: auto;
     width: 5vw;
-    margin-top: -2vh;
+    margin-top: 0vh;
     margin-left: 5vw;
 }
 
@@ -11,7 +15,333 @@
 }
 }
 
-.navbar-inverse .navbar-brand {
+@media (min-width: 768px){}
+.navbar-nav>li>a {
+    padding-top: 26px;
+    padding-bottom: 15px;
+    padding-right:50px;
+    font-size: 1.2vw
+}}
+
+@media (min-width: 768px){
+.navbar-nav>li>a {
+    padding-top: 30px;
+    padding-bottom: 15px;
+    font-size: 17px;
+    padding-right: 5vw;
+}}
+
+.navbar-inverse .navbar-nav>li>a {
     color: #fff;
-    padding-top: 4vh !important;
 }
+
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 45px;
+    color: #fff !important
+}
+
+
+
+
+a:focus{
+	border: none;
+}
+
+
+/* main body css */
+
+.indexIntroductionTag{
+	font-size: 2.5vw;
+    color: #666;
+    letter-spacing: -0px;
+    /*text-align: center;*/
+    border-bottom: 1px solid #999;
+    margin-top: 10vh;
+    font-weight: 700;
+    padding-bottom: 1.5vh
+}
+
+.indexIntroductionText{
+	font-size: 1.1vw;
+    letter-spacing: .5px;
+    word-spacing: 1px;
+    padding: 1vh 2vw 0 6vw;
+}
+
+.indexGuidelinesTag{
+	font-size: 2.5vw;
+    color: #666;
+    letter-spacing: -0px;
+    /*text-align: center;*/
+    border-bottom: 1px solid #999;
+    margin-top: 5vh;
+    font-weight: 700;
+    padding-bottom: 1.5vh
+}
+.indexGuidelines{
+	padding-left: 8vw
+}
+.indexGuidelines li{
+    font-size: 1vw;
+    padding-top: 2vh;
+    letter-spacing: .5px;
+    word-spacing: 1px;
+}
+
+.indexApplyNowButton{
+	font-size: 1.4vw;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 15vw;
+    padding: 2vh 0;
+    margin-top: 5vh;
+    
+}
+
+
+.indexObjectiveTag {
+    font-size:2vw;
+    color:#777;
+    margin-left: 3vw;
+    margin-bottom: 0px;
+
+}
+
+.indexObjectiveText{
+    font-size: 2.4vw;
+    letter-spacing: 0.5px;
+    word-spacing: 0px;
+    margin-top: 0px;
+}
+
+.loginModalHeader{
+	text-align: center;
+    color: #fff;
+    font-size: 1.5vw;
+    font-weight: 600;
+}
+.loginModalSignupButton{
+	font-size: 1.2vw;
+    padding: 1vh 2vw;
+	}
+
+.loginModalWidth{
+	width: 33%
+}
+.modal-content{
+	border-radius: 5px;
+	margin-top: 5vh
+}
+.modal-dialog{
+	margin-top: 25vh
+}
+.signupModalSignupButton{
+	width: 25vw
+}
+
+.moveToUpButton{
+    font-size: 2.6vw;
+    background-color: rgba(193, 198, 206, 0.67);
+    color: rgba(0, 0, 0, 0.59);
+    border-radius: 5px;
+    padding: .3% 6px .3% 10px;
+    text-align: center;
+    position: fixed;
+    top: 85vh;
+    left: 92%;
+    z-index: 100;
+}
+/*footer*/
+
+.footerBottom{
+    background-color: #2f2f2f;
+    color: #ffffff;
+}
+
+.footer {
+    background: #EDEFF1;
+    height: auto;
+    padding-bottom: 30px;
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #DDDDDD;
+}
+.footer p {
+    margin: 0;
+}
+.footer img {
+    max-width: 100%;
+}
+.footer h3 {
+    border-bottom: 1px solid #BAC1C8;
+    color: #54697E;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    padding: 40px 0 10px;
+    text-transform: uppercase;
+}
+.footer ul {
+    font-size: 13px;
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 15px;
+    color: #7F8C8D;
+}
+.footer ul li a {
+    padding: 0 0 5px 0;
+    display: block;
+    text-decoration: none;
+     color: #78828D
+}
+
+.footer ul li a:hover {
+    padding: 0 0 5px 0;
+    display: block;
+    text-decoration: none;
+     color: #000;
+     font-size: 13.5px
+}
+.studentProjectStatus{
+    font-size: 1.4vw;
+    padding-top: 1vh;
+    text-align: center;
+}
+
+
+.social li {
+    background: none repeat scroll 0 0 #B5B5B5;
+    border: 2px solid #B5B5B5;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    float: left;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 8px 0 0;
+    padding: 0;
+    text-align: center;
+    width: 36px;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+.social li:hover {
+    transform: scale(1.15) rotate(360deg);
+    -webkit-transform: scale(1.1) rotate(360deg);
+    -moz-transform: scale(1.1) rotate(360deg);
+    -ms-transform: scale(1.1) rotate(360deg);
+    -o-transform: scale(1.1) rotate(360deg);
+}
+.social li a {
+    color: #EDEFF1;
+}
+.social li:hover {
+    border: 2px solid #2c3e50;
+    background: #2c3e50;
+}
+.social li a i {
+    font-size: 16px;
+    margin: 0 0 0 5px;
+    color: #EDEFF1 !important;
+}
+
+.footer-bottom {
+    background: #E3E3E3;
+    border-top: 1px solid #DDDDDD;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.footer-bottom p.pull-left {
+    padding-top: 6px;
+}
+.payments {
+    font-size: 1.5em;
+}
+
+
+
+
+.indexRegisterButton {
+    background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+    box-shadow: 0 1px 0 #B4B3B3;
+}
+
+
+.full {
+    width: 100%;
+}
+.gap {
+    height: 30px;
+    width: 100%;
+    clear: both;
+    display: block;
+}
+
+.supportLi h4 {
+    font-size: 20px;
+    font-weight: lighter;
+    line-height: normal;
+    margin-bottom: 0 !important;
+    padding-bottom: 0;
+}
+.projectsAvailableTag{
+    font-size: 2.5vw;
+    color: #666;
+    letter-spacing: -0px;
+    
+    margin-top: 4vh;
+    font-weight: 700;
+    padding-bottom: 1.5vh
+}
+
+.projectSearchingInput{
+    margin-top: 5vh
+}
+
+
+.signupHereTag{
+    font-size: 3vw;
+    text-align: center;
+    margin-bottom: 5vh;
+    font-weight: 300;
+    margin-top: 20vh;
+    color: rgba(41, 0, 255, 0.73);
+}
+
+
+
+.facultyAddRemark{
+    border-radius: 8px
+}
+
+@media (min-width: 768px){
+.navbar-right {
+    margin-right: 1vw !important;
+}
+.faqQuestions{
+    font-size: 1.1vw;
+    color: #333;
+}
+.faqAnswer ul li{
+ font-size: 1vw;
+    color: #777;
+    padding-left: 3vw;
+    margin-top: 0vh;
+    margin-bottom: 4vh;   
+}
+
+

@@ -119,15 +119,15 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="http://localhost/tollPlaza/"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo"></a>
-         <a class="navbar-brand sparkNavbarTag "  href="index.php">Toll Plaza</a><br/>
+         <a class="navbar-brand" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo"></a>
+         <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll"">Toll Plaza</a><br/>
        </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">About Us </a></li>
-            <li><a href="#">FAQ's</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="<?php echo base_url; ?>components/faq.php">FAQ's</a></li>
+            <li><a href="">Contact</a></li>
             <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
          </ul>
        </div>
