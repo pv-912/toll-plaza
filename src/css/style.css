@@ -1,0 +1,17 @@
+.indexNavbarTollLogo{
+	    height: auto;
+    width: 5vw;
+    margin-top: -2vh;
+    margin-left: 5vw;
+}
+
+@media (min-width: 768px){}
+.navbar-collapse.collapse {
+    height: 11vh !important;
+}
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    padding-top: 4vh !important;
+}
