@@ -113,7 +113,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>Balance: <?php echo $balance ?></a></li>
-                                <li><a href="./../geoLocation/payment_function.php">Recharge</a></li>
+                                <li><a href="/toll-plaza/user/addmoney.php">Recharge</a></li>
                                 <li><a href="/toll-plaza/user/payToll/logs.php">Logs</a></li>
                                 <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>  
                             </ul>

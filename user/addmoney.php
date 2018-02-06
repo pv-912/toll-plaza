@@ -15,7 +15,7 @@ session_start();
         $_SESSION['time']=time();
     }
 
-include '../../config/config.php';
+include '../config/config.php';
 
 
 if($_SESSION['role']=='user'){
@@ -78,34 +78,14 @@ if($_SESSION['role']=='user'){
         </nav>
         <div class="container-fluid">
           <div class="row">
-            <div class="col-sm-12">
-              <table class="table table-striped">
-                <thead>
-                  <th>Name</th>
-                  <th>Paid</th>
-                  <th>Toll Address</th>
-                  <th>Time</th>
-                </thead>
-                <?php 
-                    $query    = "SELECT distinct c.payment,(select name from tolls as a where a.id=c.toll_id) as name, (select address from tolls as a where a.id=c.toll_id) as tollAddress,(select payTime from toll_access as b where b.toll_id=c.toll_id and b.user_id=c.user_id) as payTime from user_logs as c where user_id=$currentUserId";
-                    $result = $conn->query($query);
-                    if($result) {
-                        if(!$result->num_rows  == 0) {
-                            while($row = $result->fetch_assoc()) {   
-                              // print_r($row).'<br/>';
-                              ?>
-                              <tr>
-                                <td><?php echo $row['name']; ?></td>
-                                <td><?php echo $row['payment']; ?></td>
-                                <td><?php echo $row['tollAddress']; ?></td>
-                                <td><?php echo $row['payTime']; ?></td>
-                              </tr>
-                            <?php 
-                          }  
-                        }
-                      }
-                ?>
-              </table>
+            <div class="col-sm-4 col-sm-offset-4">
+                <form class="form-inline" action="./../../api/users/add_money.php" method="POST">
+                    <div class="form-group">
+                        <label class="sr-only" for="moneyAdd">Enter Money:</label>
+                        <input type="number" class="form-control" id="moneyAdd" name="moneyAdd" />
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
             </div>
           </div>
         </div>
