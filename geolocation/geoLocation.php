@@ -46,8 +46,8 @@ include '../config/config.php';
 <body><?php 
 
 // print_r($_POST);
-
-$user_id = $_SESSION['id'];
+//$user_id = $_SESSION['id'];
+$user_id = 19;
 
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     // echo 'hello';
@@ -83,33 +83,98 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     };
     // print_r($allocated_tolls);
     // print_r($_SESSION);
-    $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
+    
+    ///dummycode
+     $querytwo = "SELECT * FROM `users` WHERE id=$user_id";
+    $resulttwo = $conn->query($querytwo);
+    
+
+    $querythree = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
+    $resultthree = $conn->query($querythree);
+        
+
+
+    if(!$resultthree->num_rows==0){
+            $distance=array();
+            print_r($distance);
+            $toll_ids=array();
+            $i=0;
+
+
+            while($row = $resultthree->fetch_assoc()) {
+            {
+
+            $theta = $geo_lng-$row['lng'];
+            $dist = sin(deg2rad($geo_lat)) * sin(deg2rad($row['lat'])) +  cos(deg2rad($geo_lat)) * cos(deg2rad($row['lat'])) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            
+            $distance[$i]=$dist * 60 * 1.1515 * 1.609344;
+
+            $toll_ids[$i]=$row['id'];
+            $i=$i+1;
+            }}
+
+            array_multisort($distance,$toll_ids);
+            
+    }
+
+     $length=count($toll_ids);
+    for($k=0;$k<$length;$k++)
+{
+    $query = "SELECT * FROM `tolls` WHERE id=$toll_ids[$k]";
+     //$query = "SELECT * FROM `tolls` WHERE id IN (".implode(',',$toll_ids).") ORDER  BY FIND_IN_SET(id,".implode(',',$toll_ids).")";
     $result = $conn->query($query);
+    
     if(!$result->num_rows == 0) {
+
         ?>
         <table class="table table-hover">
             <tr>
                 <thead>Toll Name</thead>
                 <thead>Address</thead>
+                <thead>toll-distance</thead>
+                <thead>sorted id</thead>
                 <thead></thead>
                 <thead></thead>
 
             </tr>
         <?php
-        while($row = $result->fetch_assoc()) {
-            if ($_SESSION['variant'] == 'light') {
+        // while($row = $result->fetch_assoc()) {
+        //     if ($_SESSION['variant'] == 'light') {
+        //         $variant = 'light_rate';
+        //         $variant_round = 'light_return_rate';
+        //     } else if ($_SESSION['variant'] == 'medium') {
+        //         $variant = 'medium_rate';
+        //         $variant_round = 'medium_return_rate';
+        //     } else if ($_SESSION['variant'] == 'heavy') {
+        //         $variant = 'heavy_rate';
+        //         $variant_round = 'heavy_return_rate';
+        //     } else {
+        //         print "Variant Exception";
+        //     };
+          
+
+             
+
+         while($row = $result->fetch_assoc()) {
+            $rowtwo= $resulttwo->fetch_assoc();
+            echo $rowtwo['name'];
+            if ($rowtwo['carVariant'] == 'light') {
                 $variant = 'light_rate';
                 $variant_round = 'light_return_rate';
-            } else if ($_SESSION['variant'] == 'medium') {
+                echo $variant;
+            } else if ($rowtwo['carVariant'] == 'medium') {
                 $variant = 'medium_rate';
                 $variant_round = 'medium_return_rate';
-            } else if ($_SESSION['variant'] == 'heavy') {
+            } else if ($rowtwo['carVariant'] == 'heavy') {
                 $variant = 'heavy_rate';
                 $variant_round = 'heavy_return_rate';
             } else {
                 print "Variant Exception";
             };
-            print_r($row);
+
+
             echo $user_id;
             if (in_array($row['id'],$allocated_tolls, TRUE)) {
                 $allocated = 1;
@@ -118,10 +183,27 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
             };
             if($allocated == 0) { echo "There"; };
             echo $allocated."Status";
+
+
+            // count($row);
+            // echo "string";
+            // echo count($row);
+            // echo "string";
+
+
+            
+            
+            //array_multisort($toll_ids,$distance);
+            
+            //print_r($toll_ids);
+            
+
             ?>
                                 <tr <?php if ($allocated) { echo `class="lassan"`; } ?>>
                                     <td id="toll_id"><?php echo $row['name'];?></td>
                                     <td><?php echo $row['address'];?></td>
+                                    <td><?php echo $distance[$k];?>KMs</td>
+                                    <td><?php echo $row['id'];?></td>
                                     <td><?php echo $row[$variant];?></td>
                                     <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay Now</button></td>
                                     <td><?php echo $row[$variant_round];?></td>
@@ -129,12 +211,17 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                                     <td><?php echo "</br>";?></td>
                                 </tr>
                             <?php 
-        }?>
+                            
+        }
+          
+        ?>
     </table>
         <?php
     } else {
         echo "No results found";
     }
+   
+}
 };
 
 ?>
