@@ -77,34 +77,40 @@ $(document).ready(function(){
         $(this).parent(".result").empty();  
         var input=$("#input").val();
 
-       
+        showLocation() ;
         // var latitude=position.coords.latitude; 
         // var longitude=position.coords.longitude;
         // console.log(latitude);
         // console.log("jgv");
 
-         $.ajax({
-        type: "POST",
-        url: "display_searched_toll.php",
-        data:{
-            input:input,
-        },
-        success: function(data){
-            window.location.href="<?php echo base_url?>geolocation/display_searched_toll.php";
-        }
-    })
+    //      $.ajax({
+    //     type: "POST",
+    //     url: "display_searched_toll.php",
+    //     data:{
+    //         input:input,
+
+    //     },
+    //     success: function(data){
+    //         alert(data);
+    //         window.location.href="<?php echo base_url?>geolocation/display_searched_toll.php";
+    //     }
+    // })
     });
 
 
 });
 
-
+function showLocation() {
+    document.getElementById("forminput").submit();
+}
 
 </script>
 </head>
 <body>
     <div class="search-box">
-        <input type="text" autocomplete="off" id="input" placeholder="Search toll..." />
+        <form id="forminput" method="POST" action="display_searched_toll.php">
+        <input type="text" autocomplete="off" name="input" id="input" placeholder="Search toll..." />
+        <form>
         <div class="result"></div>
     </div>
     <div class="display"></div>
