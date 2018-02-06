@@ -19,13 +19,41 @@ include '../config/config.php';
 //include '../search-toll/backend-search.php';
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title> Toll Plaza</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+
+    <meta name="keywords" content="toll-plaza, toll, highway">
+
+    <meta name="author" content="Toll Plaza">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="<?php echo base_url; ?>src/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>src/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="<?php echo base_url; ?>src/js/bootstrap.min.js"></script>
+</head>
+
+<body>
 <?php 
+include '../search-toll/search-bar.php';
+
 // print_r($_POST);
 //$user_id = $_SESSION['id'];
 $user_id = 19;
 $input=$_POST['input'];
-echo $input;
-print_r($_POST);
+
 if($input){
     // echo 'hello';
     $toll_name=$input;
@@ -52,7 +80,6 @@ if($input){
             <tr>
                 <thead>Toll Name</thead>
                 <thead>Address</thead>
-                <thead>toll-distance</thead>
                 <thead>sorted id</thead>
                 <thead></thead>
                 <thead></thead>
@@ -61,10 +88,7 @@ if($input){
         <?php
    
     $query = "SELECT * FROM `tolls` WHERE `name`='$toll_name'";
-     //$query = "SELECT * FROM `tolls` WHERE id IN (".implode(',',$toll_ids).") ORDER  BY FIND_IN_SET(id,".implode(',',$toll_ids).")";
     $result = $conn->query($query);
-    print($query);
-    echo $result->num_rows;
     
     if($result->num_rows == 1) {
             
