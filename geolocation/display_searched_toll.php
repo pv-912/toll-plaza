@@ -18,7 +18,7 @@ session_start();
 include '../config/config.php';
 //include '../search-toll/backend-search.php';
 
-
+include './index.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,30 +52,9 @@ include '../search-toll/search-bar.php';
 //$user_id = $_SESSION['id'];
 $user_id = 19;
 
-if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
+if(!empty($_POST['input'])){
     // echo 'hello';
-    $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($_POST['latitude']).','.trim($_POST['longitude']).'&sensor=false';
-    $json = @file_get_contents($url);
-    $data = json_decode($json);
-    $status = $data->status;
-    if($status=="OK"){
-        $location = $data->results[0]->formatted_address;
-    }else{
-        $location =  '';
-    }
-    // display address
-
-    $location = $location;
-      
-    $geo_lat =$_POST['latitude'];
-    $geo_lng =$_POST['longitude'];
-    
-    $side_by_two = 1;
-    $low_lat = $geo_lat - $side_by_two;
-    $high_lat = $geo_lat + $side_by_two;
-    $low_lng = $geo_lng - $side_by_two;
-    $high_lng = $geo_lng + $side_by_two;
-
+    $toll_name=$_POST['input'];
     $query = "SELECT * FROM `toll_access` WHERE user_id=$user_id";
     // echo $query;
     $result = $conn->query($query);
@@ -92,36 +71,14 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     $resulttwo = $conn->query($querytwo);
     
 
-    $querythree = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
+    $querythree = "SELECT * FROM `tolls` WHERE name=$toll_name";
     $resultthree = $conn->query($querythree);
         
 
 
-    if(!$resultthree->num_rows==0){
-            $distance=array();
-            $toll_ids=array();
-            $i=0;
-
-
-            while($row = $resultthree->fetch_assoc()) {
-            {
-
-            $theta = $geo_lng-$row['lng'];
-            $dist = sin(deg2rad($geo_lat)) * sin(deg2rad($row['lat'])) +  cos(deg2rad($geo_lat)) * cos(deg2rad($row['lat'])) * cos(deg2rad($theta));
-            $dist = acos($dist);
-            $dist = rad2deg($dist);
-            
-            $distance[$i]=$dist * 60 * 1.1515 * 1.609344;
-
-            $toll_ids[$i]=$row['id'];
-            $i=$i+1;
-            }}
-
-            array_multisort($distance,$toll_ids);
-            
-    }
+   
       ?>
-       <!--  <table class="table table-hover">
+        <table class="table table-hover">
             <tr>
                 <thead>Toll Name</thead>
                 <thead>Address</thead>
@@ -130,11 +87,9 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                 <thead></thead>
                 <thead></thead>
 
-            </tr> -->
+            </tr>
         <?php
-     $length=count($toll_ids);
-    for($k=0;$k<$length;$k++)
-{
+   
     $query = "SELECT * FROM `tolls` WHERE id=$toll_ids[$k]";
      //$query = "SELECT * FROM `tolls` WHERE id IN (".implode(',',$toll_ids).") ORDER  BY FIND_IN_SET(id,".implode(',',$toll_ids).")";
     $result = $conn->query($query);
@@ -234,7 +189,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
         echo "No results found";
     }
    
-}
+
 };
 
 ?>

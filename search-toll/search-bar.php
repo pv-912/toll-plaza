@@ -32,25 +32,34 @@
     }
     /* Formatting result items */
     .result p{
-        margin: 0;
         padding: 7px 10px;
         border: 1px solid #CCCCCC;
         border-top: none;
         cursor: pointer;
+        z-index: 10000;
     }
+    .table {
+    margin-top: 10%;
+    width: 50%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
     .result p:hover{
         background: #f2f2f2;
     }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     $('.search-box input[type="text"]').on("keyup input", function(){
+
         /* Get input value on change */
         var inputVal = $(this).val();
         var resultDropdown = $(this).siblings(".result");
         if(inputVal.length){
-            $.get("backend-search.php", {term: inputVal}).done(function(data){
+
+            $.get("backend-search.php", {term: inputVal}).done(function(data){console.log("blo");
                 // Display the returned data in browser
                 resultDropdown.html(data);
             });
@@ -59,18 +68,45 @@ $(document).ready(function(){
         }
     });
     
+
+   
+      
     // Set search input value on click of result item
     $(document).on("click", ".result p", function(){
         $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
-        $(this).parent(".result").empty();
+        $(this).parent(".result").empty();  
+        var input=$("#input").val();
+
+       
+        // var latitude=position.coords.latitude; 
+        // var longitude=position.coords.longitude;
+        // console.log(latitude);
+        // console.log("jgv");
+
+         $.ajax({
+        type: "POST",
+        url: "display_searched_toll.php",
+        data:{
+            input:input,
+        },
+        success: function(data){
+            window.location.href="<?php echo base_url?>geolocation/display_searched_toll.php";
+        }
+    })
     });
+
+
 });
+
+
+
 </script>
 </head>
 <body>
     <div class="search-box">
-        <input type="text" autocomplete="off" placeholder="Search country..." />
+        <input type="text" autocomplete="off" id="input" placeholder="Search toll..." />
         <div class="result"></div>
     </div>
+    <div class="display"></div>
 </body>
 </html>
