@@ -1,7 +1,7 @@
 <?php
 
     ob_start();
-session_start();
+    session_start();
    /* logout after 10min. */    
     if(time()-$_SESSION['time']>60*60*10){
         unset($_SESSION['time']);
