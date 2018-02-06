@@ -41,99 +41,138 @@ include '../config/config.php';
     <link href="<?php echo base_url; ?>src/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url; ?>src/css/bootstrap-theme.min.css" rel="stylesheet">
     <script src="<?php echo base_url; ?>src/js/bootstrap.min.js"></script>
+    <style>
+        .lassan{
+            background: #00a70042 !important;
+        }
+    </style>
 </head>
 
-<body><?php 
+<body>
+<?php 
 
 // print_r($_POST);
 
 $user_id = $_SESSION['id'];
 
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
-    // echo 'hello';
     $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($_POST['latitude']).','.trim($_POST['longitude']).'&sensor=false';
     $json = @file_get_contents($url);
     $data = json_decode($json);
     $status = $data->status;
+
     if($status=="OK"){
         $location = $data->results[0]->formatted_address;
     }else{
         $location =  '';
     }
-    // display address
 
     $location = $location;
-      
+
     $geo_lat =$_POST['latitude'];
     $geo_lng =$_POST['longitude'];
-    
+
     $side_by_two = 1;
     $low_lat = $geo_lat - $side_by_two;
     $high_lat = $geo_lat + $side_by_two;
     $low_lng = $geo_lng - $side_by_two;
     $high_lng = $geo_lng + $side_by_two;
-
-    $query = "SELECT * FROM `toll_access` WHERE user_id=$user_id";
-    // echo $query;
+    
+    $query = "SELECT balance FROM `users` WHERE id=$user_id";
     $result = $conn->query($query);
-    $allocated_tolls = array();
-    // echo $result;
-    while($row = $result->fetch_assoc()) {
-        array_push($allocated_tolls, $row['toll_id']);
-    };
-    // print_r($allocated_tolls);
-    // print_r($_SESSION);
-    $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
-    $result = $conn->query($query);
-    if(!$result->num_rows == 0) {
-        ?>
-        <table class="table table-hover">
-            <tr>
-                <thead>Toll Name</thead>
-                <thead>Address</thead>
-                <thead></thead>
-                <thead></thead>
-
-            </tr>
-        <?php
+    $balance = $result->fetch_assoc();
+    $balance = $balance['balance'];
+    if ($balance > 0) {
+        $query = "SELECT * FROM `toll_access` WHERE user_id=$user_id";
+        // echo $query;
+        $result = $conn->query($query);
+        $allocated_tolls = array();
+        // echo $result;
         while($row = $result->fetch_assoc()) {
-            if ($_SESSION['variant'] == 'light') {
-                $variant = 'light_rate';
-                $variant_round = 'light_return_rate';
-            } else if ($_SESSION['variant'] == 'medium') {
-                $variant = 'medium_rate';
-                $variant_round = 'medium_return_rate';
-            } else if ($_SESSION['variant'] == 'heavy') {
-                $variant = 'heavy_rate';
-                $variant_round = 'heavy_return_rate';
-            } else {
-                print "Variant Exception";
-            };
-            print_r($row);
-            echo $user_id;
-            if (in_array($row['id'],$allocated_tolls, TRUE)) {
-                $allocated = 1;
-            } else {
-                $allocated = 0;
-            };
-            if($allocated == 0) { echo "There"; };
-            echo $allocated."Status";
+            array_push($allocated_tolls, $row['toll_id']);
+        };
+        // print_r($allocated_tolls);
+        // print_r($_SESSION);
+        $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
+        $result = $conn->query($query);
+        if(!$result->num_rows == 0) {
             ?>
-                                <tr <?php if ($allocated) { echo `class="lassan"`; } ?>>
-                                    <td id="toll_id"><?php echo $row['name'];?></td>
-                                    <td><?php echo $row['address'];?></td>
-                                    <td><?php echo $row[$variant];?></td>
-                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay Now</button></td>
-                                    <td><?php echo $row[$variant_round];?></td>
-                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="<?php echo $row['id']; ?>, 2)">Paynow</button></td>
-                                    <td><?php echo "</br>";?></td>
-                                </tr>
-                            <?php 
-        }?>
-    </table>
-        <?php
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="http://localhost/tollPlaza/"><img src="" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
+                            <a class="navbar-brand sparkNavbarTag "  href="/toll-plaza/geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a>Balance: <?php echo $balance ?></a></li>
+                                <li><a href="./../geoLocation/payment_function.php">Recharge</a></li>
+                                <li><a href="/toll-plaza/user/payToll/logs.php">Logs</a></li>
+                                <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>  
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <table class="table table-striped">
+                <thead>
+                    <th>Toll Name</th>
+                    <th>Address</th>
+                    <th>Price</th>
+                    <th></th>
+                    <th>Round Trip</th>
+                    <th></th>
+                </thead>
+                <tbody>
+            <?php
+            while($row = $result->fetch_assoc()) {
+                if ($_SESSION['variant'] == 'light') {
+                    $variant = 'light_rate';
+                    $variant_round = 'light_return_rate';
+                } else if ($_SESSION['variant'] == 'medium') {
+                    $variant = 'medium_rate';
+                    $variant_round = 'medium_return_rate';
+                } else if ($_SESSION['variant'] == 'heavy') {
+                    $variant = 'heavy_rate';
+                    $variant_round = 'heavy_return_rate';
+                } else {
+                    print "Variant Exception";
+                };
+                // print_r($row);
+                // echo $user_id;
+                if (in_array($row['id'],$allocated_tolls, TRUE)) {
+                    $allocated = 1;
+                } else {
+                    $allocated = 0;
+                };
+                // if($allocated == 0) { echo "There"; };
+                // echo $allocated."Status";
+                ?>
+                                    <tr <?php if($allocated == 1) { echo 'class="lassan"'; } ?>>
+                                        <td id="toll_id"><?php echo $row['name'];?></td>
+                                        <td><?php echo $row['address'];?></td>
+                                        <td><?php echo $row[$variant];?></td>
+                                        <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay Now</button></td>
+                                        <td><?php echo $row[$variant_round];?></td>
+                                        <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="<?php echo $row['id']; ?>, 2)">Paynow</button></td>
+                                    </tr>
+                                <?php 
+            }?>
+            </tbody>
+        </table>
+            <?php
+        } else {
+            echo "No results found";
+        }
     } else {
-        echo "No results found";
+        echo "Please Update Your Balance";
     }
 };
 

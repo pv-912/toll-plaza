@@ -48,6 +48,7 @@
                                 $_SESSION['id'] = $id; 
                                 $_SESSION['role']=$role;
                                 $_SESSION['variant']=$carVariant;
+                                $_SESSION['username']=$usernameLogin;
                                 $_SESSION['time'] = time();
                                 // setcookie("username", $username , time()+24*60*60);
                                 // setcookie("role", $role , time()+24*60*60);
