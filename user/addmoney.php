@@ -79,12 +79,21 @@ if($_SESSION['role']=='user'){
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-4 col-sm-offset-4">
-                <form class="form-inline" action="./../../api/users/add_money.php" method="POST">
+                <form class="form-inline" action="/toll-plaza/api/users/add_money.php" method="POST">
                     <div class="form-group">
                         <label class="sr-only" for="moneyAdd">Enter Money:</label>
                         <input type="number" class="form-control" id="moneyAdd" name="moneyAdd" />
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
+                    <div>
+                        <?php 
+                        if ( isset($_GET['added']) && $_GET['added'] == 1){
+                            echo "Money Added";
+                        } else if ( isset($_GET['added']) && $_GET['added'] == 0) {
+                            echo "Error";
+                        }
+                        ?>
+                    <div>
                 </form>
             </div>
           </div>

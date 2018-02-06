@@ -121,52 +121,54 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                     </div>
                 </div>
             </nav>
-            <table class="table table-striped">
-                <thead>
-                    <th>Toll Name</th>
-                    <th>Address</th>
-                    <th>Price</th>
-                    <th></th>
-                    <th>Round Trip</th>
-                    <th></th>
-                </thead>
-                <tbody>
-            <?php
-            while($row = $result->fetch_assoc()) {
-                if ($_SESSION['variant'] == 'light') {
-                    $variant = 'light_rate';
-                    $variant_round = 'light_return_rate';
-                } else if ($_SESSION['variant'] == 'medium') {
-                    $variant = 'medium_rate';
-                    $variant_round = 'medium_return_rate';
-                } else if ($_SESSION['variant'] == 'heavy') {
-                    $variant = 'heavy_rate';
-                    $variant_round = 'heavy_return_rate';
-                } else {
-                    print "Variant Exception";
-                };
-                // print_r($row);
-                // echo $user_id;
-                if (in_array($row['id'],$allocated_tolls, TRUE)) {
-                    $allocated = 1;
-                } else {
-                    $allocated = 0;
-                };
-                // if($allocated == 0) { echo "There"; };
-                // echo $allocated."Status";
-                ?>
-                                    <tr <?php if($allocated == 1) { echo 'class="lassan"'; } ?>>
-                                        <td id="toll_id"><?php echo $row['name'];?></td>
-                                        <td><?php echo $row['address'];?></td>
-                                        <td><?php echo $row[$variant];?></td>
-                                        <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay Now</button></td>
-                                        <td><?php echo $row[$variant_round];?></td>
-                                        <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="<?php echo $row['id']; ?>, 2)">Paynow</button></td>
-                                    </tr>
-                                <?php 
-            }?>
-            </tbody>
-        </table>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <th>Toll Name</th>
+                                <th>Address</th>
+                                <th>One Way</th>
+                                <th>Round Trip</th>
+                            </thead>
+                            <tbody>
+                        <?php
+                        while($row = $result->fetch_assoc()) {
+                            if ($_SESSION['variant'] == 'light') {
+                                $variant = 'light_rate';
+                                $variant_round = 'light_return_rate';
+                            } else if ($_SESSION['variant'] == 'medium') {
+                                $variant = 'medium_rate';
+                                $variant_round = 'medium_return_rate';
+                            } else if ($_SESSION['variant'] == 'heavy') {
+                                $variant = 'heavy_rate';
+                                $variant_round = 'heavy_return_rate';
+                            } else {
+                                print "Variant Exception";
+                            };
+                            // print_r($row);
+                            // echo $user_id;
+                            if (in_array($row['id'],$allocated_tolls, TRUE)) {
+                                $allocated = 1;
+                            } else {
+                                $allocated = 0;
+                            };
+                            // if($allocated == 0) { echo "There"; };
+                            // echo $allocated."Status";
+                            ?>
+                                                <tr <?php if($allocated == 1) { echo 'class="lassan"'; } ?>>
+                                                    <td id="toll_id"><?php echo $row['name'];?></td>
+                                                    <td><?php echo $row['address'];?></td>
+                                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay <?php echo $row[$variant];?></button></td>
+                                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="<?php echo $row['id']; ?>, 2)">Pay <?php echo $row[$variant_round];?></button></td>
+                                                </tr>
+                                            <?php 
+                        }?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
             <?php
         } else {
             echo "No results found";
