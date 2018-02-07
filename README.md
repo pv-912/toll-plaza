@@ -34,16 +34,23 @@ while passing through the toll user has to scan the QR CODE to get the acces to 
 HOW TO INSTALL APP==>>
 
 1)use the github link.
+
 2)download aur repo.
+
 3)use any php server to locally host it i.e for windows install XAMPP SERVER.(put the folder in xamm/htdocs)
   and for linux use APACHE SERVER.
+  
 4)go to our main page ie   eg==>>:http://localhost/toll-plaza/toll/
+
 5)now you can sigh up as user.   eg:==>>(http://localhost/toll-plaza/components/signupUser.php)  
+
 6)you can sigh up toll.   eg:==>>(http://localhost/toll-plaza/components/signupToll.php)  
-  but please be careful by signing up the the toll and carefully fill the latitude and longitude (according to the  present geolocation of toll)
-  and you will fill you dummy toll according to your the  present geolocation as a toll.
+  but please be careful by signing up the the toll and carefully fill the latitude and longitude (according to the  present geolocation of toll) and you will fill you dummy toll according to your the  present geolocation as a toll.
+  
 7)now you will se the toll on user dashboard    eg:==>>>(http://localhost/toll-plaza/geolocation/index.php)
+
 8)you can select the toll and pay it and if you want to pay for return journey you can pay it also for subsidized payment.
+
 9)amount will be detected from you account and you can add any amount in your balance.
 
 
