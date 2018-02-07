@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeReader.Bar
         @Override
         protected String doInBackground(String... param) {
 
-            String urlString = "http://spark.iitr.ac.in/toll-plaza/api/toll/comingVehicle.php"; // URL to call
+            String urlString = "http://spark.iitr.ac.in/toll/api/toll/comingVehicle.php"; // URL to call
 
             String data = param[0]; //data to post
 
