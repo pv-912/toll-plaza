@@ -4,22 +4,23 @@ session_start();
 
    /* logout after 10min. */
     
-    if(time()-$_SESSION['time']>60*60*10){
-        unset($_SESSION['time']);
-        // setcookie("username", "", time()-3600);
-        // setcookie("role", "", time()-3600);
-        // setcookie("name", "", time()-3600); 
-        session_destroy();
-        header("location: ../index.php");}
-    else{
-        $_SESSION['time']=time();
-    }
+    // if(time()-$_SESSION['time']>60*60*10){
+    //     unset($_SESSION['time']);
+    //     // setcookie("username", "", time()-3600);
+    //     // setcookie("role", "", time()-3600);
+    //     // setcookie("name", "", time()-3600); 
+    //     session_destroy();
+    //     header("location: ../index.php");}
+    // else{
+    //     $_SESSION['time']=time();
+    // }
 
 include '../../config/config.php';
 $vehicle_number = $car_variant = $car_color = ""; 
 
-if($_SESSION['role']=='toll'){
-    $currentTollId = $_SESSION['id'];
+// if($_SESSION['role']=='toll'){
+     // $currentTollId = $_SESSION['id'];
+    $currentTollId = 1;
 
 
     include '../header.php';
@@ -69,6 +70,6 @@ if($_SESSION['role']=='toll'){
         </div>
       </div>
 
-      <?php }?>
+      <?php ?>
 
   </body>
