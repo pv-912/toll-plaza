@@ -1,13 +1,13 @@
 # toll-plaza
 
-
+NAME OF OUR APP==>>TOLL PLAZA
 
 ******************************************************************************************************
 ******************************************************************************************************
 
 PROBLEM:==>>>>
 
-Explanation why we built uo the web app:==>>
+Explanation why we built up the web app:==>>
 
 Rising traffic on tolls is an inescapable condition in large and growing metropolitan areas across the world, from Los Angeles to Tokyo, from Cairo to Sao Paolo. Peak-hour traffic on tolls is an inherent result of the way modern societies operate. It stems from the widespread desires of people to pursue certain goals that inevitably overload existing roads and transit systems every day. But everyone hates traffic on tolls, and it keeps getting worse, in spite of attempted remedies.
 
