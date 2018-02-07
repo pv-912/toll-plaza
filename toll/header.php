@@ -1,7 +1,7 @@
 <?php
-  include '../config/config.php';
+  require_once '../../config/config.php';
  
- $usernameLogin = $pass = $role ="";
+  $usernameLogin = $pass = $role ="";
   $usernameLogin_err = $pass_err = "";
  
     if($_SERVER["REQUEST_METHOD"] == "POST"){
