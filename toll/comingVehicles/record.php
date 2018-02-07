@@ -43,7 +43,7 @@ $vehicle_number = $car_variant = $car_color = "";
               </tr>
               <?php 
 
-                  $query    = "SELECT distinct c.id,c.user_id,c.allow, (select name from users as a where a.id=c.user_id) as name, (select carVariant from users as a where a.id=c.user_id) as carVariant,(select carColor from users as a where a.id=c.user_id) as carColor,(select vehicleNo from users as a where a.id=c.user_id) as vehicleNo,(select licenseNo from users as a where a.id=c.user_id) as licenseNo,(select vehicleSize from users as a where a.id=c.user_id) as vehicleSize,(select contact from users as a where a.id=c.user_id) as contact from toll_access_logs as c where toll_id=1;";
+                  $query    = "SELECT distinct c.id,c.user_id, (select name from users as a where a.id=c.user_id) as name, (select carVariant from users as a where a.id=c.user_id) as carVariant,(select carColor from users as a where a.id=c.user_id) as carColor,(select vehicleNo from users as a where a.id=c.user_id) as vehicleNo,(select licenseNo from users as a where a.id=c.user_id) as licenseNo,(select vehicleSize from users as a where a.id=c.user_id) as vehicleSize,(select contact from users as a where a.id=c.user_id) as contact from toll_access_logs as c where toll_id=$currentTollId;";
                   $result = $conn->query($query);
                   if($result) {
                       if(!$result->num_rows == 0) {
@@ -55,7 +55,6 @@ $vehicle_number = $car_variant = $car_color = "";
                               <td><?php echo $row['carColor']; ?></td>
                               <td><?php echo $row['vehicleNo']; ?></td>
                               <td><?php echo $row['vehicleSize']; ?></td>
-                              <td><?php echo $row['allow']; ?></td>
 
                             </tr>
                           <?php 

@@ -21,9 +21,9 @@ $vehicle_number = $car_variant = $car_color = "";
 
 
     // $currentTollId = $_SESSION['id'];
-    $currentTollId = 2;
+    $currentTollId = 1;
 
-echo 'hello';
+// echo 'hello';
 // print_r($_SESSION);
 
     include '../header.php';

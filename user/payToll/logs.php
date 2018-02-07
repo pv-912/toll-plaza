@@ -62,15 +62,14 @@ if($_SESSION['role']=='user'){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="http://localhost/tollPlaza/"><img src="" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
-                        <a class="navbar-brand sparkNavbarTag "  href="/toll-plaza/geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
+                        <a class="navbar-brand sparkNavbarTag " style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a>Balance: <?php echo $balance ?></a></li>
-                            <li><a href="/toll-plaza/user/addmoney.php">Recharge</a></li>
-                            <li><a href="/toll-plaza/user/payToll/logs.php">Logs</a></li>
-                            <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>  
+                            <li><a href="<?php echo base_url; ?>user/addmoney.php">Recharge</a></li>
+                            <li><a href="<?php echo base_url; ?>user/payToll/logs.php">Logs</a></li>
+                            <li><a href="<?php echo base_url; ?>user" class="headerLogin" >Logout</a></li>
                         </ul>
                     </div>
                 </div>

@@ -102,13 +102,14 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link href="<?php echo base_url; ?>src/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url; ?>src/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>src/css/style.css" rel="stylesheet">
     <script src="<?php echo base_url; ?>src/js/bootstrap.min.js"></script>
 </head>
 
 
 <body>
 
-   <nav class="navbar navbar-default">
+   <nav class="navbar navbar-inverse">
      <div class="container-fluid">
       <div class="row">
        <div class="navbar-header">
@@ -118,52 +119,16 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="http://localhost/tollPlaza/"><img src="" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
-         <a class="navbar-brand sparkNavbarTag "  href="index.php">Tool Plaza</a><br/>
+         <a class="navbar-brand" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo"></a>
+         <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll"">Toll Plaza</a><br/>
        </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-         <ul class="nav navbar-nav navbar-right">
-                 <li><a href="#">About Us </a></li>
-                 <li><a href="#">Projects</a></li>
-                 <li><a href="#">Contact</a></li>
-            <?php 
-              /*$main_username = $main_role = $main_name = '';
-              
-              // if (isset($_COOKIE['username'])) {
-              //   $main_username = $_COOKIE["username"];
-              // }
-              // if (isset($_COOKIE['role'])) {
-              //   $main_role = $_COOKIE["role"];
-              // }
-              // if (isset($_COOKIE['name'])) {
-              //   $main_name = $_COOKIE["name"];
-              // }
-
-              // echo $main_name;
-              // echo $main_username;
-              // echo $main_role;
-             
-                if($main_role== "toll"){?>
-
-                 <li style="font-size: 1.4vw;color: #777;"><a href="<?php echo base_url_admin; ?>"><?php echo $main_name; ?></a></li>
-                 <li style="font-size: 1.4vw;color: #777;"><a href="<?php echo base_url; ?>logout.php" data-toggle="tooltip" data-placement="center" title="Logout">Logout</a></li>
-
-                 <?php } else if($main_role== "user"){?>
-                 
-                 <li style="font-size: 1.4vw;color: #777;"><a href="<?php echo base_url_faculty; ?>"><?php echo $main_name; ?></a></li>
-
-
-                 <?php }else if($main_role== "student"){?>
-                 
-                  <li style="font-size: 1.4vw;color: #777;"><a href="<?php echo base_url_student; ?>"><?php echo $main_name; ?></a></li>
-
-                <?php }else{?>
-                 
-                 
-          <?php }*/ ?>
-          <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
-                  
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">About Us </a></li>
+            <li><a href="<?php echo base_url; ?>components/faq.php">FAQ's</a></li>
+            <li><a href="">Contact</a></li>
+            <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
          </ul>
        </div>
      </div>

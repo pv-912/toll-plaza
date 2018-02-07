@@ -185,7 +185,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
 			<div class="row">
 				<div class="col-sm-8 col-sm-offset-2">
-					<p class="signupHereTag">Sign Up Here ..</p>
+					<p class="signupHereTag" style="margin-top: -0vh">Sign Up Here ..</p>
 					<form class="form-horizontal" id="signupForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
            
 			           <div class="form-group   <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
@@ -246,8 +246,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                          <div class="col-sm-6">
                            <input type="text"  name="carColor" class="form-control"  placeholder="C.G.P.A ( If % then convert it to C.G.P.A. ) " value="<?php //echo $carColor; ?>">
                             <span class="help-block"></span>
-                         </div>
-                       </div> -->
+                         </div>-->
+                       </div> 
 
                        
 

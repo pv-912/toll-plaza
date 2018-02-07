@@ -17,16 +17,25 @@
             mysqli_stmt_bind_param($stmt, "i", $userId);
             if(mysqli_stmt_execute($stmt)){
                 echo "Money Added .";
-                header('Location: http://localhost/toll-plaza/user/addmoney.php?added=1');
+                echo '
+                    <script>
+                       window.location.href="'.base_url.'user/addmoney.php?added=1"; 
+                    </script>';
             } else{
                 echo "Something Went Wrong.";
-                header('Location: http://localhost/toll-plaza/user/addmoney.php?added=0');
+                echo '
+                    <script>
+                       window.location.href="'.base_url.'user/addmoney.php?added=0"; 
+                    </script>';
             }
             mysqli_stmt_close($stmt);
             mysqli_close($conn);
         } else {
             echo "Something Went Wrong.";
-            header('Location: http://localhost/toll-plaza/user/addmoney.php?added=0');
+            echo '
+                    <script>
+                       window.location.href="'.base_url.'user/addmoney.php?added=0"; 
+                    </script>';
         }    
     } else {
         echo "NO POST DATA";

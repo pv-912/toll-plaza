@@ -9,7 +9,7 @@
         // setcookie("role", "", time()-3600);
         // setcookie("name", "", time()-3600); 
         session_destroy();
-        header("location: ../index.php");}
+        // header("location: ../index.php");}
     else{
         $_SESSION['time']=time();
     }

@@ -10,7 +10,8 @@ session_start();
         // setcookie("role", "", time()-3600);
         // setcookie("name", "", time()-3600); 
         session_destroy();
-        header("location: ../index.php");}
+        // header("location: ../index.php");
+    }
     else{
         $_SESSION['time']=time();
     }
@@ -62,15 +63,14 @@ if($_SESSION['role']=='user'){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="http://localhost/tollPlaza/"><img src="" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
-                        <a class="navbar-brand sparkNavbarTag "  href="/toll-plaza/geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
+                        <a class="navbar-brand sparkNavbarTag "  style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a>Balance: <?php echo $balance ?></a></li>
-                            <li><a href="/toll-plaza/user/addmoney.php">Recharge</a></li>
-                            <li><a href="/toll-plaza/user/payToll/logs.php">Logs</a></li>
-                            <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>  
+                            <li><a href="<?php echo base_url; ?>user/addmoney.php">Recharge</a></li>
+                            <li><a href="<?php echo base_url; ?>user/payToll/logs.php">Logs</a></li>
+                            <li><a href="<?php echo base_url; ?>user" class="headerLogin" >Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ if($_SESSION['role']=='user'){
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-4 col-sm-offset-4">
-                <form class="form-inline" action="/toll-plaza/api/users/add_money.php" method="POST">
+                <form class="form-inline" action="<?php echo base_url; ?>api/users/add_money.php" method="POST">
                     <div class="form-group">
                         <label class="sr-only" for="moneyAdd">Enter Money:</label>
                         <input type="number" class="form-control" id="moneyAdd" name="moneyAdd" />

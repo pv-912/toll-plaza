@@ -82,19 +82,19 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     $result = $conn->query($query);
     $balance = $result->fetch_assoc();
     $balance = $balance['balance'];
-    if ($balance > 0) {
-        $query = "SELECT * FROM `toll_access` WHERE user_id=$user_id";
-        // echo $query;
-        $result = $conn->query($query);
-        $allocated_tolls = array();
-        // echo $result;
-        while($row = $result->fetch_assoc()) {
-            array_push($allocated_tolls, $row['toll_id']);
-        };
-        // print_r($allocated_tolls);
-        // print_r($_SESSION);
-        $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
-        $result = $conn->query($query);
+
+    $query = "SELECT * FROM `toll_access` WHERE user_id=$user_id";
+    // echo $query;
+    $result = $conn->query($query);
+    $allocated_tolls = array();
+    // echo $result;
+    while($row = $result->fetch_assoc()) {
+        array_push($allocated_tolls, $row['toll_id']);
+    };
+    // print_r($allocated_tolls);
+    // print_r($_SESSION);
+    $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
+    $result = $conn->query($query);
         if(!$result->num_rows == 0) {
             ?>
             <nav class="navbar navbar-default">
@@ -107,20 +107,20 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="http://localhost/tollPlaza/"><img src="" alt="IIT Roorkee" class="indexNavbarIitrLogo"></a>
-                            <a class="navbar-brand sparkNavbarTag "  href="/toll-plaza/geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
+                            <a class="navbar-brand sparkNavbarTag " style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>Balance: <?php echo $balance ?></a></li>
-                                <li><a href="/toll-plaza/user/addmoney.php">Recharge</a></li>
-                                <li><a href="/toll-plaza/user/payToll/logs.php">Logs</a></li>
-                                <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>  
+                                <li><a href="<?php echo base_url; ?>user/addmoney.php">Recharge</a></li>
+                                <li><a href="<?php echo base_url; ?>user/payToll/logs.php">Logs</a></li>
+                                <li><a href="<?php echo base_url; ?>user" class="headerLogin" >Logout</a></li>  
                             </ul>
                         </div>
                     </div>
                 </div>
             </nav>
+            <?php if ($balance > 0) {?>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
@@ -171,11 +171,12 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
         </div>
             <?php
         } else {
-            echo "No results found";
+            echo "Please Update Your Balance";
         }
     } else {
-        echo "Please Update Your Balance";
+        echo "No results found";
     }
+    
 };
 
 ?>

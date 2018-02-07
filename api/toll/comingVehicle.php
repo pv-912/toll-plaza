@@ -5,7 +5,8 @@ include '../../config/config.php';
 	// $userId = $_POST['userId'];
 	// $tollId  = $_POST['tollId'];
 	$qrCode = '123';
-	$tollId = 2;
+	$tollId = 1;
+	$round = 0;
 
 	$sql = "SELECT id from users where qr=?";
 
@@ -31,33 +32,28 @@ include '../../config/config.php';
 
 				            if(mysqli_stmt_execute($stmt1)){
 				                mysqli_stmt_store_result($stmt1);
-			                			echo '<script>alert("ID came';echo $sql1;echo '")</script>';
-
 				                if(!mysqli_stmt_num_rows($stmt1) == 0){                    
 				                    mysqli_stmt_bind_result($stmt1, $round);
-			                			echo '<script>alert("ID came';echo $userId.$tollId;echo '")</script>';
-
 				                    if(mysqli_stmt_fetch($stmt1)){
-				                    	echo '<script>alert("hello';echo $round;echo '")</script>';
 										$round = $round-1;
 										if($round==1){
 										$sql = "UPDATE toll_access set round=? where user_id=? and toll_id=?";
-		         
 									        if($stmt = mysqli_prepare($conn, $sql)){
 									            mysqli_stmt_bind_param($stmt, "iii",$param_round, $param_user_id, $param_toll_id);
 									            $param_round = $round;
 									            if(mysqli_stmt_execute($stmt)){
 									                echo '<script>alert("Round turned to 1.")</script>';
+									                echo '
+						                                <script>
+						                                   window.location.href="'.base_url_toll.'comingVehicles"; 
+						                                </script>';
 									            } else{
 									                echo '<script>alert("Something Went Wrong.")</script>';
 									            }
 									        }else {echo '<script>alert("Something Went Wrong.")</script>';}
-									         
 									        mysqli_stmt_close($stmt);
-									        
 									    }else if($round==0){
 									    	$sql = "INSERT into toll_access_logs (user_id, toll_id) values (?,?)";
-		         
 									        if($stmt = mysqli_prepare($conn, $sql)){
 									            mysqli_stmt_bind_param($stmt, "ii", $param_user_id, $param_toll_id);
 									            if(mysqli_stmt_execute($stmt)){
@@ -66,19 +62,20 @@ include '../../config/config.php';
 									                echo '<script>alert("Something Went Wrong.")</script>';
 									            }
 									        }else {echo '<script>alert("Something Went Wrong.")</script>';}
-									         
 									        mysqli_stmt_close($stmt);
 									        $sql = "DELETE from toll_access where user_id=? and toll_id = ?";
-		         
 									        if($stmt = mysqli_prepare($conn, $sql)){
 									            mysqli_stmt_bind_param($stmt, "ii", $param_user_id, $param_toll_id);
 									            if(mysqli_stmt_execute($stmt)){
-									                echo '<script>alert("Deleted from logs")</script>';
+									                echo '<script>alert("Deleted from access.")</script>';
+									                echo '
+						                                <script>
+						                                   window.location.href="'.base_url_toll.'comingVehicles"; 
+						                                </script>';
 									            } else{
 									                echo '<script>alert("Something Went Wrong.")</script>';
 									            }
 									        }else {echo '<script>alert("Something Went Wrong.")</script>';}
-									         
 									        mysqli_stmt_close($stmt);
 									    }
 									    else{
@@ -87,7 +84,7 @@ include '../../config/config.php';
 								    }
 								}
 								else{
-						                echo '<script>alert("User do not registered.")</script>';
+						                echo '<script>alert("QR not matched.")</script>';
 						            }
 								} else{
 						                echo '<script>alert("Something Went Wrong.")</script>';
