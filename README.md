@@ -1,19 +1,12 @@
 # toll-plaza
 
-NAME OF OUR APP :: TOLL PLAZA
+### PROBLEM:
 
-******************************************************************************************************
-******************************************************************************************************
-
-###PROBLEM:
-
-#####Explanation why we built up the web app:
+##### Explanation why we built up the web app:
 
 Rising traffic on tolls is an inescapable condition in large and growing metropolitan areas across the world, from Los Angeles to Tokyo, from Cairo to Sao Paolo. Peak-hour traffic on tolls is an inherent result of the way modern societies operate. It stems from the widespread desires of people to pursue certain goals that inevitably overload existing roads and transit systems every day. But everyone hates traffic on tolls, and it keeps getting worse, in spite of attempted remedies.
 
 ******************************************************************************************************
-
-#####SOLUTION : 
 
 We built the app through which one can simply register the toll as user through which he/she is going to pass through by simply paying the amount[ie TOLL-TAX] by our webApp.a simple user admim is developed on which he/she can see all the toll near by accorDging to his/her present geoLocation.(range-100kms).
 
@@ -27,7 +20,7 @@ You can select the toll and pay it and if you want to pay for return journey you
 
 ******************************************************************************************************
 
-HOW TO INSTALL APP : 
+##### HOW TO INSTALL APP : 
 
 1)use the github link.
 
