@@ -3,7 +3,7 @@
 
 
  // echo 'hjdskl';
-include('../config/config.php');
+require ('../config/config.php');
  
 $name = $username = $lat = $address = $lng = $heavy_rate = $password = $confirm_password = $carVariant = $heavy_return_rate =$light_rate_err =$light_return_rate_err =$medium_return_rate_err = $medium_rate = $vehicleNo = "";
 $name_err = $username_err = $lat_err = $address_err = $lng_err = $heavy_rate_err = $password_err = $confirm_password_err = $carVariant_err = $heavy_return_rate_err = $medium_rate_err = $vehicleNo_err = "";

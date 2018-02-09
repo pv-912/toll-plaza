@@ -1,5 +1,5 @@
 <?php
-  require_once '../config/config.php';
+  require_once '../../config/config.php';
  
   $usernameLogin = $pass = $role ="";
   $usernameLogin_err = $pass_err = "";
@@ -124,9 +124,10 @@
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">About Us </a></li>
-            <li><a href="<?php echo base_url; ?>components/faq.php">FAQ's</a></li>
-            <li><a href="">Contact</a></li>
-            <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
+            <li><a href="<?php echo base_url_toll; ?>comingVehicles/index.php">Current</a>
+</li>
+            <li><a href="<?php echo base_url_toll; ?>comingVehicles/record.php">Records</a></li>
+            <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log Out</a></li>
          </ul>
        </div>
      </div>

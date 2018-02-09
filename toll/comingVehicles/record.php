@@ -23,15 +23,14 @@ $vehicle_number = $car_variant = $car_color = "";
     $currentTollId = 1;
 
 
-    include '../header.php';
+    include 'header.php';
 
 ?>
 
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12">
-            <a href="<?php echo base_url_toll; ?>comingVehicles/index.php">Current</a>
-            <table class="table table-hover">
+            <table class="table table-striped">
               <tr>
               	<th>Name</th>
               	<th>Contact</th>
@@ -39,7 +38,6 @@ $vehicle_number = $car_variant = $car_color = "";
                 <th>Vehicle No.</th>
                 <th>Vehicle Color</th>
                 <th>Vehicle Load</th>
-                <th>Round</th>
               </tr>
               <?php 
 

@@ -42,7 +42,7 @@ include '../../config/config.php';
 									            mysqli_stmt_bind_param($stmt, "iii",$param_round, $param_user_id, $param_toll_id);
 									            $param_round = $round;
 									            if(mysqli_stmt_execute($stmt)){
-									                echo '<script>alert("Round turned to 1.")</script>';
+									                // echo '<script>alert("Round turned to 1.")</script>';
 									                echo '
 						                                <script>
 						                                   window.location.href="'.base_url_toll.'comingVehicles"; 
@@ -57,7 +57,7 @@ include '../../config/config.php';
 									        if($stmt = mysqli_prepare($conn, $sql)){
 									            mysqli_stmt_bind_param($stmt, "ii", $param_user_id, $param_toll_id);
 									            if(mysqli_stmt_execute($stmt)){
-									                echo '<script>alert("Added to Logs.")</script>';
+									                // echo '<script>alert("Added to Logs.")</script>';
 									            } else{
 									                echo '<script>alert("Something Went Wrong.")</script>';
 									            }
@@ -67,7 +67,7 @@ include '../../config/config.php';
 									        if($stmt = mysqli_prepare($conn, $sql)){
 									            mysqli_stmt_bind_param($stmt, "ii", $param_user_id, $param_toll_id);
 									            if(mysqli_stmt_execute($stmt)){
-									                echo '<script>alert("Deleted from access.")</script>';
+									                // echo '<script>alert("Deleted from access.")</script>';
 									                echo '
 						                                <script>
 						                                   window.location.href="'.base_url_toll.'comingVehicles"; 
@@ -84,7 +84,7 @@ include '../../config/config.php';
 								    }
 								}
 								else{
-						                echo '<script>alert("QR not matched.")</script>';
+						                // echo '<script>alert("QR not matched.")</script>';
 						            }
 								} else{
 						                echo '<script>alert("Something Went Wrong.")</script>';
@@ -92,7 +92,7 @@ include '../../config/config.php';
 
 						        // }
 						    }else{
-						        	echo '<script>alert("User Doesnt Paid")</script>';
+						        	// echo '<script>alert("User Doesnt Paid")</script>';
 						        }
 			       			}
 			       		}

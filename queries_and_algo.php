@@ -149,3 +149,36 @@
                 // return --> handle hardware
 
 ?>
+
+
+Hello,
+    We have made a portal using which (a person) Client can check in at nearby highway tolls in advance.
+    The money will be deducted from the user balance.
+    Similarly, the person at the Toll can view the info of the vehicles passing through their toll.
+
+    // User Sign in page
+    We have made a sign in page where a user can sign in.
+
+    // Toll Sign in page
+    A Toll user can sign in using this page.
+
+    // Toll Login Page
+    Toll administrator can sign in using this page
+
+    // Toll Dashboard
+    List of the vehicles arriving on this toll (vehicles that have not arrived yet) will be displayed here.
+
+    // User Login page
+    At this is the page you can login with his credentials.
+
+    
+
+    // Geolocation page
+    Nearby tolls will be displayed on this page with their name and addresses.
+    Prices are displayed on paynow button. Click on the this button to check in to the toll.
+    You can opt for round trip or one way trip.
+
+    // Mobile App
+    This is the qr scanner. It will scan the qr code on the vehicle and send the toll_id and qr code to the server.
+    
+    This will reset the toll
