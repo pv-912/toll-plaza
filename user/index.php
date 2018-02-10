@@ -1,5 +1,5 @@
-    <?php 
-include 'header.php';
+<?php 
+  include 'header.php';
 ?>
 
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="" id="top">
