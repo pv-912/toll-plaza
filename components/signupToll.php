@@ -1,213 +1,176 @@
- <?php include('../toll/header.php'); ?>
- <?php
+<?php
+    require ('../config/config.php');
+    include ('../toll/header.php');
 
-
- // echo 'hjdskl';
-require ('../config/config.php');
+    $name = $username = $lat = $address = $lng = $heavy_rate = $password = $confirm_password = $carVariant = $heavy_return_rate =$light_rate_err =$light_return_rate_err =$medium_return_rate_err = $medium_rate = $vehicleNo = "";
+    $name_err = $username_err = $lat_err = $address_err = $lng_err = $heavy_rate_err = $password_err = $confirm_password_err = $carVariant_err = $heavy_return_rate_err = $medium_rate_err = $vehicleNo_err = "";
  
-$name = $username = $lat = $address = $lng = $heavy_rate = $password = $confirm_password = $carVariant = $heavy_return_rate =$light_rate_err =$light_return_rate_err =$medium_return_rate_err = $medium_rate = $vehicleNo = "";
-$name_err = $username_err = $lat_err = $address_err = $lng_err = $heavy_rate_err = $password_err = $confirm_password_err = $carVariant_err = $heavy_return_rate_err = $medium_rate_err = $vehicleNo_err = "";
- 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- if(isset($_POST["username"])){
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter a username.";
-    } else{
-        $username = trim($_POST['username']);
-        $sql = "SELECT username FROM tolls where username=? ";
-        
-        if($stmt = mysqli_prepare($conn, $sql)){
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
-            $param_username = $username;
-            
-            if(mysqli_stmt_execute($stmt)){
-                mysqli_stmt_store_result($stmt);
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if(isset($_POST["username"])){
+            if(empty(trim($_POST["username"]))){
+                $username_err = "Please enter a username.";
+            } else {
+                $username = trim($_POST['username']);
+                $sql = "SELECT username FROM tolls where username=? ";
                 
-                if(mysqli_stmt_num_rows($stmt) == 1){
-                    $username_err = "This username is already registered.";
-                } 
+                if($stmt = mysqli_prepare($conn, $sql)){
+                    mysqli_stmt_bind_param($stmt, "s", $param_username);
+                    
+                    $param_username = $username;
+                    
+                    if(mysqli_stmt_execute($stmt)){
+                        mysqli_stmt_store_result($stmt);
+                        
+                        if(mysqli_stmt_num_rows($stmt) == 1){
+                            $username_err = "This username is already registered.";
+                        } 
+                    } else{
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+                } else {
+                    echo "Oops! Something went wrong. Please try again later.2";
+                }
+                mysqli_stmt_close($stmt);
+            }
+        }
+
+        /* validators */
+        if(isset($_POST['name'])){
+            if(empty(trim($_POST['name']))){
+                $name_err = "Please enter a name.";     
+            }  else{
+                $name = trim($_POST['name']);
+                // echo $name;
+            }
+        }
+        if(isset($_POST['address'])){
+            if(empty(trim($_POST['address']))){
+                $address_err = "Please enter an address";     
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                $address = trim($_POST['address']);
+                // echo $address;
             }
-        }else{
-                echo "Oops! Something went wrong. Please try again later.2";
-            }
-         
-        mysqli_stmt_close($stmt);
-    }
-}
-
-    /* validators */
-    if(isset($_POST['name'])){
-        if(empty(trim($_POST['name']))){
-            $name_err = "Please enter a name.";     
-        }  else{
-            $name = trim($_POST['name']);
-            // echo $name;
-        }
-    }
-    if(isset($_POST['address'])){
-        if(empty(trim($_POST['address']))){
-            $address_err = "Please select address";     
-        } else{
-            $address = trim($_POST['address']);
-            // echo $address;
-        }
-    }    
-    if(isset($_POST['lat'])){
-        if(empty(trim($_POST['lat']))){
-            $lat_err = "Please enter a lat no.";     
-        } else{
-            $lat = trim($_POST['lat']);
-            // echo $lat;
-        }
-    }    
-    if(isset($_POST['lng'])){
-        if(empty(trim($_POST['lng']))){
-            $lng_err = "Please enter a date of birth";     
-        } else{
-            $lng = trim($_POST['lng']);
-            // echo $lng;
-        }
-    }   
-    if(isset($_POST['heavy_rate'])){
-        if(empty(trim($_POST['heavy_rate']))){
-            $heavy_rate_err = "Please enter a heavy_rate name.";     
-        } else{
-            $heavy_rate = trim($_POST['heavy_rate']);
-            // echo $heavy_rate;
-        }
-    }
-    // if(isset($_POST['carVariant'])){
-    //     if(empty(trim($_POST['carVariant']))){
-    //         $carVariant_err = "Please enter a carVariant.";     
-    //     } else{
-    //         $carVariant = trim($_POST['carVariant']);
-    //         // echo $heavy_rate;
-    //     }
-    // }
-    if(isset($_POST['heavy_return_rate'])){
-        if(empty(trim($_POST['heavy_return_rate']))){
-            $heavy_return_rate_err = "Please enter a heavy_return_rate.";     
-        } else{
-            $heavy_return_rate = trim($_POST['heavy_return_rate']);
-            // echo $heavy_return_rate;
-        }
-    }
-    if(isset($_POST['medium_rate'])){
-        if(empty(trim($_POST['medium_rate']))){
-            $medium_rate_err = "Please enter a C.G.P.A.";     
-        } else{
-            $medium_rate = trim($_POST['medium_rate']);
-            // echo $heavy_rate;
-        }
-    }
-    if(isset($_POST['light_rate'])){
-        if(empty(trim($_POST['light_rate']))){
-            $light_rate_err = "Please enter a light_rate (B.Tech)";     
-        } else{
-            $light_rate = trim($_POST['light_rate']);
-            // echo $heavy_rate;
-        }
-    }
-    if(isset($_POST['medium_return_rate'])){
-        if(empty(trim($_POST['medium_return_rate']))){
-            $medium_return_rate_err = "Please enter a medium_return_rate (B.Tech)";     
-        } else{
-            $medium_return_rate = trim($_POST['medium_return_rate']);
-            // echo $heavy_rate;
-        }
-    }
-    if(isset($_POST['light_return_rate'])){
-        if(empty(trim($_POST['light_return_rate']))){
-            $light_return_rate_err = "Please enter a light_return_rate (B.Tech)";     
-        } else{
-            $light_return_rate = trim($_POST['light_return_rate']);
-            // echo $heavy_rate;
-        }
-    }
-    
-
-    if(isset($_POST['password'])){
-        if(empty(trim($_POST['password']))){
-            $password_err = "Please enter a password.";     
-        } elseif(strlen(trim($_POST['password'])) < 0){
-            $password_err = "Password must have atleast 6 characters.";
-        } else{
-            $password = trim($_POST['password']);
-            // echo $password;
-        }
-    }
-    if(isset($_POST['confirm_password'])){
-        if(empty(trim($_POST["confirm_password"]))){
-            $confirm_password_err = 'Please confirm password.';     
-        } else{
-            $confirm_password = trim($_POST['confirm_password']);
-            if($password != $confirm_password){
-                $confirm_password_err = 'Password did not match.';
-            }
-        }
-    }
-    // echo $username_err; echo $password_err; echo $confirm_password_err;
-    if(empty($username_err) && empty($password_err)){
-         $sql = "INSERT INTO tolls (username, name, password, lat, lng, role, heavy_rate, medium_rate, light_rate, heavy_return_rate, medium_return_rate, light_return_rate) VALUES (?,?,?,?,?,?,?,?,?,?, ?, ?)";
-         
-        if($stmt = mysqli_prepare($conn, $sql)){
-            mysqli_stmt_bind_param($stmt, "ssssssiiiiii", $param_username, $param_name, $param_password, $param_lat, $param_lng, $param_role, $param_heavy_rate, $param_medium_rate,  $param_light_rate, $param_heavy_return_rate, $param_medium_return_rate, $light_return_rate);
-            // echo 'hello';
-            $param_username = $username;
-            $param_password = password_hash($password, PASSWORD_DEFAULT); 
-            $param_name = $name;
-            $param_lat = $lat;
-            $param_lng = $lng;
-            $param_address = $address;
-            $param_role = "toll";
-            $param_heavy_rate = $heavy_rate;
-            $param_medium_rate = $medium_rate;
-            $param_heavy_return_rate = $heavy_return_rate;
-            $param_light_rate = $light_rate;
-            $param_medium_return_rate = $medium_return_rate;
-            $param_light_return_rate = $light_return_rate;
-            // echo $param_light_return_rate."   ";
-            // echo $param_medium_return_rate."   ";
-            // echo $param_light_rate."   ";
-            // echo $param_medium_rate."   ";
-            // echo $param_heavy_rate."   ";
-            // echo $param_heavy_return_rate."   ";
-            // echo $param_lat."   ";
-            // echo $param_lng."   ";
-            // echo $param_name."   ";
-            // echo $param_username."   ";
-            // echo $param_address."   ";
-            // echo $param_role."   ";
-            // echo $param_password."   ";
-
-
-            if(mysqli_stmt_execute($stmt)){
-                echo '
-                      <script>
-                         window.location.href="'.base_url.'toll/index.php"; 
-                      </script>';
-                
+        }    
+        if(isset($_POST['lat'])){
+            if(empty(trim($_POST['lat']))){
+                $lat_err = "Please enter a lat no.";     
             } else{
-                echo " <script> alert(' Something went wrong.') </script>" ;
+                $lat = trim($_POST['lat']);
+                // echo $lat;
             }
-         }else{
-                ?> <script> alert(' Something went wrong2.') </script> <?php
+        }    
+        if(isset($_POST['lng'])){
+            if(empty(trim($_POST['lng']))){
+                $lng_err = "Please enter a date of birth";     
+            } else{
+                $lng = trim($_POST['lng']);
+                // echo $lng;
             }
-         
-        mysqli_stmt_close($stmt);
+        }   
+        if(isset($_POST['heavy_rate'])){
+            if(empty(trim($_POST['heavy_rate']))){
+                $heavy_rate_err = "Please enter a heavy_rate.";     
+            } else{
+                $heavy_rate = trim($_POST['heavy_rate']);
+                // echo $heavy_rate;
+            }
+        }
+        if(isset($_POST['heavy_return_rate'])){
+            if(empty(trim($_POST['heavy_return_rate']))){
+                $heavy_return_rate_err = "Please enter a heavy_return_rate.";     
+            } else{
+                $heavy_return_rate = trim($_POST['heavy_return_rate']);
+                // echo $heavy_return_rate;
+            }
+        }
+        if(isset($_POST['medium_rate'])){
+            if(empty(trim($_POST['medium_rate']))){
+                $medium_rate_err = "Please enter a medium_rate";     
+            } else{
+                $medium_rate = trim($_POST['medium_rate']);
+                // echo $heavy_rate;
+            }
+        }
+        if(isset($_POST['light_rate'])){
+            if(empty(trim($_POST['light_rate']))){
+                $light_rate_err = "Please enter a light_rate";     
+            } else{
+                $light_rate = trim($_POST['light_rate']);
+                // echo $heavy_rate;
+            }
+        }
+        if(isset($_POST['medium_return_rate'])){
+            if(empty(trim($_POST['medium_return_rate']))){
+                $medium_return_rate_err = "Please enter a medium_return_rate";     
+            } else{
+                $medium_return_rate = trim($_POST['medium_return_rate']);
+                // echo $heavy_rate;
+            }
+        }
+        if(isset($_POST['light_return_rate'])){
+            if(empty(trim($_POST['light_return_rate']))){
+                $light_return_rate_err = "Please enter a light_return_rate";     
+            } else{
+                $light_return_rate = trim($_POST['light_return_rate']);
+                // echo $heavy_rate;
+            }
+        }
+        if(isset($_POST['password'])){
+            if(empty(trim($_POST['password']))){
+                $password_err = "Please enter a password.";     
+            } elseif(strlen(trim($_POST['password'])) < 0){
+                $password_err = "Password must have atleast 6 characters.";
+            } else{
+                $password = trim($_POST['password']);
+                // echo $password;
+            }
+        }
+        if(isset($_POST['confirm_password'])){
+            if(empty(trim($_POST["confirm_password"]))){
+                $confirm_password_err = 'Please confirm password.';     
+            } else{
+                $confirm_password = trim($_POST['confirm_password']);
+                if($password != $confirm_password){
+                    $confirm_password_err = 'Password did not match.';
+                }
+            }
+        }
+        // echo $username_err; echo $password_err; echo $confirm_password_err;
+        if(empty($username_err) && empty($password_err)){
+            $sql = "INSERT INTO tolls (username, name, password, lat, lng, role, heavy_rate, medium_rate, light_rate, heavy_return_rate, medium_return_rate, light_return_rate) VALUES (?,?,?,?,?,?,?,?,?,?, ?, ?)";
+            
+            if($stmt = mysqli_prepare($conn, $sql)){
+                mysqli_stmt_bind_param($stmt, "ssssssiiiiii", $param_username, $param_name, $param_password, $param_lat, $param_lng, $param_role, $param_heavy_rate, $param_medium_rate,  $param_light_rate, $param_heavy_return_rate, $param_medium_return_rate, $light_return_rate);
+                $param_username = $username;
+                $param_password = password_hash($password, PASSWORD_DEFAULT); 
+                $param_name = $name;
+                $param_lat = $lat;
+                $param_lng = $lng;
+                $param_address = $address;
+                $param_role = "toll";
+                $param_heavy_rate = $heavy_rate;
+                $param_medium_rate = $medium_rate;
+                $param_heavy_return_rate = $heavy_return_rate;
+                $param_light_rate = $light_rate;
+                $param_medium_return_rate = $medium_return_rate;
+                $param_light_return_rate = $light_return_rate;
+                if(mysqli_stmt_execute($stmt)){
+                    echo '
+                        <script>
+                            window.location.href="'.base_url.'toll/index.php"; 
+                        </script>';
+                    
+                } else{
+                    echo " <script> alert(' Something went wrong.') </script>" ;
+                }
+            }else{
+                    ?> <script> alert(' Something went wrong2.') </script> <?php
+                }
+            
+            mysqli_stmt_close($stmt);
+        }
     }
-    
-    mysqli_close($conn);
-}
 ?>
-
-
-
-
-
 		<div class="container">
             <div id="Error">
                 
@@ -222,6 +185,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			             <div class="col-sm-12">
 			               <input type="text"  name="name"  class="form-control"  placeholder="Name" value="<?php echo $name; ?>" >
 			                <span class="help-block"><?php echo $name_err; ?></span>
+			             </div>
+			           </div>
+
+                       <div class="form-group">
+			             <label for="" class="sr-only">Address<sup>*</sup></label>
+			             <div class="col-sm-12">
+			               <input type="text"  name="address"  class="form-control" id="address" placeholder="Address" value="<?php echo $address; ?>" >
+			                <span class="help-block"><?php echo $address_err; ?></span>
 			             </div>
 			           </div>
 			            
@@ -311,8 +282,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				</div>
 			</div>
 		</div>
-
-           
-<?php //require_once('footer.php'); ?>
-
-    <?php require_once('login_modal_tolls.php'); ?>
+<?php require_once('login_modal_tolls.php'); ?>

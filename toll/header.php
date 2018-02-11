@@ -45,6 +45,7 @@
                         if(password_verify($pass, $hashed_pass)){
                           
                                 session_start();
+                                $_SESSION['username'] = $login_name; 
                                 $_SESSION['id'] = $id; 
                                 $_SESSION['role']=$role;
                                 $_SESSION['time'] = time();
@@ -72,8 +73,6 @@
         
         mysqli_stmt_close($stmt);
     }
-    
-    mysqli_close($conn);
 }
 ?>
 

@@ -1,7 +1,9 @@
 <?php
-ob_start();
-session_start();
+  ob_start();
+  session_start();
 
+  include '../../config/config.php';
+  include 'header.php';
    /* logout after 10min. */
     
     // if(time()-$_SESSION['time']>60*60*10){
@@ -16,17 +18,10 @@ session_start();
     //     $_SESSION['time']=time();
     // }
 
-include '../../config/config.php';
-$vehicle_number = $car_variant = $car_color = ""; 
+  $vehicle_number = $car_variant = $car_color = ""; 
+  $currentTollId = $_SESSION['id'];
 
-
-    $currentTollId = $_SESSION['id'];
-    // $currentTollId = 1;
-
-// echo 'hello';
-// print_r($_SESSION);
-
-    include 'header.php';
+  print_r($_SESSION);
 
 ?>
 
@@ -46,7 +41,7 @@ $vehicle_number = $car_variant = $car_color = "";
               </tr>
               <?php 
 
-                  $query    = "SELECT distinct c.id,c.user_id,c.round, (select name from users as a where a.id=c.user_id) as name, (select carVariant from users as a where a.id=c.user_id) as carVariant,(select carColor from users as a where a.id=c.user_id) as carColor,(select vehicleNo from users as a where a.id=c.user_id) as vehicleNo,(select licenseNo from users as a where a.id=c.user_id) as licenseNo,(select vehicleSize from users as a where a.id=c.user_id) as vehicleSize,(select contact from users as a where a.id=c.user_id) as contact from toll_access as c where toll_id=$currentTollId;";
+                  $query = "SELECT distinct c.id,c.user_id,c.round, (select name from users as a where a.id=c.user_id) as name, (select carVariant from users as a where a.id=c.user_id) as carVariant,(select carColor from users as a where a.id=c.user_id) as carColor,(select vehicleNo from users as a where a.id=c.user_id) as vehicleNo,(select licenseNo from users as a where a.id=c.user_id) as licenseNo,(select vehicleSize from users as a where a.id=c.user_id) as vehicleSize,(select contact from users as a where a.id=c.user_id) as contact from toll_access as c where toll_id=$currentTollId;";
                   $result = $conn->query($query);
                   if($result) {
                       if(!$result->num_rows == 0) {
@@ -81,11 +76,10 @@ $vehicle_number = $car_variant = $car_color = "";
   <script>
   	function pass(data){
         var userId = data;
-        var qr = '123';
         var tollId = <?php echo $currentTollId; ?> ;
             $.ajax({
                 url: '../../api/toll/comingVehicle.php',
-                data: {'qr':qr,'tollId':tollId},
+                data: {'userId':userId,'tollId':tollId},
                 async: true,
                 type: 'POST',          
 

@@ -45,6 +45,7 @@
                         if(password_verify($pass, $hashed_pass)){
                           
                                 session_start();
+                                $_SESSION['username'] = $login_name; 
                                 $_SESSION['id'] = $id; 
                                 $_SESSION['role']=$role;
                                 $_SESSION['time'] = time();
@@ -72,8 +73,6 @@
         
         mysqli_stmt_close($stmt);
     }
-    
-    mysqli_close($conn);
 }
 ?>
 
@@ -127,7 +126,7 @@
             <li><a href="<?php echo base_url_toll; ?>comingVehicles/index.php">Current</a>
 </li>
             <li><a href="<?php echo base_url_toll; ?>comingVehicles/record.php">Records</a></li>
-            <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log Out</a></li>
+            <li><a href="<?php echo base_url_toll; ?>">Log Out</a></li>
          </ul>
        </div>
      </div>

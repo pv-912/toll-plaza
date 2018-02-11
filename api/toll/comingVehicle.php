@@ -3,16 +3,15 @@ include '../../config/config.php';
 
 
 	// $userId = $_POST['userId'];
-	// $tollId  = $_POST['tollId'];
-	$qrCode = '123';
-	$tollId = 1;
+	$tollId  = $_POST['tollId'];
+	$userId = $_POST['userId'];
 	$round = 0;
 
-	$sql = "SELECT id from users where qr=?";
+	$sql = "SELECT id from users where id=?";
 
 	        if($stmt = mysqli_prepare($conn, $sql)){
-	            mysqli_stmt_bind_param($stmt, "s",$param_qr);
-	            $param_qr = $qrCode;
+	            mysqli_stmt_bind_param($stmt, "s",$param_userId);
+	            $param_userId = $userId;
 	       
 	            if(mysqli_stmt_execute($stmt)){
 	            	mysqli_stmt_store_result($stmt);

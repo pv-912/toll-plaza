@@ -1,6 +1,6 @@
 <?php
-ob_start();
-session_start();
+  ob_start();
+  session_start();
 
    /* logout after 10min. */
     
@@ -15,15 +15,15 @@ session_start();
     //     $_SESSION['time']=time();
     // }
 
-include '../../config/config.php';
-$vehicle_number = $car_variant = $car_color = ""; 
+  include '../../config/config.php';
+  include 'header.php';
+  $vehicle_number = $car_variant = $car_color = ""; 
+      // print_r($_SESSION);
+  if($_SESSION['role']=='toll'){
+      $currentTollId = $_SESSION['id'];
+  }
 
-// if($_SESSION['role']=='toll'){
-     // $currentTollId = $_SESSION['id'];
-    $currentTollId = 1;
-
-
-    include 'header.php';
+    
 
 ?>
 
