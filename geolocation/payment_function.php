@@ -5,12 +5,9 @@
    /* logout after 10min. */    
     if(time()-$_SESSION['time']>60*60*10){
         unset($_SESSION['time']);
-        // setcookie("username", "", time()-3600);
-        // setcookie("role", "", time()-3600);
-        // setcookie("name", "", time()-3600); 
         session_destroy();
-        // header("location: ../index.php");}
-    else{
+        header("location: ../user/index.php");
+    } else {
         $_SESSION['time']=time();
     }
     require_once '../config/config.php';

@@ -34,14 +34,13 @@
               	<th>Name</th>
               	<th>Contact</th>
                 <th>Vehicle Type</th>
-                <th>Vehicle No.</th>
                 <th>Vehicle Color</th>
-                <th>Vehicle Load</th>
+                <th>Vehicle No.</th>
                 <th>Round</th>
               </tr>
               <?php 
 
-                  $query = "SELECT distinct c.id,c.user_id,c.round, (select name from users as a where a.id=c.user_id) as name, (select carVariant from users as a where a.id=c.user_id) as carVariant,(select carColor from users as a where a.id=c.user_id) as carColor,(select vehicleNo from users as a where a.id=c.user_id) as vehicleNo,(select licenseNo from users as a where a.id=c.user_id) as licenseNo,(select vehicleSize from users as a where a.id=c.user_id) as vehicleSize,(select contact from users as a where a.id=c.user_id) as contact from toll_access as c where toll_id=$currentTollId;";
+                  $query = "SELECT distinct c.id,c.user_id,c.round, (select name from users as a where a.id=c.user_id) as name, (select carVariant from users as a where a.id=c.user_id) as carVariant,(select carColor from users as a where a.id=c.user_id) as carColor,(select vehicleNo from users as a where a.id=c.user_id) as vehicleNo,(select licenseNo from users as a where a.id=c.user_id) as licenseNo,(select contact from users as a where a.id=c.user_id) as contact from toll_access as c where toll_id=$currentTollId;";
                   $result = $conn->query($query);
                   if($result) {
                       if(!$result->num_rows == 0) {
@@ -52,7 +51,6 @@
                               <td><?php echo $row['carVariant']; ?></td>
                               <td><?php echo $row['carColor']; ?></td>
                               <td><?php echo $row['vehicleNo']; ?></td>
-                              <td><?php echo $row['vehicleSize']; ?></td>
                               <td><?php echo $row['round']; ?></td>
 				          		<input type='hidden' id="passedUserRound<?php echo $row['id']; ?>" value="<?php echo $row['round']; ?>">
                             </tr>

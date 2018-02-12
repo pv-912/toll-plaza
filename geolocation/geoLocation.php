@@ -2,6 +2,7 @@
 <?php
 ob_start();
 session_start();
+include '../config/config.php';
    /* logout after 10min. */
     
     if(time()-$_SESSION['time']>60*60*10){
@@ -14,7 +15,7 @@ session_start();
     else{
         $_SESSION['time']=time();
     }
-include '../config/config.php';
+
 
 ?>
 <!DOCTYPE html>
@@ -50,24 +51,24 @@ include '../config/config.php';
 
 <body>
 <?php 
-
-// print_r($_POST);
+echo "POST";
+print_r($_POST);
+echo "Session";
+print_r($_SESSION);
 
 $user_id = $_SESSION['id'];
 
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
-    $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($_POST['latitude']).','.trim($_POST['longitude']).'&sensor=false';
-    $json = @file_get_contents($url);
-    $data = json_decode($json);
-    $status = $data->status;
+    // $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($_POST['latitude']).','.trim($_POST['longitude']).'&sensor=false';
+    // $json = @file_get_contents($url);
+    // $data = json_decode($json);
+    // $status = $data->status;
 
-    if($status=="OK"){
-        $location = $data->results[0]->formatted_address;
-    }else{
-        $location =  '';
-    }
-
-    $location = $location;
+    // if($status=="OK"){
+    //     $location = $data->results[0]->formatted_address;
+    // }else{
+    //     $location =  '';
+    // }
 
     $geo_lat =$_POST['latitude'];
     $geo_lng =$_POST['longitude'];
@@ -144,7 +145,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                                 $variant = 'heavy_rate';
                                 $variant_round = 'heavy_return_rate';
                             } else {
-                                print "Variant Exception";
+                                return "Variant Exception";
                             };
                             // print_r($row);
                             // echo $user_id;
@@ -156,13 +157,13 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                             // if($allocated == 0) { echo "There"; };
                             // echo $allocated."Status";
                             ?>
-                                                <tr <?php if($allocated == 1) { echo 'class="lassan"'; } ?>>
-                                                    <td id="toll_id"><?php echo $row['name'];?></td>
-                                                    <td><?php echo $row['address'];?></td>
-                                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay <?php echo $row[$variant];?></button></td>
-                                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="<?php echo $row['id']; ?>, 2)">Pay <?php echo $row[$variant_round];?></button></td>
-                                                </tr>
-                                            <?php 
+                                <tr <?php if($allocated == 1) { echo 'class="lassan"'; } ?>>
+                                    <td id="toll_id"><?php echo $row['name'];?></td>
+                                    <td><?php echo $row['address'];?></td>
+                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay <?php echo $row[$variant];?></button></td>
+                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 2)">Pay <?php echo $row[$variant_round];?></button></td>
+                                </tr>
+                            <?php 
                         }?>
                         </tbody>
                     </table>
@@ -184,7 +185,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
 <script type="text/javascript">
 
     function payReturn(data,round){
-        // console.log(data, round);
+        console.log(data, round);
         $.ajax({
         type: "POST",
         url: "payment_function.php",
