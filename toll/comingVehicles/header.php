@@ -33,9 +33,8 @@
             mysqli_stmt_bind_param($stmt, "s", $param_usernameLogin);
             
             $param_usernameLogin =$usernameLogin;
-            echo $param_usernameLogin;
+            // echo $param_usernameLogin;
             // echo 'hello';
-            echo $param_usernameLogin;
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
                 
@@ -126,7 +125,7 @@
             <li><a href="<?php echo base_url_toll; ?>comingVehicles/index.php">Current</a>
 </li>
             <li><a href="<?php echo base_url_toll; ?>comingVehicles/record.php">Records</a></li>
-            <li><a href="<?php echo base_url_toll; ?>">Log Out</a></li>
+            <li><a href="<?php echo base_url_toll; ?>logout.php">Log Out</a></li>
          </ul>
        </div>
      </div>

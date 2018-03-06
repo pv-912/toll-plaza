@@ -15,7 +15,6 @@ include '../config/config.php';
     else{
         $_SESSION['time']=time();
     }
-echo "hree";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,10 +49,6 @@ echo "hree";
 
 <body>
 <?php 
-echo "POST";
-print_r($_POST);
-echo "Session";
-print_r($_SESSION);
 
 $user_id = $_SESSION['id'];
 
@@ -112,9 +107,9 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>Balance: <?php echo $balance ?></a></li>
-                                <li><a href="<?php echo base_url; ?>user/addmoney.php">Recharge</a></li>
-                                <li><a href="<?php echo base_url; ?>user/payToll/logs.php">Logs</a></li>
-                                <li><a href="<?php echo base_url; ?>user" class="headerLogin" >Logout</a></li>  
+                                <li><a href="<?php echo base_url_user; ?>addmoney.php">Recharge</a></li>
+                                <li><a href="<?php echo base_url_user; ?>payToll/logs.php">Logs</a></li>
+                                <li><a href="<?php echo base_url_user; ?>logout.php" class="headerLogin" >Logout</a></li>  
                             </ul>
                         </div>
                     </div>

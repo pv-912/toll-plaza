@@ -22,7 +22,6 @@
   if($_SESSION['role']=='toll'){
       $currentTollId = $_SESSION['id'];
   }
-  print_r($_SESSION);
 
     
 

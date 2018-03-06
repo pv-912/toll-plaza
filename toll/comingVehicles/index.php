@@ -21,8 +21,6 @@
   $vehicle_number = $car_variant = $car_color = ""; 
   $currentTollId = $_SESSION['id'];
 
-  print_r($_SESSION);
-
 ?>
 
       <div class="container-fluid">
