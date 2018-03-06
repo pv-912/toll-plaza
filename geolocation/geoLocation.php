@@ -3,15 +3,17 @@
 ob_start();
 session_start();
 include '../config/config.php';
+if (!isset($_SESSION['id'])) {
+    echo '
+        <script>
+            window.location.href="'.base_url_user.'"; 
+        </script>';
+}
    /* logout after 10min. */
     
     if(time()-$_SESSION['time']>60*60*10){
         unset($_SESSION['time']);
-        // setcookie("username", "", time()-3600);
-        // setcookie("role", "", time()-3600);
-        // setcookie("name", "", time()-3600); 
-        session_destroy();
-        header("location: ../index.php");}
+        session_destroy();}
     else{
         $_SESSION['time']=time();
     }

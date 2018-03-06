@@ -11,6 +11,12 @@
         $_SESSION['time']=time();
     }
     require_once '../config/config.php';
+    if (!isset($_SESSION['id'])) {
+        echo '
+            <script>
+                window.location.href="'.base_url_user.'"; 
+            </script>';
+    }
     $user_id=$_SESSION['id'];
     $round = $_POST['round'];
     $query = "SELECT * FROM `users` WHERE `id`= $user_id";

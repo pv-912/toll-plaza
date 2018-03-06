@@ -1,6 +1,11 @@
 <?php
   require_once '../../config/config.php';
- 
+  if (!isset($_SESSION['id'])) {
+    echo '
+        <script>
+            window.location.href="'.base_url_toll.'"; 
+        </script>';
+  }
   $usernameLogin = $pass = $role ="";
   $usernameLogin_err = $pass_err = "";
  
