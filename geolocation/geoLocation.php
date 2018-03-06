@@ -15,8 +15,7 @@ include '../config/config.php';
     else{
         $_SESSION['time']=time();
     }
-
-
+echo "hree";
 ?>
 <!DOCTYPE html>
 <html lang="en">

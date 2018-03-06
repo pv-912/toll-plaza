@@ -38,11 +38,25 @@
    </div>
       <div class="container-fluid">
         <div class="row">
-          <h1 style="padding-left: 5vw">About Us</h1>
-          Pay-toll is a online application
+          <h1 style="text-align: center;">About Us</h1>
+          <p class="discription">Pay-toll is a online application</p>
         </div>
     </div>
-
+<style >
+  .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    line-height: 1;
+    width: 100vw;
+    height: 65vh;
+}
+.discription {
+    font-size: 2em;
+    text-align: center;
+}
+.carousel {
+    position: relative;
+    margin-top: -3vh;
+}
+</style>
 
 
     <?php require_once('../components/login_modal_user.php'); ?>

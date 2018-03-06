@@ -105,12 +105,33 @@
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">About Us </a></li>
               <li><a href="<?php echo base_url; ?>components/faq.php">FAQ's</a></li>
-              <li><a href="#">Contact</a></li>
               <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
             </ul>
           </div>
         </div>
       </div>
     </nav>
+
+    <style type="text/css">
+      .navbar-collapse.collapse {
+    height: auto !important;
+}
+
+@media only screen and (max-width: 768px) {
+.navbar-nav>li>a {
+    padding-top: 20px;
+    padding-bottom: 15px;
+    padding-right: 31px;
+    font-size: 4.2vw;
+}
+.navbar-brand {
+    float: left;
+    height: 53px;
+    padding: 14px 15px;
+    font-size: 18px;
+    line-height: 21px;
+    color: #fff !important;
+}
+}
+    </style>
