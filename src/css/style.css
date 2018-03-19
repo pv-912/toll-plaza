@@ -17,10 +17,10 @@ body{
 
 @media (min-width: 768px){}
 .navbar-nav>li>a {
-    padding-top: 26px;
-    padding-bottom: 15px;
-    padding-right:50px;
-    font-size: 1.2vw
+   padding-top: 2em;
+    padding-bottom: 1em;
+    padding-right: 50px;
+    font-size: .9em;
 }}
 
 @media (min-width: 768px){
@@ -60,10 +60,10 @@ a:focus{
 }
 
 .sparkNavbarTag{
+    color: #40e1e2;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.3em;
+    font-size: 1.5em;
     font-weight: 600;
-    color: black;
     letter-spacing: .3em;
 }
 
@@ -282,18 +282,18 @@ a:focus{
 }
 
 .socialicons1{
-    padding-top: 2em;
-    width: .7em;
+    padding-top: 22vh;
+    width: 1.6vw;
 }
 
 .socialicons2{
-    padding-top: 2em;
-    width: 2em;
+    padding-top: 22vh;
+    width: 3.2vw;
 }
 
 .socialicons3{
-    padding-top: 1.5em;
-    width: 2em;
+    padding-top: 22vh;
+    width: 3.3vw;
 }
 
 @media only screen and (max-width: 500px) {
