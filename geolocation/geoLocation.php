@@ -15,7 +15,6 @@ include '../config/config.php';
     else{
         $_SESSION['time']=time();
     }
-echo "hree";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,14 +49,13 @@ echo "hree";
 
 <body>
 <?php 
-include '../searchToll/search-bar.php';
+
 echo "POST";
 print_r($_POST);
 echo "Session";
 print_r($_SESSION);
 
 $user_id = $_SESSION['id'];
-
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     // $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($_POST['latitude']).','.trim($_POST['longitude']).'&sensor=false';
     // $json = @file_get_contents($url);
@@ -121,7 +119,9 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                     </div>
                 </div>
             </nav>
-            <?php if ($balance > 0) {?>
+            <?php 
+            include '../searchToll/search-bar.php';
+            if ($balance > 0) {?>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">

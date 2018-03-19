@@ -50,8 +50,7 @@ include '../config/config.php';
 include '../search-toll/search-bar.php';
 
 // print_r($_POST);
-//$user_id = $_SESSION['id'];
-$user_id = 19;
+$user_id = $_SESSION['id'];
 $input=$_POST['input'];
 
 if($input){
@@ -73,9 +72,37 @@ if($input){
      $querytwo = "SELECT * FROM `users` WHERE id=$user_id";
     $resulttwo = $conn->query($querytwo);
     
-
+ $query = "SELECT balance FROM `users` WHERE id=$user_id";
+    $result = $conn->query($query);
+    $balance = $result->fetch_assoc();
+    $balance = $balance['balance'];
    
       ?>
+      
+      
+       <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand sparkNavbarTag " style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a>Balance: <?php echo $balance ?></a></li>
+                                <li><a href="<?php echo base_url; ?>user/addmoney.php">Recharge</a></li>
+                                <li><a href="<?php echo base_url; ?>user/payToll/logs.php">Logs</a></li>
+                                <li><a href="<?php echo base_url; ?>user" class="headerLogin" >Logout</a></li>  
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         <table class="table table-hover">
             <tr>
                 <thead>Toll Name</thead>

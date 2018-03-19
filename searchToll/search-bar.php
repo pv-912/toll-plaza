@@ -25,6 +25,8 @@
         z-index: 999;
         top: 100%;
         left: 0;
+        background-color: lightgrey;
+    color: black;
     }
     .search-box input[type="text"], .result{
         width: 100%;
@@ -39,8 +41,7 @@
         z-index: 10000;
     }
     .table {
-    margin-top: 10%;
-    width: 50%;
+    width: 100%;
     max-width: 100%;
     margin-bottom: 20px;
 }
