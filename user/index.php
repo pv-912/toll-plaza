@@ -43,6 +43,39 @@
           <p class="about_discription">Rising traffic on tolls is an inescapable condition in large and growing metropolitan areas across the world, from Los Angeles to Tokyo, from Cairo to Sao Paolo. Peak-hour traffic on tolls is an inherent result of the way modern societies operate. It stems from the widespread desires of people to pursue certain goals that inevitably overload existing roads and transit systems every day. But everyone hates traffic on tolls, and it keeps getting worse, in spite of attempted remedies.</p>
         </div>
     </div>
+<div class="footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="footer_header">
+                CONTACT US
+            </div>
+            <div class="half_underline_footer"></div>
+            <div class="email">
+                <p>Email Id : varunbhandia@tollplaza.com</p>
+                <p>Mobile No. : +91 9001126303</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                    <div class="col-xs-4">
+                        <center>
+                        <a href="#"><img  src="../src/img/fb.png" alt="Sangram facebook" class="socialicons1"></a>
+                            </center>
+                    </div>
+                    <div class="col-xs-4">  
+                        <center>
+                        <a href="#"> <img src="../src/img/youtube.png" alt="Sangram youtube" class="socialicons2"></a>
+                        </center>
+                    </div>
+                    <div class="col-xs-4">   
+                        <center>
+                        <a href="#"> <img src="../src/img/insta.png" alt="Sangram instagram" class="socialicons3"></a>
+                        </center>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
 <style >
   .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     line-height: 1;
