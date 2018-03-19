@@ -112,11 +112,11 @@
        <div class="navbar-header">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
            <span class="sr-only">Toggle navigation</span>
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
+           <span class="icon-bar" style="background-color: #40e1e2;"></span>
+           <span class="icon-bar" style="background-color: #40e1e2;"></span>
+           <span class="icon-bar" style="background-color: #40e1e2;"></span>
          </button>
-         <a class="navbar-brand" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo"></a>
+         <a class="navbar-brand" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo desktop"></a>
          <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll">TOLL PLAZA</a><br/>
        </div>
 
@@ -144,14 +144,7 @@
     padding-right: 31px;
     font-size: 4.2vw;
 }
-.navbar-brand {
-    float: left;
-    height: 53px;
-    padding: 14px 15px;
-    font-size: 18px;
-    line-height: 21px;
-    color: #fff !important;
-}
+
 }
 .navbar-collapse.collapse {
     height: auto !important;

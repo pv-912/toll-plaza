@@ -43,8 +43,16 @@ body{
     line-height: 45px;
 }
 
+.desktop{
+    
+}
 
 
+@media only screen and (max-width: 500px) {
+.desktop{
+   display: none;
+}
+}
 
 a:focus{
 	border: none;
