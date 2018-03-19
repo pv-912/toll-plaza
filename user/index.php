@@ -38,15 +38,16 @@
    </div>
       <div class="container-fluid">
         <div class="row">
-          <h1 style="text-align: center;">About Us</h1>
-          <p class="discription">Pay-toll is a online application</p>
+              <h1 class="about_header">ABOUT US</h1>
+            <div class="half_underline"></div>
+          <p class="about_discription">Rising traffic on tolls is an inescapable condition in large and growing metropolitan areas across the world, from Los Angeles to Tokyo, from Cairo to Sao Paolo. Peak-hour traffic on tolls is an inherent result of the way modern societies operate. It stems from the widespread desires of people to pursue certain goals that inevitably overload existing roads and transit systems every day. But everyone hates traffic on tolls, and it keeps getting worse, in spite of attempted remedies.</p>
         </div>
     </div>
 <style >
   .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     line-height: 1;
-    width: 100vw;
-    height: 65vh;
+    width: 100%;
+    height: 44em;
 }
 .discription {
     font-size: 2em;
@@ -54,14 +55,13 @@
 }
 .carousel {
     position: relative;
-    margin-top: -3vh;
+/*    margin-top: -3vh;*/
 }
 </style>
 
 
     <?php require_once('../components/login_modal_user.php'); ?>
    
-</body>
 
 
 
