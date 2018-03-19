@@ -106,24 +106,26 @@
 
 <body>
 
-   <nav class="navbar navbar-inverse">
+   <nav class="navbar">
      <div class="container-fluid">
       <div class="row">
        <div class="navbar-header">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
            <span class="sr-only">Toggle navigation</span>
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
+           <span class="icon-bar" style="background-color: #40e1e2;"></span>
+           <span class="icon-bar" style="background-color: #40e1e2;"></span>
+           <span class="icon-bar" style="background-color: #40e1e2;"></span>
          </button>
-         <a class="navbar-brand" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo"></a>
-         <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll">Toll Plaza</a><br/>
+         <a class="navbar-brand" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo desktop"></a>
+         <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll">TOLL PLAZA</a><br/>
        </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?php echo base_url; ?>components/faq.php">FAQ's</a></li>
-            <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
+            <li><a href="" class="nav_items">ABOUT US</a></li>
+            <li><a href="<?php echo base_url; ?>components/faq.php" class="nav_items">FAQ's</a></li>
+            <li><a href="" class="nav_items">CONTACT US</a></li>
+            <li><a href="#login" data-toggle="modal" data-target="#login" class=" nav_items headerLogin" >LOG IN</a></li>
          </ul>
        </div>
      </div>
@@ -142,14 +144,7 @@
     padding-right: 31px;
     font-size: 4.2vw;
 }
-.navbar-brand {
-    float: left;
-    height: 53px;
-    padding: 14px 15px;
-    font-size: 18px;
-    line-height: 21px;
-    color: #fff !important;
-}
+
 }
 .navbar-collapse.collapse {
     height: auto !important;

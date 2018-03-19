@@ -16,6 +16,12 @@ session_start();
     }
 
 include '../../config/config.php';
+if (!isset($_SESSION['id'])) {
+    echo '
+        <script>
+            window.location.href="'.base_url_user.'"; 
+        </script>';
+}
 
 
 if($_SESSION['role']=='user'){
@@ -67,9 +73,9 @@ if($_SESSION['role']=='user'){
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a>Balance: <?php echo $balance ?></a></li>
-                            <li><a href="<?php echo base_url; ?>user/addmoney.php">Recharge</a></li>
-                            <li><a href="<?php echo base_url; ?>user/payToll/logs.php">Logs</a></li>
-                            <li><a href="<?php echo base_url; ?>user" class="headerLogin" >Logout</a></li>
+                            <li><a href="<?php echo base_url_user; ?>addmoney.php">Recharge</a></li>
+                            <li><a href="<?php echo base_url_user; ?>payToll/logs.php">Logs</a></li>
+                            <li><a href="<?php echo base_url_user; ?>logout.php" class="headerLogin" >Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -86,7 +92,12 @@ if($_SESSION['role']=='user'){
                   <th>Time</th>
                 </thead>
                 <?php 
-                    $query    = "SELECT distinct c.payment,(select name from tolls as a where a.id=c.toll_id) as name, (select address from tolls as a where a.id=c.toll_id) as tollAddress,(select payTime from toll_access as b where b.toll_id=c.toll_id and b.user_id=c.user_id) as payTime from user_logs as c where user_id=$currentUserId";
+                    $query    = "SELECT
+                    c.payment,
+                    (select name from tolls as a where a.id=c.toll_id) as name, 
+                    (select address from tolls as a where a.id=c.toll_id) as tollAddress,
+                    (select payTime from toll_access as b where b.toll_id=c.toll_id and b.user_id=c.user_id) as payTime 
+                    from user_logs as c where user_id=$currentUserId";
                     $result = $conn->query($query);
                     if($result) {
                         if(!$result->num_rows  == 0) {

@@ -3,15 +3,17 @@
 ob_start();
 session_start();
 include '../config/config.php';
+if (!isset($_SESSION['id'])) {
+    echo '
+        <script>
+            window.location.href="'.base_url_user.'"; 
+        </script>';
+}
    /* logout after 10min. */
     
     if(time()-$_SESSION['time']>60*60*10){
         unset($_SESSION['time']);
-        // setcookie("username", "", time()-3600);
-        // setcookie("role", "", time()-3600);
-        // setcookie("name", "", time()-3600); 
-        session_destroy();
-        header("location: ../index.php");}
+        session_destroy();}
     else{
         $_SESSION['time']=time();
     }
@@ -151,9 +153,9 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>Balance: <?php echo $balance ?></a></li>
-                                <li><a href="<?php echo base_url; ?>user/addmoney.php">Recharge</a></li>
-                                <li><a href="<?php echo base_url; ?>user/payToll/logs.php">Logs</a></li>
-                                <li><a href="<?php echo base_url; ?>user" class="headerLogin" >Logout</a></li>  
+                                <li><a href="<?php echo base_url_user; ?>addmoney.php">Recharge</a></li>
+                                <li><a href="<?php echo base_url_user; ?>payToll/logs.php">Logs</a></li>
+                                <li><a href="<?php echo base_url_user; ?>logout.php" class="headerLogin" >Logout</a></li>  
                             </ul>
                         </div>
                     </div>

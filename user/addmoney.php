@@ -17,7 +17,12 @@ session_start();
     }
 
 include '../config/config.php';
-
+if (!isset($_SESSION['id'])) {
+    echo '
+        <script>
+            window.location.href="'.base_url_user.'"; 
+        </script>';
+}
 
 if($_SESSION['role']=='user'){
     $currentUserId = $_SESSION['id'];
