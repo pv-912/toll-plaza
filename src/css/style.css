@@ -94,6 +94,15 @@ a:focus{
     background-color: black;
 }
 
+@media only screen and (max-width: 768px) {
+.half_underline{
+    margin-left: 5vw;
+    height: 1vh;
+    width: 15vw;
+    background-color: black;
+}
+}
+
 .about_discription{
     text-align: justify;
     line-height: 200%;
@@ -223,6 +232,16 @@ a:focus{
     height: 40vh;
     width: 100%;
 }
+
+@media only screen and (max-width: 768px) {
+.footer {
+    margin-top: 10vh;
+    background-color: black;
+    height: 30em;
+    width: 100%;
+}
+}
+
 .footer p {
     margin: 0;
 }
@@ -279,6 +298,15 @@ a:focus{
     background-color: white;
 }
 
+@media only screen and (max-width: 768px) {
+.half_underline_footer{
+    margin-left: 5vw;
+    height: 1vh;
+    width: 15vw;
+    background-color: white;
+}
+}
+
 .email{
     margin-top: 7vh;
     margin-left: 5vw;
@@ -294,9 +322,23 @@ a:focus{
     width: 1.6vw;
 }
 
+@media only screen and (max-width: 768px) {
+.socialicons1{
+    padding-top: 9vh;
+    width: 2em;
+}
+}
+
 .socialicons2{
     padding-top: 22vh;
     width: 3.2vw;
+}
+
+@media only screen and (max-width: 500px) {
+.socialicons2{
+    padding-top: 9vh;
+    width: 3.2em;
+}
 }
 
 .socialicons3{
@@ -305,9 +347,9 @@ a:focus{
 }
 
 @media only screen and (max-width: 500px) {
-socialicons3{
-    padding-top: 2em;
-    width: 2.6em;
+.socialicons3{
+    padding-top: 9vh;
+    width: 3.3em;
 }
 }
 

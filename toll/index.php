@@ -83,6 +83,15 @@ include 'header.php';
     width: 100%;
     height: 44em;
 }
+    
+@media only screen and (max-width: 768px) {
+  .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    line-height: 1;
+    width: 100%;
+    height: 15em;
+}
+}
+    
 .discription {
     font-size: 2em;
     text-align: center;
