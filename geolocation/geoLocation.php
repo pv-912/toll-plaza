@@ -50,6 +50,7 @@ echo "hree";
 
 <body>
 <?php 
+include '../searchToll/search-bar.php';
 echo "POST";
 print_r($_POST);
 echo "Session";
