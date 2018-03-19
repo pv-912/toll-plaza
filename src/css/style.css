@@ -1,11 +1,11 @@
 body{
-	background-color: #c9edcb
+	background-color: white;
 }
 
 .indexNavbarTollLogo{
 	    height: auto;
     width: 5vw;
-    margin-top: 0vh;
+    margin-top: -2vh;
     margin-left: 5vw;
 }
 
@@ -41,7 +41,6 @@ body{
     padding: 15px 15px;
     font-size: 18px;
     line-height: 45px;
-    color: #fff !important
 }
 
 
@@ -51,8 +50,53 @@ a:focus{
 	border: none;
 }
 
+.nav_items{
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: black;
+    letter-spacing: .1em;
+}
+
+.sparkNavbarTag{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: black;
+    letter-spacing: .3em;
+}
 
 /* main body css */
+
+.about_header{
+    margin-top: 7vh;
+    margin-left: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: 600;
+    color: black;
+    letter-spacing: .2em;
+}
+
+.half_underline{
+    margin-left: 5vw;
+    height: 1vh;
+    width: 6vw;
+    background-color: black;
+}
+
+.about_discription{
+    text-align: justify;
+    line-height: 200%;
+    margin-top: 2vh;
+    margin-right: 10vw;
+    margin-left: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: #4b4d51;
+
+}
 
 .indexIntroductionTag{
 	font-size: 2.5vw;
@@ -166,13 +210,10 @@ a:focus{
 }
 
 .footer {
-    background: #EDEFF1;
-    height: auto;
-    padding-bottom: 30px;
-    position: relative;
+    margin-top: 10vh;
+    background-color: black;
+    height: 40vh;
     width: 100%;
-    border-bottom: 1px solid #CCCCCC;
-    border-top: 1px solid #DDDDDD;
 }
 .footer p {
     margin: 0;
@@ -211,6 +252,58 @@ a:focus{
      color: #000;
      font-size: 13.5px
 }
+
+.footer_header{
+    margin-top: 7vh;
+    margin-left: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: 600;
+    color: white;
+    letter-spacing: .2em;
+}
+
+.half_underline_footer{
+    margin-top: 1.5vh;
+    margin-left: 5vw;
+    height: .7vh;
+    width: 6vw;
+    background-color: white;
+}
+
+.email{
+    margin-top: 7vh;
+    margin-left: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: #e0e3e5;
+    letter-spacing: .05em;
+    line-height: 200%;
+}
+
+.socialicons1{
+    padding-top: 2em;
+    width: .7em;
+}
+
+.socialicons2{
+    padding-top: 2em;
+    width: 2em;
+}
+
+.socialicons3{
+    padding-top: 1.5em;
+    width: 2em;
+}
+
+@media only screen and (max-width: 500px) {
+socialicons3{
+    padding-top: 2em;
+    width: 2.6em;
+}
+}
+
+
 .studentProjectStatus{
     font-size: 1.4vw;
     padding-top: 1vh;
@@ -343,5 +436,6 @@ a:focus{
     margin-top: 0vh;
     margin-bottom: 4vh;   
 }
+
 
 
