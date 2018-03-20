@@ -36,14 +36,14 @@
        <span class="sr-only">Next</span>
      </a>
    </div>
-      <div class="container-fluid">
+      <div id="about" class="container-fluid">
         <div class="row">
               <h1 class="about_header">ABOUT US</h1>
             <div class="half_underline"></div>
           <p class="about_discription">Rising traffic on tolls is an inescapable condition in large and growing metropolitan areas across the world, from Los Angeles to Tokyo, from Cairo to Sao Paolo. Peak-hour traffic on tolls is an inherent result of the way modern societies operate. It stems from the widespread desires of people to pursue certain goals that inevitably overload existing roads and transit systems every day. But everyone hates traffic on tolls, and it keeps getting worse, in spite of attempted remedies.</p>
         </div>
     </div>
-<div class="footer">
+<div id="contact" class="footer">
     <div class="row">
         <div class="col-md-6">
             <div class="footer_header">
@@ -99,12 +99,92 @@
     position: relative;
 /*    margin-top: -3vh;*/
 }
+#about{
+  height: 92vh;
+}
+.about_header {
+    margin-top: 7vh;
+    margin-left: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4em;
+    font-weight: 600;
+    color: black;
+    letter-spacing: .2em;
+}
+.half_underline {
+    margin-left: 5vw;
+    height: 1vh;
+    width: 12vw;
+    background-color: black;
+}
+.about_discription {
+    text-align: justify;
+    line-height: 200%;
+    /* margin-top: 2vh; */
+    /* margin-right: 10vw; */
+    /* margin-left: 5vw; */
+    font-family: 'Montserrat', sans-serif;
+    padding: 112px;
+    font-size: 1.5em;
+    color: #4b4d51;
+}
+#contact{
+  height: 100vh;
+}
+.half_underline_footer {
+    margin-top: 1.5vh;
+    margin-left: 5vw;
+    height: 0.7vh;
+    width: 15vw;
+    background-color: white;
+}
+.email {
+    margin-top: 7vh;
+    margin-left: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: #e0e3e5;
+    letter-spacing: .05em;
+    line-height: 200%;
+}
+.socialicons1 {
+    padding-top: 30vh;
+    width: 1.6vw;
+}.socialicons2 {
+    padding-top: 30vh;
+    width: 3.6vw;
+}.socialicons3 {
+    padding-top: 30vh;
+    width: 3.6vw;
+}
+.footer_header {
+    margin-top: 7vh;
+    margin-left: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4em;
+    font-weight: 600;
+    color: white;
+    letter-spacing: .2em;
+}
 </style>
 
     <?php require_once('../components/login_modal_user.php'); ?>
    
 
-
+<script type="text/javascript">
+  
+   $(document).ready(function(){
+    $('a[href^="#"]').click(function(e) {
+        e.preventDefault();
+        var target = this.hash, $target = $(target);
+        $('html, body').stop().animate({
+            'scrollTop': $target.offset().top
+        }, 900, 'swing', function() {
+            window.location.hash = target;
+        });
+    });
+});
+</script>
 
 
 
