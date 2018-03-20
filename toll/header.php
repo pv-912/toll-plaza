@@ -117,7 +117,7 @@
            <span class="icon-bar" style="background-color: #40e1e2;"></span>
          </button>
          <a class="navbar-brand" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo desktop"></a>
-         <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll">TOLL PLAZA</a><br/>
+         <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll">TOLL PLAZA(toll)</a><br/>
        </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -127,6 +127,7 @@
             <li><a href="#contact" class="nav_items">CONTACT US</a></li>
             <li><a href="<?php echo base_url; ?>components/signupUser.php" class="nav_items">USER-SIGNUP</a></li>
             <li><a href="#login" data-toggle="modal" data-target="#login" class=" nav_items headerLogin" >TOLL-LOG IN</a></li>
+            <li><a href="<?php echo base_url; ?>user/index.php" class="nav_items">USER-DASHBOARD</a></li>
          </ul>
        </div>
      </div>
