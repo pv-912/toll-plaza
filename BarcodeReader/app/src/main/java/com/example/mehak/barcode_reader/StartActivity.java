@@ -23,7 +23,7 @@ public class StartActivity extends AppCompatActivity implements PassingData {
         okButton = (Button)findViewById(R.id.okBtn);
         //num = tollEdit.getText().toString().trim();
 
-        num = "1";
+        num = "73";
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,9 +35,6 @@ public class StartActivity extends AppCompatActivity implements PassingData {
                     Intent barcodeReader = new Intent(StartActivity.this,MainActivity.class);
                     barcodeReader.putExtra("tollId",num);
                     startActivity(barcodeReader);
-
-
-
                 }
             }
         });
