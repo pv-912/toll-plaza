@@ -499,15 +499,18 @@ a:focus{
     margin-right: 1vw !important;
 }
 .faqQuestions{
-    font-size: 1.1vw;
-    color: #333;
+    line-height: 200%;
+    margin-top: 2vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: #4b4d51;
+    font-weight: 700;
 }
-.faqAnswer ul li{
- font-size: 1vw;
-    color: #777;
-    padding-left: 3vw;
-    margin-top: 0vh;
-    margin-bottom: 4vh;   
+.faqAnswer{
+    font-family: 'Montserrat', sans-serif;
+    font-size: .9em;
+    color: #83868c;
+    font-weight: 500;   
 }
 
 
