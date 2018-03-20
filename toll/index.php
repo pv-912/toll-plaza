@@ -13,16 +13,21 @@ include 'header.php';
        <div class="item active">
          <img src="<?php echo base_url; ?>src/img/slider1.jpg" alt="slider1" class="indexSliderImage responsive">
          <div class="carousel-caption">
+          <div class="image-heading">AIM FOR DIGITAL INDIA</div>
          </div>
        </div>
        <div class="item">
          <img src="<?php echo base_url; ?>src/img/slider2.jpg" alt="slider2" class="indexSliderImage responsive">
          <div class="carousel-caption">
+         <div class="image-heading">YOU DON’T WANT TO BE IN THIS LANE – IT’S EXIT-ONLY</div>
+
          </div>
        </div>
        <div class="item">
          <img src="<?php echo base_url; ?>src/img/slider3.jpg" alt="slider3"  class="indexSliderImage responsive">
          <div class="carousel-caption">
+         <div class="image-heading">SOLUTION TO TRAFFIC</div>
+
          </div>
        </div>
      </div>
@@ -167,7 +172,9 @@ include 'header.php';
     color: white;
     letter-spacing: .2em;
 }
-
+.image-heading{
+  font-size: 5em;
+}
 </style>
 
 
