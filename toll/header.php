@@ -100,6 +100,7 @@
     <link href="<?php echo base_url; ?>src/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url; ?>src/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="<?php echo base_url; ?>src/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,900" rel="stylesheet">
     <script src="<?php echo base_url; ?>src/js/bootstrap.min.js"></script>
 </head>
 

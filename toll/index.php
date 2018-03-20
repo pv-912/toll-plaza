@@ -134,9 +134,7 @@ include 'header.php';
     font-size: 1.5em;
     color: #4b4d51;
 }
-#contact{
-  height: 100vh;
-}
+
 .half_underline_footer {
     margin-top: 1.5vh;
     margin-left: 5vw;
@@ -144,46 +142,16 @@ include 'header.php';
     width: 15vw;
     background-color: white;
 }
-.email {
-    margin-top: 7vh;
-    margin-left: 5vw;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2em;
-    color: #e0e3e5;
-    letter-spacing: .05em;
-    line-height: 200%;
-}
-.socialicons1 {
-    padding-top: 30vh;
-    width: 1.6vw;
-}.socialicons2 {
-    padding-top: 30vh;
-    width: 3.6vw;
-}.socialicons3 {
-    padding-top: 30vh;
-    width: 3.6vw;
-}
-.footer_header {
-    margin-top: 7vh;
-    margin-left: 5vw;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4em;
-    font-weight: 600;
-    color: white;
-    letter-spacing: .2em;
-}
+
 .image-heading{
-  font-size: 5em;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
 }
 </style>
 
 
     <?php require_once('../components/login_modal_tolls.php'); ?>
-
-
-
-
-
 
 <script type="text/javascript">
   
