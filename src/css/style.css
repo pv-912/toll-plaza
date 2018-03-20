@@ -17,9 +17,9 @@ body{
 
 @media (min-width: 768px){}
 .navbar-nav>li>a {
+    transition: .2s;
    padding-top: 2em;
     padding-bottom: 1em;
-    padding-right: 50px;
     font-size: .9em;
 }}
 
@@ -70,7 +70,7 @@ a:focus{
 .sparkNavbarTag{
     color: #40e1e2;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-weight: 600;
     letter-spacing: .3em;
 }
@@ -227,7 +227,12 @@ a:focus{
 	margin-top: 25vh
 }
 .signupModalSignupButton{
-	width: 25vw
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    width: 7em;
+    background-color: black;
+    height: 2.5em;
 }
 
 .moveToUpButton{
@@ -480,12 +485,11 @@ a:focus{
 
 
 .signupHereTag{
-    font-size: 3vw;
-    text-align: center;
-    margin-bottom: 5vh;
-    font-weight: 300;
-    margin-top: 20vh;
-    color: rgba(41, 0, 255, 0.73);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    margin-bottom: 1em;
+    font-weight: 600;
+    color: black;
 }
 
 
@@ -499,15 +503,18 @@ a:focus{
     margin-right: 1vw !important;
 }
 .faqQuestions{
-    font-size: 1.1vw;
-    color: #333;
+    line-height: 200%;
+    margin-top: 2vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: #4b4d51;
+    font-weight: 700;
 }
-.faqAnswer ul li{
- font-size: 1vw;
-    color: #777;
-    padding-left: 3vw;
-    margin-top: 0vh;
-    margin-bottom: 4vh;   
+.faqAnswer{
+    font-family: 'Montserrat', sans-serif;
+    font-size: .9em;
+    color: #83868c;
+    font-weight: 500;   
 }
 
 
