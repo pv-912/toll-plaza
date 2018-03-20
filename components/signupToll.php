@@ -49,6 +49,7 @@
             } else{
                 $address = trim($_POST['address']);
                 // echo $address;
+                echo '<script>alert("'.$address.'")</script>';
             }
         }    
         if(isset($_POST['lat'])){
@@ -137,10 +138,10 @@
         }
         // echo $username_err; echo $password_err; echo $confirm_password_err;
         if(empty($username_err) && empty($password_err)){
-            $sql = "INSERT INTO tolls (username, name, password, lat, lng, role, heavy_rate, medium_rate, light_rate, heavy_return_rate, medium_return_rate, light_return_rate) VALUES (?,?,?,?,?,?,?,?,?,?, ?, ?)";
+            $sql = "INSERT INTO tolls (username, name, password, lat, lng, address, role, heavy_rate, medium_rate, light_rate, heavy_return_rate, medium_return_rate, light_return_rate) VALUES (?,?,?,?,?,?,?,?,?,?,?, ?, ?)";
             
             if($stmt = mysqli_prepare($conn, $sql)){
-                mysqli_stmt_bind_param($stmt, "ssssssiiiiii", $param_username, $param_name, $param_password, $param_lat, $param_lng, $param_role, $param_heavy_rate, $param_medium_rate,  $param_light_rate, $param_heavy_return_rate, $param_medium_return_rate, $light_return_rate);
+                mysqli_stmt_bind_param($stmt, "sssssssiiiiii", $param_username, $param_name, $param_password, $param_lat, $param_lng, $param_address, $param_role, $param_heavy_rate, $param_medium_rate,  $param_light_rate, $param_heavy_return_rate, $param_medium_return_rate, $light_return_rate);
                 $param_username = $username;
                 $param_password = password_hash($password, PASSWORD_DEFAULT); 
                 $param_name = $name;
