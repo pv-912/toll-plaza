@@ -125,7 +125,8 @@
             <li><a href="" class="nav_items">ABOUT US</a></li>
             <li><a href="<?php echo base_url; ?>components/faq.php" class="nav_items">FAQ's</a></li>
             <li><a href="" class="nav_items">CONTACT US</a></li>
-            <li><a href="#login" data-toggle="modal" data-target="#login" class=" nav_items headerLogin" >LOG IN</a></li>
+            <li><a href="<?php echo base_url; ?>components/signupUser.php" class="nav_items">USER-SIGNUP</a></li>
+            <li><a href="#login" data-toggle="modal" data-target="#login" class=" nav_items headerLogin" >TOLL-LOG IN</a></li>
          </ul>
        </div>
      </div>
