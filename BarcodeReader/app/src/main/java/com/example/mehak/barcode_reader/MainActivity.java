@@ -1,5 +1,7 @@
 package com.example.mehak.barcode_reader;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import info.androidhive.barcode.BarcodeReader;
 public class MainActivity extends AppCompatActivity implements BarcodeReader.BarcodeReaderListener {
 
     BarcodeReader barcodeReader;
+    String passedMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,16 @@ public class MainActivity extends AppCompatActivity implements BarcodeReader.Bar
 
         // get the barcode reader instance
         barcodeReader = (BarcodeReader) getSupportFragmentManager().findFragmentById(R.id.barcode_scanner);
+
+        Intent intent = getIntent();
+        passedMessage = intent.getStringExtra("tollId");
+        Log.e("msg",passedMessage);
+        //((PassingData)this).passingTollId(passedMessage);
+        Toast.makeText(this, passedMessage, Toast.LENGTH_SHORT).show();
+        Log.e("msg",passedMessage);
+
+
+
     }
 
     @Override
@@ -79,37 +92,38 @@ public class MainActivity extends AppCompatActivity implements BarcodeReader.Bar
         @Override
         protected String doInBackground(String... param) {
 
-            String urlString = "http://spark.iitr.ac.in/toll/api/toll/comingVehicle.php"; // URL to call
-
-            String data = param[0]; //data to post
-
+            String urlString = "http://eb059f31.ngrok.io/api/toll/comingVehicle.php"; // URL to call
+            String userId = param[0]; //data to post
+            //String tollId = param[1];
             OutputStream out = null;
             try {
 
                 URL url = new URL(urlString);
-
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("userId",userId);
+                urlConnection.setRequestProperty("tollId",passedMessage);
+                urlConnection.setDoOutput(true);
+                Log.w("Value",userId);
+                Log.w("Value",passedMessage);
                 out = new BufferedOutputStream(urlConnection.getOutputStream());
 
+                /*writeStream(out);
+                out.flush();
+                out.close();*/
+
                 BufferedWriter writer = new BufferedWriter (new OutputStreamWriter(out, "UTF-8"));
-
-                writer.write(data);
-
+                writer.write(userId);
+                writer.write(passedMessage);
                 writer.flush();
-
                 writer.close();
-
                 out.close();
-
                 urlConnection.connect();
 
 
             } catch (Exception e) {
 
                 System.out.println(e.getMessage());
-
-
 
             }
             return null;
