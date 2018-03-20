@@ -177,7 +177,7 @@
             </div>
 			<div class="row">
 				<div class="col-sm-8 col-sm-offset-2">
-					<p class="signupHereTag">Sign Up Here ..</p>
+					<p class="signupHereTag">SIGN UP</p>
 					<form class="form-horizontal" id="signupForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
            
 			           <div class="form-group   <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
@@ -273,8 +273,8 @@
 			          
 			           </div>
 			           <div class="form-group">
-			             <div class="col-sm-offset-3 col-sm-6">
-			               <input type="submit" value="SIGN UP" id="signupSubmitButton" class="btn btn-primary signupModalSignupButton" style="width: 100%;margin-bottom: 5vh" autocomplete="off">
+			             <div class="col-sm-6">
+			               <input type="submit" value="SIGN UP" id="signupSubmitButton" class="signupModalSignupButton" autocomplete="off">
 			             </div>
 			           </div>
 			         </form>
