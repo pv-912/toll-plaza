@@ -34,6 +34,7 @@ if (!isset($_SESSION['id'])) {
     <meta name="keywords" content="toll-plaza, toll, highway">
 
     <meta name="author" content="Toll Plaza">
+     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -142,7 +143,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand sparkNavbarTag " style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
+                            <a class="navbar-brand sparkNavbarTag " style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><i class="fas fa-user"></i>&nbsp;<?php echo $_SESSION['username'] ?></a><br/>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
@@ -161,13 +162,13 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
-                        <table class="table table-striped">
+                        <table class="table table-striped blue-grey lighten-4 table-bordered">
                             <thead>
-                                <th>Toll Name</th>
-                                <th>Address</th>
-                                <th>distance from you</th>
-                                <th>One Way</th>
-                                <th>Round Trip</th>
+                                <th scope="row">Toll Name</th>
+                                <th scope="row">Address</th>
+                                <th scope="row">distance from you</th>
+                                <th scope="row">One Way</th>
+                                <th scope="row">Round Trip</th>
                             </thead>
                             <tbody>
                         <?php
@@ -244,3 +245,17 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
 }
 
 </script>
+<style type="text/css">
+    .navbar-default .navbar-nav>li>a {
+    color: black;
+    font-size: 17px;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 22px;
+    line-height: 20px;
+    color: black !important;
+}
+</style>

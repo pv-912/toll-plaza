@@ -43,6 +43,8 @@ include '../config/config.php';
     <link href="<?php echo base_url; ?>src/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url; ?>src/css/bootstrap-theme.min.css" rel="stylesheet">
     <script src="<?php echo base_url; ?>src/js/bootstrap.min.js"></script>
+         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
 </head>
 
 <body>
@@ -56,7 +58,7 @@ $input=$_POST['input'];
 if($input){
     // echo 'hello';
     $toll_name=$input;
-    echo $toll_name;
+    
     $query = "SELECT * FROM `toll_access` WHERE user_id=$user_id";
     // echo $query;
     $result = $conn->query($query);
@@ -90,7 +92,7 @@ if($input){
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand sparkNavbarTag " style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
+                            <a class="navbar-brand sparkNavbarTag " style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><i class="fas fa-user"></i>&nbsp;<?php echo $_SESSION['username'] ?></a><br/>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
@@ -103,15 +105,16 @@ if($input){
                     </div>
                 </div>
             </nav>
-        <table class="table table-hover">
-            <tr>
-                <thead>Toll Name</thead>
-                <thead>Address</thead>
-                <thead>sorted id</thead>
-                <thead></thead>
-                <thead></thead>
+        <table class="table table-hover table-striped blue-grey lighten-4 table-bordered">
+            <thead>
+                <th scope="row">Toll Name</th>
+                <th scope="row">Address</th>
+                <th scope="row">sorted id</th>
+                <th scope="row">One Way</th>
+                <th scope="row">Round Trip</th>
 
-            </tr>
+            </thead>
+            <tbody>
         <?php
    
     $query = "SELECT * FROM `tolls` WHERE `name`='$toll_name'";
@@ -120,16 +123,7 @@ if($input){
     if($result->num_rows == 1) {
             
         ?>
-        <table class="table table-hover">
-            <tr>
-                <thead></thead>
-                <thead></thead>
-                <thead></thead>
-                <thead></thead>
-                <thead></thead>
-                <thead></thead>
-
-            </tr>
+       
         <?php
         // while($row = $result->fetch_assoc()) {
         //     if ($_SESSION['variant'] == 'light') {
@@ -150,11 +144,11 @@ if($input){
 
          while($row = $result->fetch_assoc()) {
             $rowtwo= $resulttwo->fetch_assoc();
-            echo $rowtwo['name'];
+            
             if ($rowtwo['carVariant'] == 'light') {
                 $variant = 'light_rate';
                 $variant_round = 'light_return_rate';
-                echo $variant;
+                
             } else if ($rowtwo['carVariant'] == 'medium') {
                 $variant = 'medium_rate';
                 $variant_round = 'medium_return_rate';
@@ -166,14 +160,14 @@ if($input){
             };
 
 
-            echo $user_id;
+            
             if (in_array($row['id'],$allocated_tolls, TRUE)) {
                 $allocated = 1;
             } else {
                 $allocated = 0;
             };
-            if($allocated == 0) { echo "There"; };
-            echo $allocated."Status";
+            if($allocated == 0) { echo ""; };
+
 
 
             // count($row);
@@ -190,21 +184,24 @@ if($input){
             
 
             ?>
+            
                                 <tr <?php if ($allocated) { echo `class="lassan"`; } ?>>
                                     <td id="toll_id"><?php echo $row['name'];?></td>
                                     <td><?php echo $row['address'];?></td>
                                     <td><?php echo $row['id'];?></td>
-                                    <td><?php echo $row[$variant];?></td>
+                                    
                                     <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay Now</button></td>
-                                    <td><?php echo $row[$variant_round];?></td>
+                                    
                                     <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="<?php echo $row['id']; ?>, 2)">Paynow</button></td>
                                     <td><?php echo "</br>";?></td>
                                 </tr>
+
                             <?php 
                             
         }
           
         ?>
+        </tbody>
     </table>
         <?php
     } else {
@@ -234,3 +231,17 @@ if($input){
 }
 
 </script>
+<style type="text/css">
+    .navbar-default .navbar-nav>li>a {
+    color: black;
+    font-size: 17px;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 22px;
+    line-height: 20px;
+    color: black !important;
+}
+</style>
