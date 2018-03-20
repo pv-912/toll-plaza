@@ -52,10 +52,7 @@ if (!isset($_SESSION['id'])) {
 <body>
 <?php 
 
-echo "POST";
-print_r($_POST);
-echo "Session";
-print_r($_SESSION);
+
 
 $user_id = $_SESSION['id'];
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
@@ -122,10 +119,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
             }}
 
             array_multisort($distance,$toll_ids);
-            echo "<br>";echo "<br>";echo "<br>";echo "<br>";
-            print_r($distance);
-            echo "<br>";echo "<br>";echo "<br>";echo "<br>";
-            print_r($toll_ids);
+           
             
     }
 
