@@ -103,6 +103,29 @@ a:focus{
 }
 }
 
+.faq_header{
+    margin-top: 7vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: 600;
+    color: black;
+    letter-spacing: .2em;
+}
+
+.half_underline_faq{
+    height: 1vh;
+    width: 6vw;
+    background-color: black;
+}
+
+@media only screen and (max-width: 768px) {
+.half_underline_faq{
+    height: 1vh;
+    width: 15vw;
+    background-color: black;
+}
+}
+
 .about_discription{
     text-align: justify;
     line-height: 200%;
