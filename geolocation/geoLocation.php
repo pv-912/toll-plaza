@@ -52,8 +52,9 @@ if (!isset($_SESSION['id'])) {
 <body>
 <?php 
 
-$user_id = $_SESSION['id'];
 
+
+$user_id = $_SESSION['id'];
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     // $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($_POST['latitude']).','.trim($_POST['longitude']).'&sensor=false';
     // $json = @file_get_contents($url);
@@ -88,6 +89,43 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     while($row = $result->fetch_assoc()) {
         array_push($allocated_tolls, $row['toll_id']);
     };
+
+
+
+
+     $querythree = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
+    $resultthree = $conn->query($querythree);
+        
+
+
+    if(!$resultthree->num_rows==0){
+            $distance=array();
+            $toll_ids=array();
+            $i=0;
+
+
+            while($row = $resultthree->fetch_assoc()) {
+            {
+
+            $theta = $geo_lng-$row['lng'];
+            $dist = sin(deg2rad($geo_lat)) * sin(deg2rad($row['lat'])) +  cos(deg2rad($geo_lat)) * cos(deg2rad($row['lat'])) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            
+            $distance[$i]=$dist * 60 * 1.1515 * 1.609344;
+
+            $toll_ids[$i]=$row['id'];
+            $i=$i+1;
+            }}
+
+            array_multisort($distance,$toll_ids);
+           
+            
+    }
+
+
+
+
     // print_r($allocated_tolls);
     // print_r($_SESSION);
     $query = "SELECT * FROM `tolls` WHERE (`lat` BETWEEN $low_lat AND $high_lat ) AND (`lng` BETWEEN $low_lng AND $high_lng )";
@@ -117,7 +155,9 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                     </div>
                 </div>
             </nav>
-            <?php if ($balance > 0) {?>
+            <?php 
+            include '../searchToll/search-bar.php';
+            if ($balance > 0) {?>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
@@ -125,11 +165,13 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                             <thead>
                                 <th>Toll Name</th>
                                 <th>Address</th>
+                                <th>distance from you</th>
                                 <th>One Way</th>
                                 <th>Round Trip</th>
                             </thead>
                             <tbody>
                         <?php
+                        $j=0;
                         while($row = $result->fetch_assoc()) {
                             if ($_SESSION['variant'] == 'light') {
                                 $variant = 'light_rate';
@@ -152,14 +194,20 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                             };
                             // if($allocated == 0) { echo "There"; };
                             // echo $allocated."Status";
+
+                            $querytemp = "SELECT * FROM `tolls` WHERE `id`=$toll_ids[$j];";
+                            $resulttemp = $conn->query($querytemp);
+                            $row = $resulttemp->fetch_assoc();
                             ?>
                                 <tr <?php if($allocated == 1) { echo 'class="lassan"'; } ?>>
                                     <td id="toll_id"><?php echo $row['name'];?></td>
                                     <td><?php echo $row['address'];?></td>
+                                    <td><?php echo $distance[$j];?></td>
                                     <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay <?php echo $row[$variant];?></button></td>
                                     <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 2)">Pay <?php echo $row[$variant_round];?></button></td>
                                 </tr>
                             <?php 
+                            $j++;
                         }?>
                         </tbody>
                     </table>

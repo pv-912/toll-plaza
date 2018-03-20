@@ -88,36 +88,42 @@
     <link href="<?php echo base_url; ?>src/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="<?php echo base_url; ?>src/css/style.css" rel="stylesheet">
     <script src="<?php echo base_url; ?>src/js/bootstrap.min.js"></script>
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,900" rel="stylesheet">
   </head>
   <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo"></a>
-            <a class="navbar-brand sparkNavbarTag"  href="<?php echo base_url; ?>toll">Toll Plaza</a><br/>
-          </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="<?php echo base_url; ?>components/faq.php">FAQ's</a></li>
-              <li><a href="#login" data-toggle="modal" data-target="#login" class="headerLogin" >Log In</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
+   <nav class="navbar">
+     <div class="container-fluid">
+      <div class="row">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar" style="background-color: #40e1e2;"></span>
+           <span class="icon-bar" style="background-color: #40e1e2;"></span>
+           <span class="icon-bar" style="background-color: #40e1e2;"></span>
+         </button>
+         <a class="navbar-brand desktop" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo desktop"></a>
+         <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll">TOLL PLAZA (USER)</a><br/>
+       </div>
 
-    <style type="text/css">
-      .navbar-collapse.collapse {
-    height: auto !important;
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#about"  class="nav_items">ABOUT US</a></li>
+            <li><a href="<?php echo base_url; ?>components/faq.php" class="nav_items">FAQ's</a></li>
+            <li><a href="#contact"  class="nav_items">CONTACT US</a></li>
+            <li><a href="<?php echo base_url; ?>components/signupUser.php" class="nav_items">USER-SIGNUP</a></li>
+            <li><a href="#login" data-toggle="modal" data-target="#login" class=" nav_items headerLogin" >USER-LOG IN</a></li>
+            <li><a href="<?php echo base_url; ?>toll/index.php" class="nav_items">TOLL-DASHBOARD</a></li>
+         </ul>
+       </div>
+     </div>
+   </div>
+   </nav>
+<style >
+  .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    line-height: 1;
+    width: 100vw;
+    height: 65vh;
 }
-
 @media only screen and (max-width: 768px) {
 .navbar-nav>li>a {
     padding-top: 20px;
@@ -125,13 +131,9 @@
     padding-right: 31px;
     font-size: 4.2vw;
 }
-.navbar-brand {
-    float: left;
-    height: 53px;
-    padding: 14px 15px;
-    font-size: 18px;
-    line-height: 21px;
-    color: #fff !important;
+
 }
+.navbar-collapse.collapse {
+    height: auto !important;
 }
-    </style>
+</style>
