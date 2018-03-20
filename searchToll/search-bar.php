@@ -48,6 +48,16 @@
     .result p:hover{
         background: #f2f2f2;
     }
+    .search-box {
+    width: 300px;
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    /* text-align: center; */
+    margin-bottom: 10vh;
+    margin-left: 39vw;
+    border: 1px solid grey;
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

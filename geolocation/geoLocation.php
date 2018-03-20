@@ -202,7 +202,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                                 <tr <?php if($allocated == 1) { echo 'class="lassan"'; } ?>>
                                     <td id="toll_id"><?php echo $row['name'];?></td>
                                     <td><?php echo $row['address'];?></td>
-                                    <td><?php echo $distance[$j];?></td>
+                                    <td><?php echo number_format((float)$distance[$j], 2, '.', '');?>&nbsp;Kms</td>
                                     <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay <?php echo $row[$variant];?></button></td>
                                     <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 2)">Pay <?php echo $row[$variant_round];?></button></td>
                                 </tr>
