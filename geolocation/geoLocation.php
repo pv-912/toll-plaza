@@ -34,6 +34,7 @@ if (!isset($_SESSION['id'])) {
     <meta name="keywords" content="toll-plaza, toll, highway">
 
     <meta name="author" content="Toll Plaza">
+     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -52,10 +53,7 @@ if (!isset($_SESSION['id'])) {
 <body>
 <?php 
 
-echo "POST";
-print_r($_POST);
-echo "Session";
-print_r($_SESSION);
+
 
 $user_id = $_SESSION['id'];
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
@@ -122,10 +120,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
             }}
 
             array_multisort($distance,$toll_ids);
-            echo "<br>";echo "<br>";echo "<br>";echo "<br>";
-            print_r($distance);
-            echo "<br>";echo "<br>";echo "<br>";echo "<br>";
-            print_r($toll_ids);
+           
             
     }
 
@@ -148,7 +143,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand sparkNavbarTag " style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><?php echo $_SESSION['username'] ?></a><br/>
+                            <a class="navbar-brand sparkNavbarTag " style="margin-left: 5vw" href="<?php echo base_url; ?>geolocation/index.php"><i class="fas fa-user"></i>&nbsp;<?php echo $_SESSION['username'] ?></a><br/>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
@@ -167,13 +162,13 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
-                        <table class="table table-striped">
+                        <table class="table table-striped blue-grey lighten-4 table-bordered">
                             <thead>
-                                <th>Toll Name</th>
-                                <th>Address</th>
-                                <th>distance from you</th>
-                                <th>One Way</th>
-                                <th>Round Trip</th>
+                                <th scope="row">Toll Name</th>
+                                <th scope="row">Address</th>
+                                <th scope="row">distance from you</th>
+                                <th scope="row">One Way</th>
+                                <th scope="row">Round Trip</th>
                             </thead>
                             <tbody>
                         <?php
@@ -208,7 +203,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
                                 <tr <?php if($allocated == 1) { echo 'class="lassan"'; } ?>>
                                     <td id="toll_id"><?php echo $row['name'];?></td>
                                     <td><?php echo $row['address'];?></td>
-                                    <td><?php echo $distance[$j];?></td>
+                                    <td><?php echo number_format((float)$distance[$j], 2, '.', '');?>&nbsp;Kms</td>
                                     <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay <?php echo $row[$variant];?></button></td>
                                     <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 2)">Pay <?php echo $row[$variant_round];?></button></td>
                                 </tr>
@@ -250,3 +245,17 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
 }
 
 </script>
+<style type="text/css">
+    .navbar-default .navbar-nav>li>a {
+    color: black;
+    font-size: 17px;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 22px;
+    line-height: 20px;
+    color: black !important;
+}
+</style>

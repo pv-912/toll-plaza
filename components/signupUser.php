@@ -220,11 +220,15 @@
                          </div>
                         </div>
 
-                        <div class="form-group  ">
+                        <div class="form-group">
                         <label for="" class="sr-only">carVariant</label>
                          <div class="col-sm-6">
-                           <input type="text" name="carVariant"  class="form-control"  placeholder="carVariant" value="<?php echo $carVariant; ?>">
-                            <span class="help-block"><?php echo $carVariant_err; ?></span>
+                           
+                            <select type="text" name="carVariant"  class="form-control"  placeholder="carVariant" value="<?php echo $carVariant; ?>">
+                              <option value="light">light</option>
+                              <option value="medium">medium</option>
+                              <option value="heavy">heavy</option>
+                           </select>
                          </div>
                         </div> 
 
