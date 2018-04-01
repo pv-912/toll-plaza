@@ -24,17 +24,17 @@
     $row = $result->fetch_assoc();
     // Test it
     if ($row['role'] == 'user' && isset($_POST['toll_id'])) {
-        if ($row['carVariant'] == 'light' && isset($round)) {
+        if ($row['carVariant'] == 'light' && $round==2) {
             $varient_and_round = 'light_return_rate';
-        } else if ($row['carVariant'] == 'light') {
+        } else if ($row['carVariant'] == 'light' && $round==1) {
             $varient_and_round = 'light_rate';
-        } else if ($row['carVariant'] == 'medium' && isset($round)) {
+        } else if ($row['carVariant'] == 'medium' && $round==2) {
             $varient_and_round = 'medium_return_rate';
-        } else if ($row['carVariant'] == 'medium') {
+        } else if ($row['carVariant'] == 'medium' && $round==1) {
             $varient_and_round = 'medium_rate';
-        } else if ($row['carVariant'] == 'heavy' && isset($round)) {
+        } else if ($row['carVariant'] == 'heavy' && $round==2) {
             $varient_and_round = 'heavy_return_rate';
-        } else if ($row['carVariant'] == 'heavy') {
+        } else if ($row['carVariant'] == 'heavy' && $round==1) {
             $varient_and_round = 'heavy_rate';
         } else {
             echo "Varient and Round Exception";

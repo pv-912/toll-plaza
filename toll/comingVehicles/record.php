@@ -30,13 +30,13 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12">
-            <table class="table table-striped">
+            <table class="table table-striped table-striped blue-grey lighten-4 table-bordered">
               <tr>
-              	<th>Name</th>
-              	<th>Contact</th>
-                <th>Vehicle Type</th>
-                <th>Vehicle Color</th>                
-                <th>Vehicle No.</th>
+              	<th scope="row">Name</th>
+              	<th scope="row">Contact</th>
+                <th scope="row">Vehicle Type</th>
+                <th scope="row">Vehicle Color</th>                
+                <th scope="row">Vehicle No.</th>
               </tr>
               <?php 
 

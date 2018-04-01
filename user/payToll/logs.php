@@ -84,12 +84,12 @@ if($_SESSION['role']=='user'){
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-12">
-              <table class="table table-striped">
+              <table class="table table-striped table-striped blue-grey lighten-4 table-bordered">
                 <thead>
-                  <th>Name</th>
-                  <th>Paid</th>
-                  <th>Toll Address</th>
-                  <th>Time</th>
+                  <th scope="row">Name</th>
+                  <th scope="row">Paid</th>
+                  <th scope="row">Toll Address</th>
+                  <th scope="row">Time</th>
                 </thead>
                 <?php 
                     $query    = "SELECT

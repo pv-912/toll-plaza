@@ -190,9 +190,9 @@ if($input){
                                     <td><?php echo $row['address'];?></td>
                                     <td><?php echo $row['id'];?></td>
                                     
-                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay Now</button></td>
+                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="payReturn(<?php echo $row['id']; ?>, 1)">Pay <?php echo $row[$variant];?></button></td>
                                     
-                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="<?php echo $row['id']; ?>, 2)">Paynow</button></td>
+                                    <td><button type="button" class="btn btn-primary" <?php if($allocated == 1) { echo "disabled"; } ?> onClick="<?php echo $row['id']; ?>, 2)">Pay <?php echo $row[$variant_round];?></button></td>
                                     <td><?php echo "</br>";?></td>
                                 </tr>
 
