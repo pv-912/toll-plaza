@@ -102,7 +102,7 @@
            <span class="icon-bar" style="background-color: #40e1e2;"></span>
          </button>
          <a class="navbar-brand desktop" href="<?php echo base_url; ?>toll"><img src="<?php echo base_url; ?>src/img/tollLogo.jpg" alt="Toll Plaza" class="indexNavbarTollLogo desktop"></a>
-         <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll">TOLL PLAZA (USER)</a><br/>
+         <a class="navbar-brand sparkNavbarTag "  href="<?php echo base_url; ?>toll">TOLL PLAZA <span style="font-size: .7em;color: #00e247;letter-spacing: .05em;margin-left: -1em;">(USER)</span></a><br/>
        </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
