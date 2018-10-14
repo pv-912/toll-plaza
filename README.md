@@ -8,7 +8,7 @@ Rising traffic on tolls is an inescapable condition in large and growing metropo
 
 ******************************************************************************************************
 
-We built the app through which one can simply register the toll as user through which he/she is going to pass through by simply paying the amount[i.e. TOLL-TAX] by our webApp.A simple user admin is developed on which he/she can see all the toll near-by according to his/her present geoLocation.(range-100kms).
+We built the app through which one can simply register the toll as user through which he/she is going to pass through by simply paying the amount[TOLL-TAX] by our webApp.A simple user admin is developed on which he/she can see all the toll near-by according to his/her present geoLocation.(range-100kms).
 
 User can see his/her activity on user logs i.e on which toll he/she paid.
 
